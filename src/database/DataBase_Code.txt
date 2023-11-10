@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS comic_web;
+USE comic_web1;
+-- Tao bang User
+CREATE TABLE `user` (
+	`ID` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`username` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`password` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`name` VARCHAR(50) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`dateOfBirth` DATE NULL DEFAULT NULL,
+	`phoneNumber` VARCHAR(10) NOT NULL COLLATE 'utf8mb4_general_ci',
+	`email` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+	`media` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_general_ci',
+	`wallet` INT(11) NOT NULL DEFAULT '0',
+	PRIMARY KEY (`ID`) USING BTREE
+)
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB
+;
