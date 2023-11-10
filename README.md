@@ -1,1 +1,1 @@
-# Comic_Web
+Chạy code CSQL trong tệp ./Database/DataBase_Code.txt trước
