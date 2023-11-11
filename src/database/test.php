@@ -15,11 +15,17 @@ $config = [
 ];
 $db = new database($config);
 $user = new User("1", "Lonq", "3", "4", "2003-11-23", "6", "7", "8", "9");
+$id = '1';
 
 /*
     Bước 1: $db->table(get_class($user)) ==> Trả về Object đó
     Bước 2: Object->insert() ==> Gọi ra phương thức từ Object đã lấy ra ở Bước 1
 */
-$db->table(get_class($user))
+$a = $db->table(get_class($user))
     // ->insert($user->toArray());
-    ->update($user->toArray());
+    // ->update($user->toArray());
+    // ->deleteByID($id);
+    // ->selectByID($id);
+    ->selectALL();
+echo '<br>';
+print_r($a);

@@ -8,7 +8,7 @@ class Database extends Connect
     public function __construct($config)
     {
         parent::__construct($config);
-        // connect to mysql
+        // Connect database
         $this->connection();
     }
 
@@ -22,6 +22,7 @@ class Database extends Connect
     public function insert($data)
     {
         $insert_status = null;
+
         try {
             $keys = array_keys($data);
             $fields = implode(', ', $keys);
@@ -54,18 +55,96 @@ class Database extends Connect
 
             if ($this->statement !== null)
                 $this->statement = null;
+
+            return $insert_status;
+        }
+    }
+
+    // SELECT BY ID
+    public function selectByID($id)
+    {
+        $select_status = null;
+
+        try {
+            // Tạo câu truy vấn
+            $sql = "SELECT * FROM " . $this->table . " WHERE id=:id";
+
+            // Tạo đối tượng Statement
+            $this->statement = $this->connection->prepare($sql);
+
+            // Truyền param
+            $this->statement->bindParam(':id', $id);
+
+            // Thực hiện truy vấn
+            $select_status = $this->statement->execute();
+            $result = $this->statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage() . '<br>';
+            echo 'Line: ' . $e->getLine() . '<br>';
+        } finally {
+            if ($select_status == true) {
+                echo '<br>Lấy dữ liệu thành công';
+            } else {
+                echo '<br>Lấy dữ liệu thất bại';
+            }
+
+            // Đóng kết nối CSDL
+            if ($this->connection !== null)
+                $this->connection = null;
+
+            if ($this->table !== null)
+                $this->table = null;
+
+            if ($this->statement !== null)
+                $this->statement = null;
+
+            return $result;
         }
     }
 
     // SELECT
-    public function select()
+    public function selectALL()
     {
+        $select_status = null;
+
+        try {
+            // Tạo câu truy vấn
+            $sql = "SELECT * FROM " . $this->table;
+
+            // Tạo đối tượng Statement
+            $this->statement = $this->connection->prepare($sql);
+
+            // Thực hiện truy vấn
+            $select_status = $this->statement->execute();
+            $result = $this->statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage() . '<br>';
+            echo 'Line: ' . $e->getLine() . '<br>';
+        } finally {
+            if ($select_status == true) {
+                echo '<br>Lấy dữ liệu thành công';
+            } else {
+                echo '<br>Lấy dữ liệu thất bại';
+            }
+
+            // Đóng kết nối CSDL
+            if ($this->connection !== null)
+                $this->connection = null;
+
+            if ($this->table !== null)
+                $this->table = null;
+
+            if ($this->statement !== null)
+                $this->statement = null;
+
+            return $result;
+        }
     }
 
     // UPDATE
     public function update($data)
     {
-        $insert_status = null;
+        $update_status = null;
 
         try {
             // Xử lý tách id
@@ -75,23 +154,22 @@ class Database extends Connect
             $keyStr = $this->keyToStr($data);
 
             // Kết hợp các key thành một chuỗi
-            $resultString = implode(', ', $keyStr);
+            $resultKey = implode(', ', $keyStr);
 
             // Tạo câu truy vấn
-            $sql = "UPDATE " . $this->table . " SET $resultString WHERE id=:id";
-            echo '<br>' . $sql;
+            $sql = "UPDATE " . $this->table . " SET $resultKey WHERE id=:id";
 
             // Tạo đối tượng Statement
-            $data['id'] = $id;
             $this->statement = $this->connection->prepare($sql);
 
             // Thực hiện truy vấn
-            $insert_status = $this->statement->execute($data);
+            $data['id'] = $id;
+            $update_status = $this->statement->execute($data);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage() . '<br>';
             echo 'Line: ' . $e->getLine() . '<br>';
         } finally {
-            if ($insert_status == true) {
+            if ($update_status == true) {
                 echo '<br>Cập nhật dữ liệu thành công';
             } else {
                 echo '<br>Cập nhật dữ liệu thất bại';
@@ -106,12 +184,50 @@ class Database extends Connect
 
             if ($this->statement !== null)
                 $this->statement = null;
+
+            return $update_status;
         }
     }
 
     // DELETE
-    public function delete()
+    public function deleteByID($id)
     {
+        $delete_status = null;
+
+        try {
+            // Tạo câu truy vấn
+            $sql = "DELETE FROM " . $this->table . " WHERE id=:id";
+
+            // Tạo đối tượng Statement
+            $this->statement = $this->connection->prepare($sql);
+
+            // Truyền param
+            $this->statement->bindParam(':id', $id);
+
+            // Thực hiện truy vấn
+            $delete_status = $this->statement->execute();
+        } catch (Exception $e) {
+            echo 'Error: ' . $e->getMessage() . '<br>';
+            echo 'Line: ' . $e->getLine() . '<br>';
+        } finally {
+            if ($delete_status == true) {
+                echo '<br>Cập nhật dữ liệu thành công';
+            } else {
+                echo '<br>Cập nhật dữ liệu thất bại';
+            }
+
+            // Đóng kết nối CSDL
+            if ($this->connection !== null)
+                $this->connection = null;
+
+            if ($this->table !== null)
+                $this->table = null;
+
+            if ($this->statement !== null)
+                $this->statement = null;
+
+            return $delete_status;
+        }
     }
 
     // Xử lý chuyển key từ arr -> chuỗi
