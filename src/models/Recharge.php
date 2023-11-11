@@ -1,13 +1,13 @@
 <?php
 class Recharge
 {
-    private $recharge_id;
+    private $id;
     private $price;
     private $coinAmount;
 
-    public function __construct($recharge_id, $price, $coinAmount)
+    public function __construct($id, $price, $coinAmount)
     {
-        $this->recharge_id = $recharge_id;
+        $this->id = $id;
         $this->price = $price;
         $this->coinAmount = $coinAmount;
     }
@@ -15,7 +15,7 @@ class Recharge
     // Getter methods
     public function getRechargeId()
     {
-        return $this->recharge_id;
+        return $this->id;
     }
 
     public function getPrice()
@@ -29,9 +29,9 @@ class Recharge
     }
 
     // Setter methods
-    public function setRechargeId($recharge_id)
+    public function setRechargeId($id)
     {
-        $this->recharge_id = $recharge_id;
+        $this->id = $id;
     }
 
     public function setPrice($price)
@@ -47,7 +47,7 @@ class Recharge
     // Phương thức toString
     public function __toString()
     {
-        return "Recharge ID: " . $this->recharge_id .
+        return "Recharge ID: " . $this->id .
             "<br> Price: " . $this->price .
             "<br> Coin Amount: " . $this->coinAmount;
     }

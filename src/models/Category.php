@@ -1,19 +1,19 @@
 <?php
 class Category
 {
-    private $category_id;
+    private $id;
     private $name;
 
-    public function __construct($category_id, $name)
+    public function __construct($id, $name)
     {
-        $this->category_id = $category_id;
+        $this->id = $id;
         $this->name = $name;
     }
 
     // Getter methods
     public function getCategoryId()
     {
-        return $this->category_id;
+        return $this->id;
     }
 
     public function getName()
@@ -22,9 +22,9 @@ class Category
     }
 
     // Setter methods
-    public function setCategoryId($category_id)
+    public function setCategoryId($id)
     {
-        $this->category_id = $category_id;
+        $this->id = $id;
     }
 
     public function setName($name)
@@ -35,7 +35,7 @@ class Category
     // Phương thức toString
     public function __toString()
     {
-        return "Category ID: " . $this->category_id .
+        return "Category ID: " . $this->id .
             "<br> Name: " . $this->name;
     }
 }

@@ -1,16 +1,16 @@
 <?php
 class Comment
 {
-    private $comment_id;
+    private $id;
     private $chapter_id;
     private $user_id;
     private $content;
     private $timestamp;
     private $reaction;
 
-    public function __construct($comment_id, $chapter_id, $user_id, $content, $timestamp, $reaction)
+    public function __construct($id, $chapter_id, $user_id, $content, $timestamp, $reaction)
     {
-        $this->comment_id = $comment_id;
+        $this->id = $id;
         $this->chapter_id = $chapter_id;
         $this->user_id = $user_id;
         $this->content = $content;
@@ -21,7 +21,7 @@ class Comment
     // Getter methods
     public function getCommentId()
     {
-        return $this->comment_id;
+        return $this->id;
     }
 
     public function getChapterId()
@@ -50,9 +50,9 @@ class Comment
     }
 
     // Setter methods
-    public function setCommentId($comment_id)
+    public function setCommentId($id)
     {
-        $this->comment_id = $comment_id;
+        $this->id = $id;
     }
 
     public function setChapterId($chapter_id)
@@ -83,7 +83,7 @@ class Comment
     // Phương thức toString
     public function __toString()
     {
-        return "Comment ID: " . $this->comment_id .
+        return "Comment ID: " . $this->id .
             "<br> Chapter ID: " . $this->chapter_id .
             "<br> User ID: " . $this->user_id .
             "<br> Content: " . $this->content .

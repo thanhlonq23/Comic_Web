@@ -1,7 +1,7 @@
 <?php
 class Admin
 {
-    private $admin_id;
+    private $id;
     private $username;
     private $password;
     private $name;
@@ -10,9 +10,9 @@ class Admin
     private $email;
     private $media;
 
-    public function __construct($admin_id, $username, $password, $name, $dateOfBirth, $phoneNumber, $email, $media)
+    public function __construct($id, $username, $password, $name, $dateOfBirth, $phoneNumber, $email, $media)
     {
-        $this->admin_id = $admin_id;
+        $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->name = $name;
@@ -25,7 +25,7 @@ class Admin
     // Getter methods
     public function getAdminId()
     {
-        return $this->admin_id;
+        return $this->id;
     }
 
     public function getUsername()
@@ -64,9 +64,9 @@ class Admin
     }
 
     // Setter methods
-    public function setAdminId($admin_id)
+    public function setAdminId($id)
     {
-        $this->admin_id = $admin_id;
+        $this->id = $id;
     }
 
     public function setUsername($username)
@@ -109,7 +109,7 @@ class Admin
     {
         $dateOfBirthFormatted = $this->dateOfBirth->format("d-m-Y");
 
-        return "Admin ID: " . $this->admin_id .
+        return "Admin ID: " . $this->id .
             "<br> Username: " . $this->username .
             "<br> Password: " . $this->password .
             "<br> Name: " . $this->name .

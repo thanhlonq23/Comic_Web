@@ -1,19 +1,19 @@
 <?php
 class Author
 {
-    private $author_id;
+    private $id;
     private $name;
 
-    public function __construct($author_id, $name)
+    public function __construct($id, $name)
     {
-        $this->author_id = $author_id;
+        $this->id = $id;
         $this->name = $name;
     }
 
     // Getter methods
     public function getAuthorId()
     {
-        return $this->author_id;
+        return $this->id;
     }
 
     public function getName()
@@ -22,9 +22,9 @@ class Author
     }
 
     // Setter methods
-    public function setAuthorId($author_id)
+    public function setAuthorId($id)
     {
-        $this->author_id = $author_id;
+        $this->id = $id;
     }
 
     public function setName($name)
@@ -35,7 +35,7 @@ class Author
     // Phương thức toString
     public function __toString()
     {
-        return "Author ID: " . $this->author_id .
+        return "Author ID: " . $this->id .
             "<br> Name: " . $this->name;
     }
 }

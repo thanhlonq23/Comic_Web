@@ -2,14 +2,14 @@
 
 class Reading
 {
-    private $reading_id;
+    private $id;
     private $user_id;
     private $webtoon_id;
     private $name;
 
-    public function __construct($reading_id, $user_id, $webtoon_id, $name)
+    public function __construct($id, $user_id, $webtoon_id, $name)
     {
-        $this->reading_id = $reading_id;
+        $this->id = $id;
         $this->user_id = $user_id;
         $this->webtoon_id = $webtoon_id;
         $this->name = $name;
@@ -18,7 +18,7 @@ class Reading
     // Getter methods
     public function getReadingId()
     {
-        return $this->reading_id;
+        return $this->id;
     }
 
     public function getUserId()
@@ -37,9 +37,9 @@ class Reading
     }
 
     // Setter methods
-    public function setReadingId($reading_id)
+    public function setReadingId($id)
     {
-        $this->reading_id = $reading_id;
+        $this->id = $id;
     }
 
     public function setUserId($user_id)
@@ -60,7 +60,7 @@ class Reading
     // Phương thức toString
     public function __toString()
     {
-        return "Reading ID: " . $this->reading_id .
+        return "Reading ID: " . $this->id .
             "<br> User ID: " . $this->user_id .
             "<br> Webtoon ID: " . $this->webtoon_id .
             "<br> Name: " . $this->name;

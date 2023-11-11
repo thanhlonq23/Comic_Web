@@ -2,15 +2,15 @@
 
 class Order
 {
-    private $order_id;
+    private $id;
     private $timestamp;
     private $transaction_id;
     private $recharge_id;
     private $user_id;
 
-    public function __construct($order_id, $timestamp, $transaction_id, $recharge_id, $user_id)
+    public function __construct($id, $timestamp, $transaction_id, $recharge_id, $user_id)
     {
-        $this->order_id = $order_id;
+        $this->id = $id;
         $this->timestamp = $timestamp;
         $this->transaction_id = $transaction_id;
         $this->recharge_id = $recharge_id;
@@ -20,7 +20,7 @@ class Order
     // Getter methods
     public function getOrderId()
     {
-        return $this->order_id;
+        return $this->id;
     }
 
     public function getTimestamp()
@@ -44,9 +44,9 @@ class Order
     }
 
     // Setter methods
-    public function setOrderId($order_id)
+    public function setOrderId($id)
     {
-        $this->order_id = $order_id;
+        $this->id = $id;
     }
 
     public function setTimestamp($timestamp)
@@ -72,7 +72,7 @@ class Order
     // Phương thức toString
     public function __toString()
     {
-        return "Order ID: " . $this->order_id .
+        return "Order ID: " . $this->id .
             "<br> Timestamp: " . $this->timestamp .
             "<br> Transaction ID: " . $this->transaction_id .
             "<br> Recharge ID: " . $this->recharge_id .

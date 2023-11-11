@@ -1,7 +1,7 @@
 <?php
 class Webtoon
 {
-    private $webtoon_id;
+    private $id;
     private $category_id;
     private $author_id;
     private $name;
@@ -10,9 +10,9 @@ class Webtoon
     private $favorite;
     private $date;
 
-    public function __construct($webtoon_id, $category_id, $author_id, $name, $status, $rating, $favorite, $date)
+    public function __construct($id, $category_id, $author_id, $name, $status, $rating, $favorite, $date)
     {
-        $this->webtoon_id = $webtoon_id;
+        $this->id = $id;
         $this->category_id = $category_id;
         $this->author_id = $author_id;
         $this->name = $name;
@@ -25,7 +25,7 @@ class Webtoon
     // Getter methods
     public function getWebtoonId()
     {
-        return $this->webtoon_id;
+        return $this->id;
     }
 
     public function getCategoryId()
@@ -64,9 +64,9 @@ class Webtoon
     }
 
     // Setter methods
-    public function setWebtoonId($webtoon_id)
+    public function setWebtoonId($id)
     {
-        $this->webtoon_id = $webtoon_id;
+        $this->id = $id;
     }
 
     public function setCategoryId($category_id)
@@ -108,7 +108,7 @@ class Webtoon
     public function __toString()
     {
         $dateOfBirthFormatted = $this->date->format("d-m-Y");
-        return "Webtoon ID: " . $this->webtoon_id .
+        return "Webtoon ID: " . $this->id .
             "<br> Category ID: " . $this->category_id .
             "<br> Author ID: " . $this->author_id .
             "<br> Name: " . $this->name .

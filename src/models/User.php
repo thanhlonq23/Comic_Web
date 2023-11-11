@@ -1,7 +1,7 @@
 <?php
 class User
 {
-    private $ID;
+    private $id;
     private $username;
     private $password;
     private $name;
@@ -11,9 +11,9 @@ class User
     private $media;
     private $wallet;
 
-    public function __construct($ID, $username, $password, $name, $dateOfBirth, $phoneNumber, $email, $media, $wallet)
+    public function __construct($id, $username, $password, $name, $dateOfBirth, $phoneNumber, $email, $media, $wallet)
     {
-        $this->ID = $ID;
+        $this->id = $id;
         $this->username = $username;
         $this->password = $password;
         $this->name = $name;
@@ -24,9 +24,9 @@ class User
         $this->wallet = $wallet;
     }
 
-    public function getID()
+    public function getid()
     {
-        return $this->ID;
+        return $this->id;
     }
     public function getUsername()
     {
@@ -63,9 +63,9 @@ class User
 
 
     // Setter methods
-    public function setID($ID)
+    public function setid($id)
     {
-        $this->ID = $ID;
+        $this->id = $id;
     }
 
     public function setUsername($username)
@@ -116,7 +116,7 @@ class User
     public function __toString()
     {
         $dateOfBirthFormatted = $this->dateOfBirth->format("d-m-Y");
-        return "User ID: " . $this->ID .
+        return "User id: " . $this->id .
             "<br> Username: " . $this->username .
             "<br> Name: " . $this->name .
             "<br> Date of Birth: " . $dateOfBirthFormatted .

@@ -2,13 +2,13 @@
 
 class RankingList
 {
-    private $ranking_id;
+    private $id;
     private $webtoon_id;
     private $name;
 
-    public function __construct($ranking_id, $webtoon_id, $name)
+    public function __construct($id, $webtoon_id, $name)
     {
-        $this->ranking_id = $ranking_id;
+        $this->id = $id;
         $this->webtoon_id = $webtoon_id;
         $this->name = $name;
     }
@@ -16,7 +16,7 @@ class RankingList
     // Getter methods
     public function getRankingId()
     {
-        return $this->ranking_id;
+        return $this->id;
     }
 
     public function getWebtoonId()
@@ -30,9 +30,9 @@ class RankingList
     }
 
     // Setter methods
-    public function setRankingId($ranking_id)
+    public function setRankingId($id)
     {
-        $this->ranking_id = $ranking_id;
+        $this->id = $id;
     }
 
     public function setWebtoonId($webtoon_id)
@@ -48,7 +48,7 @@ class RankingList
     // Phương thức toString
     public function __toString()
     {
-        return "Ranking ID: " . $this->ranking_id .
+        return "Ranking ID: " . $this->id .
             "<br> Webtoon ID: " . $this->webtoon_id .
             "<br> Name: " . $this->name;
     }

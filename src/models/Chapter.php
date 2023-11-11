@@ -1,7 +1,7 @@
 <?php
 class Chapter
 {
-    private $chapter_id;
+    private $id;
     private $webtoon_id;
     private $title;
     private $price;
@@ -10,9 +10,9 @@ class Chapter
     private $date;
     private $media;
 
-    public function __construct($chapter_id, $webtoon_id, $title, $price, $status, $views, $date, $media)
+    public function __construct($id, $webtoon_id, $title, $price, $status, $views, $date, $media)
     {
-        $this->chapter_id = $chapter_id;
+        $this->id = $id;
         $this->webtoon_id = $webtoon_id;
         $this->title = $title;
         $this->price = $price;
@@ -25,7 +25,7 @@ class Chapter
     // Getter methods
     public function getChapterId()
     {
-        return $this->chapter_id;
+        return $this->id;
     }
 
     public function getWebtoonId()
@@ -64,9 +64,9 @@ class Chapter
     }
 
     // Setter methods
-    public function setChapterId($chapter_id)
+    public function setChapterId($id)
     {
-        $this->chapter_id = $chapter_id;
+        $this->id = $id;
     }
 
     public function setWebtoonId($webtoon_id)
@@ -109,7 +109,7 @@ class Chapter
     {
         $dateFormatted = $this->date->format("d-m-Y");
 
-        return "Chapter ID: " . $this->chapter_id .
+        return "Chapter ID: " . $this->id .
             "<br> Webtoon ID: " . $this->webtoon_id .
             "<br> Title: " . $this->title .
             "<br> Price: " . $this->price .
