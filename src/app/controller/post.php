@@ -1,5 +1,5 @@
 <?php
-class post
+class post extends DController
 {
 
     public function __construct()

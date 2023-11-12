@@ -8,11 +8,8 @@ class product extends DController
         // echo 'This is Product';
     }
 
-    public function chiTietSanPham($id,$slug)
+    public function chiTietSanPham()
     {
         echo 'Chi tiet san pham<br>';
-        echo "ID: $id";
-        echo "Slug: $slug";
-
     }
 }

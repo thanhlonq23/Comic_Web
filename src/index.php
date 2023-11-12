@@ -10,7 +10,7 @@
 <body>
     <h1>
         <?php
-        include_once("./system/libs/main.php");
+        // include_once("./system/libs/main.php");
         include_once("./system/libs/DController.php");
         include_once("./system/libs/Load.php");
 
@@ -33,14 +33,17 @@
                 $ctlr->{$url[1]}($url[2]);
             } else {
                 if (isset($url[1])) {
-                    $ctlr->{$url[1]};
+                    $ctlr->{$url[1]}();
                 } else {
+                    // Code
                 }
             }
         } else {
+            // Mặc định nếu không có url thì chạy phương thức homePage() trong file Controller/index.php
             include_once("./app/controller/index.php");
             $index = new index();
             $index->homePage();
+            new HomeModel();
         }
         ?>
     </h1>

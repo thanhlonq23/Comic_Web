@@ -5,7 +5,7 @@ class Load
     {
     }
 
-    public function view($fileName)
+    public function view($fileName, $data = null)
     {
         include 'app/views/' . $fileName . '.php';
     }
@@ -13,6 +13,6 @@ class Load
     public function model($fileName)
     {
         include 'app/models/' . $fileName . '.php';
-        return new $fileName;
+        return new $fileName();
     }
 }

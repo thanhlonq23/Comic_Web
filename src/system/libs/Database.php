@@ -1,8 +1,7 @@
 <?php
-class Home
+class Database
 {
     public function __construct()
     {
-        echo "this is Home Model";
     }
 }
