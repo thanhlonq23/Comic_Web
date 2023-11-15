@@ -9,66 +9,62 @@
     <script src="lib/js/jquery-3.7.1.min.js"></script>
     <script src="lib/js/bootstrap.js"></script>
     <style>
-        .menu-link {
-            color: black;
+        .home-text {
+            color: yellow;
             font-size: 16px;
             font-family: Arial;
             font-weight: 700;
             word-wrap: break-word
         }
-
-        .log-in {
-            color: black;
+        .home-text:hover{
+            color: red
+        }
+        .menu-text{
+            color: white;
             font-size: 16px;
             font-family: Arial;
             font-weight: 700;
             word-wrap: break-word
+        }
+        .menu-text:hover{
+            color: lightgreen
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <div>
-                    <ul class="nav menu">
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#">Trang chủ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#">Theo dõi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#">Thể loại</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#">Lịch sử</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link menu-link" href="#">Truyện hot</a>
-                        </li>
-                    </ul>
-            </div>
-            <div>
-                <div class="search_location"></div>
-                <p>Tìm kiếm</p>
-                <img />
-            </div>
-            <div>
-                <ul class="nav menu">
+    <header class="p-3 bg-dark">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                     <li class="nav-item">
-                        <a class="nav-link active log-in" href="#">Login</a>
+                        <a class="nav-link px-2 home-text" href="#">Trang chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active log-in" href="#">Logout</a>
+                        <a class="nav-link px-2 menu-text" href="#">Theo dõi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 menu-text" href="#">Thể loại</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 menu-text" href="#">Lịch sử</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-2 menu-text" href="#">Truyện hot</a>
                     </li>
                 </ul>
-            </div>
-        </header>
-        <footer>
 
-        </footer>
-    </div>
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                    <input type="search" class="form-control form-control-dark" placeholder="Tìm kiếm..."
+                        aria-label="Search">
+                </form>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    <button type="button" class="btn btn-warning">Sign-up</button>
+                </div>
+            </div>
+        </div>
+    </header>
 </body>
 
 </html>
