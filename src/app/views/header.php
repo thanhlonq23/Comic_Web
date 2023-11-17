@@ -16,17 +16,20 @@
             font-weight: 700;
             word-wrap: break-word
         }
-        .home-text:hover{
+
+        .home-text:hover {
             color: red
         }
-        .menu-text{
+
+        .menu-text {
             color: white;
             font-size: 16px;
             font-family: Arial;
             font-weight: 700;
             word-wrap: break-word
         }
-        .menu-text:hover{
+
+        .menu-text:hover {
             color: lightgreen
         }
     </style>
@@ -55,8 +58,7 @@
                 </ul>
 
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Tìm kiếm..."
-                        aria-label="Search">
+                    <input type="search" class="form-control form-control-dark" placeholder="Tìm kiếm..." aria-label="Search">
                 </form>
                 <div class="text-end">
                     <button type="button" class="btn btn-outline-light me-2">Login</button>

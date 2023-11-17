@@ -1,9 +1,10 @@
 <?php
 class DController
 {
-    protected $Load = array();
+    protected $load = array();
+
     public function __construct()
     {
-        $this->Load = new Load();
+        $this->load = new Load();
     }
 }

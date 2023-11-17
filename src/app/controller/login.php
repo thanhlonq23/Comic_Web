@@ -1,6 +1,6 @@
 <?php
 // Trang chủ
-class index extends DController
+class login extends DController
 {
     public function __construct()
     {
@@ -10,20 +10,15 @@ class index extends DController
 
     public function index()
     {
-        $this->homePage();
+        $this->login();
     }
 
-    public function homePage()
+    public function login()
     {
         $this->load->view("header");
         $this->load->view("home");
         $this->load->view("footer");
     }
 
-    public function notFound()
-    {
-        $this->load->view("header");
-        $this->load->view("404");
-        $this->load->view("footer");
-    }
+
 }
