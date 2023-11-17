@@ -11,5 +11,4 @@
 
 (Đây là repo tạm thời phèn vcl chưa sắp xếp cấu trúc push lên chỉ để lên xem tiến độ thôi)
  
-bảo ăn cứt
-long bú dái Bảo
+Bảo ❤️ Long
