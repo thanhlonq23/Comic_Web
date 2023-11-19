@@ -1,6 +1,6 @@
 <?php
 // Trang chủ
-class login extends DController
+class login extends Controller
 {
     public function __construct()
     {
@@ -15,10 +15,45 @@ class login extends DController
 
     public function login()
     {
-        $this->load->view("header");
-        $this->load->view("home");
-        $this->load->view("footer");
+        Session::init();
+        if (Session::get('login') == true) {
+            header("Location:" . BASE_URL . "/admin");
+        }
+        $this->load->view("auth/login");
     }
 
+    public function auth_login()
+    {
+        $table_Admin = 'user';
+        $username = $_POST['username'];
+        $password = md5($_POST['password']);
 
+        $loginModel = $this->load->model('loginModel');
+        $row = $loginModel->login($table_Admin, $username, $password);
+
+        if ($row == 1) {
+            $result = $loginModel->getLogin($table_Admin, $username, $password);
+
+            if ($result[0]['username'] == $username && $result[0]['password'] == $password && $result[0]['role'] == 'admin') {
+                Session::init();
+                Session::set('login', true);
+                Session::set('role', 'admin');
+                header("Location:" . BASE_URL . "/admin");
+            } else {
+                Session::init();
+                Session::set('login', true);
+                Session::set('role', 'user');
+                header("Location:" . BASE_URL);
+            }
+        } else {
+            header("Location:" . BASE_URL . "/login");
+        }
+    }
+
+    public function logout()
+    {
+        Session::init();
+        Session::destroy();
+        header("Location:" . BASE_URL . "");
+    }
 }

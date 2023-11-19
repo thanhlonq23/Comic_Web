@@ -13,7 +13,6 @@
             <h1>Error 404</h1>
         </div>
     </div>
-
     <style>
         * {
             transition: all 0.6s;

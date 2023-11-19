@@ -1,35 +1,40 @@
 <?php
-class categoryModel extends Model
+class users extends Model
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function category($tableCategory)
+    public function select($tableCategory)
     {
         $sql = "SELECT * FROM $tableCategory";
         return $this->db->select($sql);
     }
 
-    public function categoryByID($tableCategory, $id)
+    public function selectByID($tableCategory, $id)
     {
         $sql = 'SELECT * FROM ' . $tableCategory . ' WHERE id = :id';
         $data = array(':id' => $id);
         return $this->db->select($sql, $data);
     }
+    public function selectUser($table, $username)
+    {
+        $sql = "SELECT username FROM $table WHERE username=?";
+        return $this->db->affectedRows($sql, $username);
+    }
 
-    public function insertCategory($tableCategory, $data)
+    public function insert($tableCategory, $data)
     {
         return $this->db->insert($tableCategory, $data);
     }
 
-    public function updateCategory($tableCategory, $data, $cond)
+    public function update($tableCategory, $data, $cond)
     {
         return $this->db->update($tableCategory, $data, $cond);
     }
 
-    public function deleteCategory($tableCategory, $cond)
+    public function delete($tableCategory, $cond)
     {
         return $this->db->delete($tableCategory, $cond);
     }

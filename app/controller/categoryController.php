@@ -1,6 +1,6 @@
 <?php
 // Danh mục
-class categoryController extends DController
+class categoryController extends Controller
 {
     public function __construct()
     {
@@ -10,18 +10,16 @@ class categoryController extends DController
 
     public function index()
     {
-        $this->load->view("header");
-        echo "index funtion";
-        $this->load->view("footer");
+        $this->load->view("HomePage/header");
     }
 
     public function list_category()
     {
         $this->load->view("header");
         $categoryModel = $this->load->model('categoryModel');
-        $tableCategory = 'user'; // Truyen
+        $tableCategory = 'user';
         $data['category'] = $categoryModel->category($tableCategory);
-        $this->load->view("category", $data);
+        $this->load->view("Category/category", $data);
         // $this->load->view("footer"); 
     }
 
@@ -30,24 +28,24 @@ class categoryController extends DController
         $this->load->view("header");
 
         $categoryModel = $this->load->model('categoryModel');
-        $id = 1;
+        $id = 2;
         $tableCategory = 'user'; // Truyen
         $data['categoryByID'] = $categoryModel->categoryByID($tableCategory, $id);
 
         // Hiện trang từ views
-        $this->load->view("categoryByID", $data);
+        $this->load->view("Category/categoryByID", $data);
 
         // $this->load->view("footer"); 
     }
 
     public function insertCategory()
     {
-        $categoryModel = $this->load->model('categoryModel');
-        $tableCategory = 'user';
-
         $id = null;
         $username = null;
         $password = null;
+
+        $categoryModel = $this->load->model('categoryModel');
+        $tableCategory = 'user';
 
         if (isset($_POST['id']) && isset($_POST['username']) && isset($_POST['password'])) {
             $id = $_POST['id'];
@@ -69,7 +67,7 @@ class categoryController extends DController
         } else {
             $message['msg'] = "Thêm dữ liêu thất bại";
         }
-        $this->load->view("addCategory", $message);
+        $this->load->view("Category/addCategory", $message);
     }
 
     // public function addCategory()

@@ -1,5 +1,5 @@
 <?php
-class homemodel extends DModel
+class homeModel extends Model
 {
     public function __construct()
     {

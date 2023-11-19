@@ -1,2 +1,2 @@
 <?php
-define("BASE_URL", "http://localhost/Demo_ComicWeb");
+define("BASE_URL", "http://localhost/Comic_Web");
