@@ -28,7 +28,7 @@ class signup extends Controller
         $checkUser = $this->checkUsername($username, $userModel, $table);
 
         if (($password == $rePassword) && $checkUser) {
-            $id = 'user' . $this->getid();
+            $id =  $this->getid();
             $data = array(
                 'id' => $id,
                 'username' => $username,
@@ -59,13 +59,11 @@ class signup extends Controller
 
     private function getid()
     {
-        $number = '0123456789';
         $randomID = '';
-
         for ($i = 0; $i < 6; $i++) {
-            $randomID .= $number[rand(0, strlen($number) - 1)];
+            $randomID .= rand(0, 9);
         }
 
-        return $randomID;
+        return 'user' . $randomID;
     }
 }
