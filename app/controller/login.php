@@ -24,7 +24,7 @@ class login extends Controller
 
     public function auth_login()
     {
-        $table_Admin = 'user';
+        $table_Admin = 'users';
         $username = $_POST['username'];
         $password = md5($_POST['password']);
 

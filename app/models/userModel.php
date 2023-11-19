@@ -1,5 +1,5 @@
 <?php
-class users extends Model
+class userModel extends Model
 {
     public function __construct()
     {
@@ -20,7 +20,7 @@ class users extends Model
     }
     public function selectUser($table, $username)
     {
-        $sql = "SELECT username FROM $table WHERE username=?";
+        $sql = "SELECT * FROM $table WHERE username=?";
         return $this->db->affectedRows($sql, $username);
     }
 

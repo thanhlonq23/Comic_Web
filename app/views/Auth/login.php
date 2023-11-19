@@ -37,8 +37,10 @@
                                         <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
                                     </div>
 
-                                    <a class="small text-muted" href="#!">Quên mật khẩu?</a>
-                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">Bạn không có tài khoản? <a href="<?php echo BASE_URL . '/register' ?>" style="color: #393f81;">Đăng kí ở đây</a></p>
+                                    <p class="mb-5 pb-lg-2" style="color: #393f81;">
+                                        <br>Bạn chưa có tài khoản?
+                                        <a href="<?php echo BASE_URL ?>/signup" style="text-decoration: none;"><br>Đăng kí ở đây</a>
+                                    </p>
                                 </form>
 
                             </div>

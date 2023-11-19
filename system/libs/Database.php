@@ -65,10 +65,14 @@ class Database extends PDO
         return $this->exec($sql);
     }
 
-    public function affectedRows($sql, $username = null, $password = null)
+    public function affectedRows($sql, $username, $password = null)
     {
         $pst = $this->prepare($sql);
-        $pst->execute(array($username, $password));
+        if ($password == null) {
+            $pst->execute(array($username));
+        } else {
+            $pst->execute(array($username, $password));
+        }
         return $pst->rowCount(); // Trả về số hàng đã ảnh hưởng
     }
 
