@@ -15,8 +15,9 @@ class signup extends Controller
 
     public function signup()
     {
-        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['rePassword']) && isset($_POST['email']) && isset($_POST['phoneNumber'])) {
+        if ($this->checkPost()) {
             $username = $_POST['username'];
+            $name = $_POST['name'];
             $password = md5($_POST['password']);
             $rePassword = md5($_POST['rePassword']);
             $email = $_POST['email'];
@@ -31,6 +32,7 @@ class signup extends Controller
             $id =  $this->getid();
             $data = array(
                 'id' => $id,
+                'name' => $name,
                 'username' => $username,
                 'password' => $password,
                 'email' => $email,
@@ -39,6 +41,7 @@ class signup extends Controller
 
             $result = $userModel->insert($table, $data);
             if ($result == true) {
+                
                 echo "Đăng kí thành công";
             } else {
                 echo "Email không hợp lệ";
@@ -65,5 +68,13 @@ class signup extends Controller
         }
 
         return 'user' . $randomID;
+    }
+
+    private function checkPost()
+    {
+        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['rePassword']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['name'])) {
+            return true;
+        }
+        return false;
     }
 }

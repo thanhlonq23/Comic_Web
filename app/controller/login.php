@@ -34,7 +34,7 @@ class login extends Controller
         if ($row == 1) {
             $result = $loginModel->getLogin($table_Admin, $username, $password);
 
-            if ($result[0]['username'] == $username && $result[0]['password'] == $password && $result[0]['role'] == 'admin') {
+            if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password) && ($result[0]['role'] == 'admin')) {
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'admin');

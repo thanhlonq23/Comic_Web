@@ -23,13 +23,27 @@
                 <input type="search" class="form-control form-control-dark" placeholder="Tìm kiếm..." aria-label="Search">
             </form>
             <div class="text-end">
-                <a href="<?php echo BASE_URL ?>/login">
-                    <button type=" button" class="btn btn-outline-light me-2" onclick="">Login</button>
-                </a>
-                <a href="<?php echo BASE_URL ?>/signup">
-                    <button type=" button" class="btn btn-warning">Sign-up</button>
-                </a>
+                <?php
+                session_start();
+                // Kiểm tra xem session đã đăng nhập chưa
+                if (isset($_SESSION['login'])) {
+                    // Nếu đã đăng nhập, hiển thị nút đăng xuất
+                    echo '<a href="' . BASE_URL . '/login/logout">';
+                    echo '<button type="button" class="btn btn-outline-light me-2">Logout</button>';
+                    echo '</a>';
+                } else {
+                    // Nếu chưa đăng nhập, hiển thị nút login và sign-up
+                    echo '<a href="' . BASE_URL . '/login">';
+                    echo '<button type="button" class="btn btn-outline-light me-2">Login</button>';
+                    echo '</a>';
+                    echo '<a href="' . BASE_URL . '/signup">';
+                    echo '<button type="button" class="btn btn-warning">Sign-up</button>';
+                    echo '</a>';
+                }
+                ?>
             </div>
+
+
         </div>
     </div>
     <style>
