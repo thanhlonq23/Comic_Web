@@ -16,7 +16,7 @@ class user extends Controller
     {
         $userModel = $this->load->model("userModel");
         $data['users'] = $userModel->selectAll($this->table);
-        $this->load->view("Admin/header");
+        $this->load->view("Admin/User/header");
         $this->load->view("Admin/User/listUser", $data);
         // $this->load->view("Admin/footer");
     }
@@ -33,7 +33,7 @@ class user extends Controller
         $userModel = $this->load->model("userModel");
         $data['userByID'] = $userModel->selectByCond($this->table, $cond);
 
-        $this->load->view("Admin/header");
+        $this->load->view("Admin/User/header");
         $this->load->view("Admin/User/editUser", $data);
     }
 

@@ -17,8 +17,8 @@ class author extends Controller
         $authorModel = $this->load->model("authorModel");
         $data['authors'] =  $authorModel->selectAll($this->table);
 
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/author/listAuthor", $data);
+        $this->load->view("Admin/Author/header");
+        $this->load->view("Admin/Author/listAuthor", $data);
         // $this->load->view("Admin/footer");
 
     }
@@ -32,7 +32,7 @@ class author extends Controller
 
     public function add_Author()
     {
-        $this->load->view("Admin/header");
+        $this->load->view("Admin/Author/header");
         $this->load->view("Admin/author/addAuthor");
     }
 
@@ -61,7 +61,7 @@ class author extends Controller
         $authorModel = $this->load->model("authorModel");
         $data['authorByID'] = $authorModel->selectByCond($this->table, $cond);
 
-        $this->load->view("Admin/header");
+        $this->load->view("Admin/Author/header");
         $this->load->view("Admin/author/editAuthor", $data);
     }
 

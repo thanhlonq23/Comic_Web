@@ -5,7 +5,7 @@
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="<?php echo BASE_URL ?>">
-                            <img src="./app/upload/logo/f4.jpg" alt="" width="45" height="39" class="d-inline-block align-text-top">
+                            <img src="../app/upload/logo/f4.jpg" alt="" width="45" height="39" class="d-inline-block align-text-top">
                         </a>
                     </div>
                 </nav>
