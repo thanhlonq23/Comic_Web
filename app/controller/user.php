@@ -42,12 +42,16 @@ class user extends Controller
         $name = $_POST['name'];
         $phoneNumber = $_POST['phoneNumber'];
         $email = $_POST['email'];
+        $password = md5($_POST['password']);
+        $role = $_POST['role'];
 
         $cond = "id = '$id'";
         $data = [
             'name' => $name,
             'phoneNumber' => $phoneNumber,
-            'email' => $email
+            'email' => $email,
+            'role' => $role,
+            'password' => $password
         ];
 
         $userModel = $this->load->model("userModel");
