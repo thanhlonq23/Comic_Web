@@ -1,3 +1,9 @@
+<style>
+    footer {
+        left: 0;
+        bottom: 0;
+    }
+</style>
 <footer class="bg-dark text-center text-white">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
