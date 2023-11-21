@@ -29,9 +29,8 @@ class signup extends Controller
         $checkUser = $this->checkUsername($username, $userModel, $table);
 
         if (($password == $rePassword) && $checkUser) {
-            $id =  $this->getid();
             $data = array(
-                'id' => $id,
+                'id' => $this->getid(),
                 'name' => $name,
                 'username' => $username,
                 'password' => $password,
@@ -41,7 +40,6 @@ class signup extends Controller
 
             $result = $userModel->insert($table, $data);
             if ($result == true) {
-                
                 echo "Đăng kí thành công";
             } else {
                 echo "Email không hợp lệ";

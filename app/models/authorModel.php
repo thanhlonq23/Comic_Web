@@ -1,5 +1,5 @@
 <?php
-class userModel extends Model
+class authorModel extends Model
 {
     public function __construct()
     {
@@ -17,11 +17,6 @@ class userModel extends Model
         $sql = "SELECT * FROM $table WHERE $cond";
         return $this->db->select($sql);
     }
-    public function selectUser($table, $username)
-    {
-        $sql = "SELECT * FROM $table WHERE username=?";
-        return $this->db->affectedRows($sql, $username);
-    }
 
     public function insert($table, $data)
     {
@@ -32,7 +27,6 @@ class userModel extends Model
     {
         return $this->db->update($table, $data, $cond);
     }
-    
 
     public function delete($table, $cond)
     {
