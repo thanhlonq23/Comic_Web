@@ -5,43 +5,53 @@
                 <nav class="navbar navbar-light bg-light">
                     <div class="container-fluid">
                         <a class="navbar-brand" href="<?php echo BASE_URL ?>">
-                            <img src="./app/upload/logo/f4.jpg" alt="" width="45" height="39" class="d-inline-block align-text-top">
+                            <img src="../app/upload/logo/f4.jpg" alt="" width="45" height="39" class="d-inline-block align-text-top">
                         </a>
                     </div>
                 </nav>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class=" nav-item dropdown">
-                            <a class=" nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Truyện tranh
+                            <a class=" nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Webtoon
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="">Danh sách</a></li>
-                                <li><a class="dropdown-item" href="#">Thêm</a></li>
-                                <li><a class="dropdown-item" href="#">Cập nhật</a></li>
+                                <li><a class="dropdown-item" href="">List</a></li>
+                                <li><a class="dropdown-item">Add</a></li>
+                                <li><a class="dropdown-item">Update</a></li>
+                            </ul>
+                        </li>
+                        <li class=" nav-item dropdown">
+                            <a class=" nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Chapter
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="">List</a></li>
+                                <li><a class="dropdown-item">Add</a></li>
+                                <li><a class="dropdown-item">Update</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tác giả
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Author
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/list_Author">Danh sách</a></li>
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/add_Author">Thêm</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/list_Author">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/add_Author">Add</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Người dùng
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                User
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/user/list_User">Danh sách</a></li>
-                                <li><a class="dropdown-item" href="#">Cấp quyền Admin</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/user/list_User">List</a></li>
+                                <li><a class="dropdown-item">Cấp quyền Admin</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tùy chọn
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Account
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="">Tài khoản</a></li>
