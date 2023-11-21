@@ -94,12 +94,12 @@
         var email = document.getElementById('email').value;
         var phone = document.getElementById('phoneNumber').value;
 
-        // Kiểm tra mật khẩu và xác nhận mật khẩu
-        if (password !== confirm_password) {
-            document.getElementById('confirmPasswordError').innerHTML = "Mật khẩu không khớp.";
+        // Kiểm tra tên đăng nhập có ít nhất 6 kí tự
+        if (username.length < 6) {
+            document.getElementById('usernameError').innerHTML = "Tên đăng nhập phải có ít nhất 6 kí tự.";
             return false;
         } else {
-            document.getElementById('confirmPasswordError').innerHTML = "";
+            document.getElementById('usernameError').innerHTML = "";
         }
 
         // Kiểm tra số điện thoại chỉ chứa số và có đúng 10 kí tự
@@ -110,12 +110,12 @@
             document.getElementById('phoneError').innerHTML = "";
         }
 
-        // Kiểm tra tên đăng nhập có ít nhất 6 kí tự
-        if (username.length < 6) {
-            document.getElementById('usernameError').innerHTML = "Tên đăng nhập phải có ít nhất 6 kí tự.";
+        // Kiểm tra mật khẩu và xác nhận mật khẩu
+        if (password !== confirm_password) {
+            document.getElementById('confirmPasswordError').innerHTML = "Mật khẩu không khớp.";
             return false;
         } else {
-            document.getElementById('usernameError').innerHTML = "";
+            document.getElementById('confirmPasswordError').innerHTML = "";
         }
 
         return true;
