@@ -22,9 +22,5 @@
         <a class="text-white" href="#">F4 Comics</a>
     </div>
     <!-- Copyright -->
-    <a class="text-white" href="#">F4 Comics</a>
-    </div>
-    <!-- Copyright -->
 </footer>
-
 <!-- Thêm chỗ link thư viện này để có css vs js cho header footer -->
