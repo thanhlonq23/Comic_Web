@@ -46,7 +46,7 @@
                 <!-- Bảng hiển thị các comics gần đây (name, date, trạng thái) -->
                 <div class="header">
                     <i class='bx bxs-book-open'></i>
-                    <h3>Recent Comics</h3>
+                    <h3>List Comics</h3>
                     <!-- <i class='bx bx-filter'></i>
                         <i class='bx bx-search'></i> -->
                     <form action="#">
