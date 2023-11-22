@@ -1,0 +1,102 @@
+/* HEADER */
+header {
+    position: relative;
+    top: 0;
+    width: 100%;
+}
+
+.home-text {
+    color: yellow;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.home-text:hover {
+    color: red
+}
+
+.menu-text {
+    color: white;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.menu-text:hover {
+    color: lightgreen
+}
+/* HEADER */
+
+
+
+
+
+/* CATALOGY */
+@media (min-width: 1200px) {
+    .container.catalogy {
+        max-width: 970px;
+    }
+}
+
+.comic-item {
+    position: relative;
+    width: 200px; /* Đặt chiều rộng mong muốn của div */
+    height: 300px; /* Đặt chiều cao mong muốn của div */
+    overflow: hidden;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Khung viền */
+    transition: transform 0.3s ease; /* Thêm hiệu ứng transition cho việc chuyển động */
+}
+
+a .cover{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.comic-title{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease; /* Thêm hiệu ứng transition cho việc chuyển động */
+}
+
+/* Hiệu ứng khi hover */
+.comic-item:hover {
+    transform: scale(1.02); /* Phóng to khi hover */
+}
+
+a .cover:hover {
+    transform: scale(1.02); /* Phóng to khi hover */
+}
+
+.comic-title:hover {
+    opacity: 0; /* Ẩn tiêu đề khi hover */
+}
+
+/* Hình ảnh mặc định */
+.comic-item img:empty {
+    background: url('https://fomantic-ui.com/images/wireframe/white-image.png') center center no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Khung viền cho trường hợp không có ảnh */
+}
+/* CATALOGY */
+
+
+
+
+
+/* FOOTER */
+footer {
+    left: 0;
+    bottom: 0;
+}
+/* FOOTER */
