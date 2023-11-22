@@ -1,5 +1,5 @@
 <?php
-class webtoonModel extends Model
+class Model extends Model
 {
     public function __construct()
     {
@@ -12,16 +12,11 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
-    public function select($collum, $table)
+    public function selectByID($table, $id)
     {
-        $sql = "SELECT $collum FROM $table";
-        return $this->db->select($sql);
-    }
-
-    public function selectByCond($table, $cond)
-    {
-        $sql = "SELECT * FROM $table WHERE $cond";
-        return $this->db->select($sql);
+        $sql = 'SELECT * FROM ' . $table . ' WHERE id = :id';
+        $data = array(':id' => $id);
+        return $this->db->select($sql, $data);
     }
 
     public function insert($table, $data)
@@ -33,7 +28,6 @@ class webtoonModel extends Model
     {
         return $this->db->update($table, $data, $cond);
     }
-
 
     public function delete($table, $cond)
     {

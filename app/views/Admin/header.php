@@ -16,9 +16,8 @@
                                 Webtoon
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="">List</a></li>
-                                <li><a class="dropdown-item">Add</a></li>
-                                <li><a class="dropdown-item">Update</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/webtoon/list_Webtoon">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/webtoon/add_Webtoon">Add</a></li>
                             </ul>
                         </li>
                         <li class=" nav-item dropdown">
@@ -26,9 +25,8 @@
                                 Chapter
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="">List</a></li>
-                                <li><a class="dropdown-item">Add</a></li>
-                                <li><a class="dropdown-item">Update</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/chapter/list_Chapter">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/chapter/add_Chapter">Add</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -54,7 +52,7 @@
                                 Account
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="">Tài khoản</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>">Tài khoản</a></li>
                                 <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/login/logout">Đăng xuất</a></li>
                             </ul>
                         </li>

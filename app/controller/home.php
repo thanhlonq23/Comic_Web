@@ -10,9 +10,9 @@ class home extends Controller
 
     public function index()
     {
-        $this->load->view("HomePage/header");
-        $this->load->view("HomePage/page");
-        $this->load->view("HomePage/footer");
+        $this->load->view("User/HomePage/header");
+        $this->load->view("User/HomePage/page");
+        $this->load->view("User/HomePage/footer");
     }
 
     public function notFound()

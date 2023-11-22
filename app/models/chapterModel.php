@@ -1,5 +1,5 @@
 <?php
-class webtoonModel extends Model
+class chapterModel extends Model
 {
     public function __construct()
     {
@@ -9,12 +9,6 @@ class webtoonModel extends Model
     public function selectAll($table)
     {
         $sql = "SELECT * FROM $table";
-        return $this->db->select($sql);
-    }
-
-    public function select($collum, $table)
-    {
-        $sql = "SELECT $collum FROM $table";
         return $this->db->select($sql);
     }
 

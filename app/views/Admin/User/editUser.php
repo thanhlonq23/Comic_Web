@@ -1,11 +1,3 @@
-<?php
-if (!empty($_GET['msg'])) {
-    $msg = unserialize(urldecode($_GET['msg']));
-    foreach ($msg as $key => $value) {
-        echo "<p style='color: green'><br> $value </p>";
-    }
-}
-?>
 <h1 style="text-align: center;">Edit User</h1>
 <div class="container mt-5">
     <?php
