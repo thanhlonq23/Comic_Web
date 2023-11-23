@@ -103,7 +103,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="comic-row" style="cursor: pointer;">
+                        <tr class="comicdb-row" style="cursor: pointer;">
                             <td>
                                 <img src="../../css/admin/images/1.jpg" alt="Comic 1">
                                 <p>Hệ Thống Tự Cứu Của Nhân Vật Phản Diện</p>
@@ -114,7 +114,7 @@
                             <td>07/09/2003</td>
                             <td>30 chapters</td>
                         </tr>
-                        <tr class="comic-row" style="cursor: pointer;">
+                        <tr class="comicdb-row" style="cursor: pointer;">
 
                             <td>
                                 <img src="../../css/admin/images/3.jpg" alt="Comic 2">
@@ -125,7 +125,7 @@
                             <td>07/09/2003</td>
                             <td>30 chapters</td>
                         </tr>
-                        <tr class="comic-row" style="cursor: pointer;">
+                        <tr class="comicdb-row" style="cursor: pointer;">
 
                             <td>
                                 <img src="../../css/admin/images/4.jpg" alt="Comic 3">
@@ -184,7 +184,18 @@
     <!-- End of Main content-->
 
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const comicRows = document.querySelectorAll(".comicdb-row");
 
+        comicRows.forEach(function(row) {
+            row.addEventListener("click", function(event) {
+                // Chuyển hướng tới trang comic khi click vào comic row
+                location.href = 'comic.php';
+            });
+        });
+    });
+</script>
     <script src="../../js/admin/admin.js"></script>
 
 

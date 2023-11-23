@@ -93,74 +93,153 @@ sideLinks.forEach(item => {
 // });
 
 //list dashboard
-document.addEventListener("DOMContentLoaded", function() {
-    const comicRows = document.querySelectorAll(".comic-row");
+// document.addEventListener("DOMContentLoaded", function() {
+//     const comicRows = document.querySelectorAll(".comicdb-row");
 
-    comicRows.forEach(function(row) {
-        row.addEventListener("click", function(event) {
-            // Chuyển hướng tới trang comic khi click vào comic row
-            location.href = 'comic.php';
+//     comicRows.forEach(function(row) {
+//         row.addEventListener("click", function() {
+//             // Chuyển hướng tới trang comic khi click vào comic row
+//             location.href = 'comic.php';
+//         });
+//     });
+// });
+// //list comicslist
+// document.addEventListener("DOMContentLoaded", function() {
+//     const comicRows = document.querySelectorAll(".comic-row");
+
+//     comicRows.forEach(function(row) {
+//         const editButton = row.querySelector('input[value="Edit"]');
+//         const deleteButton = row.querySelector('input[value="Delete"]');
+
+//         editButton.addEventListener("click", function(eventcm) {
+//             eventcm.preventDefault();
+//             location.href = 'editcomic.php';
+//         });
+
+//         deleteButton.addEventListener("click", function(eventcm) {
+//             eventcm.preventDefault();
+//             location.href = 'deletecomic.php';
+//         });
+
+//         row.addEventListener("click", function(eventcm) {
+//             if (eventcm.target !== editButton && eventcm.target !== deleteButton) {
+//                 location.href = 'comic.php';
+//             }
+//         });
+//     });
+// });
+
+// //list chapters tại comic.php
+// document.addEventListener("DOMContentLoaded", function() {
+//     const comicRows = document.querySelectorAll(".chapter-row");
+
+//     comicRows.forEach(function(row) {
+//         // Lấy nút "Edit" trong từng hàng
+//         const editButton = row.querySelector('input[value="Edit"]');
+//         const deleteButton = row.querySelector('input[value="Delete"]');
+
+//         // Thêm sự kiện click cho nút "Edit"
+//         editButton.addEventListener("click", function(event) {
+//             // Ngăn chặn hành vi mặc định của nút (tránh refresh trang)
+//             event.preventDefault();
+
+//             // Chuyển hướng sang trang edit.php
+//             location.href = 'editchapter.php';
+//         });
+
+//         // Thêm sự kiện click cho nút "Delete"
+//         deleteButton.addEventListener("click", function(event) {
+//             // Ngăn chặn hành vi mặc định của nút (tránh refresh trang)
+//             event.preventDefault();
+
+//             // Thực hiện xóa hoặc xử lý logic xóa ở đây
+
+//             // Ví dụ: chuyển hướng sang trang delete.php
+//             location.href = 'deletechapter.php';
+//         });
+
+//         // Thêm sự kiện click cho toàn bộ hàng (trừ nút "Edit" và "Delete")
+//         row.addEventListener("click", function(event) {
+//             // Kiểm tra xem sự kiện click được kích hoạt từ nút "Edit" hoặc "Delete" hay không
+//             if (event.target !== editButton && event.target !== deleteButton) {
+//                 location.href = 'reading.php';
+//             }
+//         });
+//     });
+// });
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+//     const comicRows = document.querySelectorAll(".comic-row");
+
+//     comicRows.forEach(function(row) {
+//         const editButton = row.querySelector('input[value="Edit"]');
+//         const deleteButton = row.querySelector('input[value="Delete"]');
+
+//         editButton.addEventListener("click", function(eventcm) {
+//             eventcm.preventDefault();
+//             location.href = 'editcomic.php';
+//         });
+
+//         deleteButton.addEventListener("click", function(eventcm) {
+//             eventcm.preventDefault();
+//             location.href = 'deletecomic.php';
+//         });
+
+//         row.addEventListener("click", function(eventcm) {
+//             if (eventcm.target !== editButton && eventcm.target !== deleteButton) {
+//                 location.href = 'comic.php';
+//             }
+//         });
+//     });
+// });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Lấy tất cả các hàng có class "comic-row"
+    const comicRows = document.querySelectorAll('.comic-row');
+
+    // Lặp qua từng hàng và thêm sự kiện click
+    comicRows.forEach(row => {
+        row.addEventListener('click', () => {
+            window.location.href = 'comic.php'; // Chuyển hướng sang comic.php khi click vào hàng
         });
-    });
-});
-//list comicslist
-document.addEventListener("DOMContentLoaded", function() {
-    const comicRows = document.querySelectorAll(".comic-row");
 
-    comicRows.forEach(function(row) {
+        // Lấy các button "Edit" và "Delete" trong mỗi hàng
         const editButton = row.querySelector('input[value="Edit"]');
         const deleteButton = row.querySelector('input[value="Delete"]');
 
-        editButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            location.href = 'editcomic.php';
+        // Thêm sự kiện click cho nút Edit
+        editButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
+            window.location.href = 'editcomic.php'; // Chuyển hướng sang edit.php khi click vào nút Edit
         });
 
-        deleteButton.addEventListener("click", function(event) {
-            event.preventDefault();
-            location.href = 'deletecomic.php';
-        });
-
-        row.addEventListener("click", function(event) {
-            if (event.target !== editButton && event.target !== deleteButton) {
-                location.href = 'comic.php';
-            }
+        // Thêm sự kiện click cho nút Delete
+        deleteButton.addEventListener('click', (event) => {
+            event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
+            window.location.href = 'deletecomic.php'; // Chuyển hướng sang delete.php khi click vào nút Delete
         });
     });
+
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const chapterRows = document.querySelectorAll(".chapter-row");
 
-//list chapters tại comic.php
-document.addEventListener("DOMContentLoaded", function() {
-    const comicRows = document.querySelectorAll(".chapter-row");
-
-    comicRows.forEach(function(row) {
-        // Lấy nút "Edit" trong từng hàng
+    chapterRows.forEach(function (row) {
         const editButton = row.querySelector('input[value="Edit"]');
         const deleteButton = row.querySelector('input[value="Delete"]');
 
-        // Thêm sự kiện click cho nút "Edit"
-        editButton.addEventListener("click", function(event) {
-            // Ngăn chặn hành vi mặc định của nút (tránh refresh trang)
+        editButton.addEventListener("click", function (event) {
             event.preventDefault();
-
-            // Chuyển hướng sang trang edit.php
             location.href = 'editchapter.php';
         });
 
-        // Thêm sự kiện click cho nút "Delete"
-        deleteButton.addEventListener("click", function(event) {
-            // Ngăn chặn hành vi mặc định của nút (tránh refresh trang)
+        deleteButton.addEventListener("click", function (event) {
             event.preventDefault();
-
-            // Thực hiện xóa hoặc xử lý logic xóa ở đây
-
-            // Ví dụ: chuyển hướng sang trang delete.php
             location.href = 'deletechapter.php';
         });
 
-        // Thêm sự kiện click cho toàn bộ hàng (trừ nút "Edit" và "Delete")
-        row.addEventListener("click", function(event) {
-            // Kiểm tra xem sự kiện click được kích hoạt từ nút "Edit" hoặc "Delete" hay không
+        row.addEventListener("click", function (event) {
             if (event.target !== editButton && event.target !== deleteButton) {
                 location.href = 'reading.php';
             }
@@ -217,7 +296,7 @@ window.addEventListener('resize', () => {
 
 
 //Khi có nội dung list chpaters trong tbody thì vẫn hiển thị default, khi không có chapter nào sẽ hiển thị phần thêm chapter mới, ẩn thead
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const tbody = document.querySelector(".bottom-data .comics tbody");
     const thead = document.querySelector(".bottom-data .comics thead");
 
@@ -234,8 +313,8 @@ document.addEventListener("DOMContentLoaded", function() {
             </td>
         `;
 
-         // Thêm sự kiện click vào td mới
-         newRow.addEventListener("click", function() {
+        // Thêm sự kiện click vào td mới
+        newRow.addEventListener("click", function () {
             location.href = 'uploadchapter.php';
         });
 
@@ -244,21 +323,21 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const createChapterBtn = document.querySelector('.header input[type="button"][value="Create Chapter"]');
 
     if (createChapterBtn) {
-        createChapterBtn.addEventListener("click", function() {
+        createChapterBtn.addEventListener("click", function () {
             location.href = 'uploadchapter.php';
         });
     }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     const createProjectBtn = document.querySelector('.upload-comic input[type="button"][value="Create Project"]');
 
     if (createProjectBtn) {
-        createProjectBtn.addEventListener("click", function(event) {
+        createProjectBtn.addEventListener("click", function (event) {
             event.preventDefault();
             location.href = 'uploadcomic.php';
         });
@@ -298,65 +377,65 @@ function goBackComicslist() {
 
 $(document).ready(function () {
     function setupFileUpload() {
-      const dragArea = $('.drag-area');
-      const fileInput = $('input[type="file"]');
-      const submitButton = $('input[type="button"]');
+        const dragArea = $('.drag-area');
+        const fileInput = $('input[type="file"]');
+        const submitButton = $('input[type="button"]');
 
-      // Kéo và thả thư mục
-      dragArea.on('dragover', function (e) {
-        e.preventDefault();
-        dragArea.addClass('active');
-      });
+        // Kéo và thả thư mục
+        dragArea.on('dragover', function (e) {
+            e.preventDefault();
+            dragArea.addClass('active');
+        });
 
-      dragArea.on('dragleave', function () {
-        dragArea.removeClass('active');
-      });
+        dragArea.on('dragleave', function () {
+            dragArea.removeClass('active');
+        });
 
-      dragArea.on('drop', function (e) {
-        e.preventDefault();
-        const files = e.originalEvent.dataTransfer.items;
-        handleFiles(files);
-        dragArea.removeClass('active');
-      });
+        dragArea.on('drop', function (e) {
+            e.preventDefault();
+            const files = e.originalEvent.dataTransfer.items;
+            handleFiles(files);
+            dragArea.removeClass('active');
+        });
 
-      // Chọn thư mục khi click vào khu vực tải lên
-      dragArea.on('click', function () {
-        fileInput.click();
-      });
+        // Chọn thư mục khi click vào khu vực tải lên
+        dragArea.on('click', function () {
+            fileInput.click();
+        });
 
-      // Xử lý sự kiện khi chọn thư mục
-      fileInput.on('change', function () {
-        const files = fileInput[0].files;
-        handleFiles(files);
-      });
+        // Xử lý sự kiện khi chọn thư mục
+        fileInput.on('change', function () {
+            const files = fileInput[0].files;
+            handleFiles(files);
+        });
 
-      // Hàm kiểm tra và xử lý các tệp tin hình ảnh
-      function handleFiles(files) {
-        let hasImageFiles = false;
+        // Hàm kiểm tra và xử lý các tệp tin hình ảnh
+        function handleFiles(files) {
+            let hasImageFiles = false;
 
-        for (let i = 0; i < files.length; i++) {
-          if (files[i].type === 'image/jpeg' || files[i].type === 'image/png' || files[i].type === 'image/jpg') {
-            hasImageFiles = true;
-            break;
-          }
+            for (let i = 0; i < files.length; i++) {
+                if (files[i].type === 'image/jpeg' || files[i].type === 'image/png' || files[i].type === 'image/jpg') {
+                    hasImageFiles = true;
+                    break;
+                }
+            }
+
+            if (hasImageFiles) {
+                // Code để xử lý tệp tin hình ảnh
+                console.log('Files are valid. Ready to upload.');
+            } else {
+                alert('No image files found in the selected folder!');
+            }
         }
 
-        if (hasImageFiles) {
-          // Code để xử lý tệp tin hình ảnh
-          console.log('Files are valid. Ready to upload.');
-        } else {
-          alert('No image files found in the selected folder!');
-        }
-      }
-
-      // Xử lý sự kiện nhấn nút "Submit Upload"
-      submitButton.on('click', function () {
-        const files = fileInput[0].files;
-        handleFiles(files);
-      });
+        // Xử lý sự kiện nhấn nút "Submit Upload"
+        submitButton.on('click', function () {
+            const files = fileInput[0].files;
+            handleFiles(files);
+        });
     }
 
     // Gọi hàm setupFileUpload khi tài liệu được tải
     setupFileUpload();
-  });
+});
 
