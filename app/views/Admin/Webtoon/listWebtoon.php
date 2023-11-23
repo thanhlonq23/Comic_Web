@@ -43,8 +43,9 @@
                             echo 'Đã hoàn thành';
                         } ?>
                     </td>
-                    <td class="col-4 text-center"><?php echo $value['cover'] ?></td>
-
+                    <td class="col-4 text-center">
+                        <img src="../public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="Ảnh bìa" width="100" style="height:auto;">
+                    </td>
                     <td class="col-1 text-center">
                         <a href="<?php echo BASE_URL ?>/webtoon/edit_Webtoon/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
                     </td>

@@ -3,7 +3,7 @@
     <?php
     foreach ($webtoonByID as $key => $value) {
     ?>
-        <form action="<?php echo BASE_URL ?>/webtoon/edit/<?php echo $value['id'] ?>" method="post">
+        <form action="<?php echo BASE_URL ?>/webtoon/edit/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 Tên Truyện <br>
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên Truyện" value="<?php echo $value['name'] ?>">
@@ -13,8 +13,8 @@
                 <input type="text" class="form-control" name="description" placeholder="Nhập mô tả" value="<?php echo $value['description'] ?>">
             </div>
             <div class="mb-3">
-                Ảnh bìa <br>
-                <input type="file" class="form-control" name="cover">
+                <label class="form-label">Ảnh bìa:</label>
+                <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov">
             </div>
             <div class="mb-3">
                 Tình trạng <br>
