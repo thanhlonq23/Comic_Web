@@ -1,5 +1,5 @@
 <?php
-class Model extends Model
+class categoryModel extends Model
 {
     public function __construct()
     {

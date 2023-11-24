@@ -10,11 +10,6 @@
             </div>
 
             <div class="mb-3">
-                <label class="form-label">File:</label>
-                <input type="file" name="file" multiple>
-            </div>
-
-            <div class="mb-3">
                 Tình trạng <br>
                 <input type="radio" id="status1" name="status" value="1">
                 <label for="status1">Mở khóa</label>

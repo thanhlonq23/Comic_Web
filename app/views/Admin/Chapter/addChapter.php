@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Thêm Chapter:</h1>
 <div class="container mt-5">
-    <form action="<?php echo BASE_URL ?>/chapter/add" method="post">
+    <form action="<?php echo BASE_URL ?>/chapter/add" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Webtoon:</label>
             <select class="form-select form-select-lg mb-3" name="webtoon_id">
@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label class="form-label">File:</label>
-            <input type="file" name="file" multiple>
+            <input class="form-control" type="file" name="images[]" accept=".png,.jpg,.mov" multiple>
         </div>
 
         <button type="submit" class="btn btn-primary">Thêm</button>

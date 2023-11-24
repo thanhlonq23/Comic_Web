@@ -7,10 +7,13 @@ class webtoon extends Controller
         Session::checkSession();
         parent::__construct();
     }
+
+
     public function index()
     {
         $this->list_Webtoon();
     }
+
 
     public function list_Webtoon()
     {
@@ -21,11 +24,13 @@ class webtoon extends Controller
         // $this->load->view("Admin/footer");
     }
 
+
     public function add_Webtoon()
     {
         $this->load->view("Admin/header");
         $this->load->view("Admin/webtoon/addWebtoon");
     }
+
 
     public function add()
     {
@@ -33,10 +38,11 @@ class webtoon extends Controller
         $name = $_POST['name'];
         $description = $_POST['description'];
 
-        // Lấy tên ảnh bìa
-        $uploadedFileName = $_FILES["cover"]["name"];
+        // Tên thư mục chứa chapter = id 
+        $newDir = $id;
 
-        // Tạo tên duy nhất 
+        // Xử lý tạo tên bìa
+        $uploadedFileName = $_FILES["cover"]["name"];
         $fileName = uniqid() . "_" . $uploadedFileName;
 
         $data = [
@@ -46,8 +52,8 @@ class webtoon extends Controller
             'cover' => $fileName
         ];
 
-        // Không lưu được ảnh => Không lưu vào db
-        if ($this->upload($fileName)) {
+        // Không lưu được ảnh/ không tạo được thư mục => k lưu vào db
+        if ($this->upload($fileName) && $this->createDir($newDir)) {
             // Thực hiện truy vấn db
             $webtoonModel = $this->load->model("webtoonModel");
             $result = $webtoonModel->insert($this->table, $data);
@@ -65,19 +71,36 @@ class webtoon extends Controller
         }
     }
 
+
     public function delete_Webtoon($id)
     {
+        // Tên file là id
+        $file = $id;
+
+        // Điều kiện
         $cond = "id = '$id'";
+
+        // Lấy tên bìa
         $webtoonModel = $this->load->model('webtoonModel');
-        try {
-            $webtoonModel->delete($this->table, $cond);
-        } catch (Exception  $th) {
-            $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra Chapter";
+        $getCover = $webtoonModel->selectByCond($this->table, $cond);
+        $cover = $getCover[0]['cover'];
+
+        // Xóa được thư mục,bìa thành công mới đến xóa trong db
+        if ($this->deleteDir($file) && $this->deleteFile($cover)) {
+            try {
+                $webtoonModel->delete($this->table, $cond);
+            } catch (Exception  $th) {
+                $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại";
+                header("Location:" . BASE_URL . "/webtoon/list_Webtoon?msg=" . urlencode(serialize($message)));
+                exit;
+            }
+            header("Location:" . BASE_URL . "/webtoon/list_Webtoon");
+        } else {
+            $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại11";
             header("Location:" . BASE_URL . "/webtoon/list_Webtoon?msg=" . urlencode(serialize($message)));
-            exit;
         }
-        header("Location:" . BASE_URL . "/webtoon/list_Webtoon");
     }
+
 
     public function edit_Webtoon($id)
     {
@@ -88,6 +111,7 @@ class webtoon extends Controller
         $this->load->view("Admin/header");
         $this->load->view("Admin/Webtoon/editWebtoon", $data);
     }
+
 
     public function edit($id)
     {
@@ -128,13 +152,15 @@ class webtoon extends Controller
         }
     }
 
-    protected function selectByCond($cond)
-    {
-        $webtoonModel = $this->load->model("webtoonModel");
-        // $data['webtoons'] = $webtoonModel->selectAll($this->table);
-        $data = $webtoonModel->selectAll($this->table);
-    }
 
+
+
+    //==================================================================Các hàm xử lý==================================================================//
+
+
+
+
+    // Lưu ảnh
     private function upload($fileName)
     {
         $path_uploads = "public/Uploads/Cover/Webtoon/";
@@ -147,6 +173,7 @@ class webtoon extends Controller
         }
     }
 
+    // Tạo id
     private function getid()
     {
         $randomID = '';
@@ -155,5 +182,40 @@ class webtoon extends Controller
         }
 
         return 'webtoon' . $randomID;
+    }
+
+    // Tạo thư mục chứa ảnh 
+    private function createDir($newDir)
+    {
+        $dirPath = "public/Uploads/Comic";
+        $path = $dirPath . '/' . $newDir;
+
+        if (!is_dir($path)) {
+            mkDir($path);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // Xử lý xóa
+    private function deleteDir($dir)
+    {
+        $dirPath = "public/Uploads/Comic/" . $dir;
+
+        if (is_dir($dirPath)) {
+            return rmdir($dirPath);
+        }
+        return false;
+    }
+    private function deleteFile($cover)
+    {
+        $filePath = "public/Uploads/Cover/Webtoon/" . $cover;
+
+        if (file_exists($filePath)) {
+            return unlink($filePath);
+        }
+        return false;
     }
 }

@@ -12,7 +12,7 @@
         <div class="mb-3">
             <label class="form-label">Ảnh bìa:</label>
             <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov">
-        </div>
+        </div> 
         <button type="submit" class="btn btn-primary">Thêm</button>
 
         <!-- Hiện thông báo -->

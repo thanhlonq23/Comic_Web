@@ -9,8 +9,8 @@
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên Truyện" value="<?php echo $value['name'] ?>">
             </div>
             <div class="mb-3">
-                Mô tả <br>
-                <input type="text" class="form-control" name="description" placeholder="Nhập mô tả" value="<?php echo $value['description'] ?>">
+                <label class="form-label">Mô tả:</label><br>
+                <textarea class="form-control" name="description" rows="5" placeholder="Nhập mô tả" value="<?php echo $value['description'] ?>"></textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label">Ảnh bìa:</label>

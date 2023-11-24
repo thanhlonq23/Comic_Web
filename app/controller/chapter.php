@@ -2,7 +2,7 @@
 class chapter extends Controller
 {
     private $table = 'chapters';
-    private $webtoon;
+
     public function __construct()
     {
         Session::checkSession();
@@ -31,15 +31,24 @@ class chapter extends Controller
 
     public function add()
     {
+        $id = $this->getid();
+        $name = $_POST['name'];
+        $webtoon_id = $_POST['webtoon_id'];
+
         $data = [
-            'id' => $this->getid(),
-            'webtoon_id' => $_POST['webtoon_id'],
-            'name' => $_POST['name']
+            'id' => $id,
+            'webtoon_id' => $webtoon_id,
+            'name' => $name
         ];
 
+        // Thư mục upload = id
+        $dir = $id;
+
+        // Xử lý thêm vào db
         $chapterModel = $this->load->model("chapterModel");
         $result = $chapterModel->insert($this->table, $data);
-        if ($result != 0) {
+
+        if (($result != 0) && $this->upload($webtoon_id, $dir)) {
             $message['msg'] = "Thêm chapter thành công";
             header("Location:" . BASE_URL . "/chapter/add_Chapter?msg=" . urlencode(serialize($message)));
         } else {
@@ -59,7 +68,7 @@ class chapter extends Controller
     private function getid()
     {
         $randomID = '';
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $randomID .= rand(0, 9);
         }
 
@@ -69,6 +78,15 @@ class chapter extends Controller
     {
         $cond = "id = '$id'";
         $chapterModel = $this->load->model('chapterModel');
+
+        // Tên chapter
+        $dir = $id;
+
+        // Xử lý lấy tên webtoon
+        $getChapter = $chapterModel->selectByCond($this->table, $cond);
+        $webtoonDir = $getChapter[0]['webtoon_id'];
+
+        $this->delete($webtoonDir, $dir);
         $chapterModel->delete($this->table, $cond);
         header("Location:" . BASE_URL . "/Chapter/list_Chapter");
     }
@@ -87,12 +105,12 @@ class chapter extends Controller
         $cond = "id = '$id'";
         $data = [
             'name' => $_POST['name'],
-            // 'cover' => $_POST['cover'],
             'status' => $_POST['status']
         ];
 
         $chapterModel = $this->load->model("chapterModel");
         $result = $chapterModel->update($this->table, $data, $cond);
+
         if ($result != 0) {
             $message['msg'] = "Cập nhật chapter thành công";
             header("Location:" . BASE_URL . "/Chapter/?msg=" . urlencode(serialize($message)));
@@ -100,5 +118,64 @@ class chapter extends Controller
             $message['msg'] = "Cập nhật chapter thất bại";
             header("Location:" . BASE_URL . "/Chapter/?msg=" . urlencode(serialize($message)));
         }
+    }
+
+
+    private function upload($webtoonDir, $dir)
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+            // Đường dẫn đến thư mục lưu trữ tập tin đã tải lên
+            $targetDir = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir . "/";
+
+            // Kiểm tra xem thư mục đã tồn tại hay chưa
+            if (!is_dir($targetDir)) {
+                // Nếu chưa, tạo thư mục
+                mkdir($targetDir, 0755, true);
+            }
+
+            $uploadedFiles = [];
+
+            foreach ($_FILES["images"]["name"] as $key => $name) {
+                $targetFile = $targetDir . basename($name);
+                $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                // Kiểm tra nếu là file ảnh thì mới cho phép upload
+                if (getimagesize($_FILES["images"]["tmp_name"][$key])) {
+                    if (move_uploaded_file($_FILES["images"]["tmp_name"][$key], $targetFile)) {
+                        $uploadedFiles[] = $targetFile;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private function delete($webtoonDir, $dir)
+    {
+        function rmdir_recursive($dirPath)
+        {
+            foreach (scandir($dirPath) as $item) {
+                if ($item == '.' || $item == '..') {
+                    continue;
+                }
+                $path = $dirPath . '/' . $item;
+                if (is_dir($path)) {
+                    rmdir_recursive($path);
+                } else {
+                    unlink($path);
+                }
+            }
+            rmdir($dirPath);
+        }
+
+        // Sử dụng hàm để xóa thư mục
+        $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
+        echo $dirPath;
+        rmdir_recursive($dirPath);
     }
 }

@@ -6,7 +6,7 @@
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-block">
                             <a href="<?php echo BASE_URL ?>">
-                                <img src="./public/Logo/f4.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                                <img src="./app/upload/logo/f4.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
                             </a>
                         </div>
 
