@@ -969,3 +969,13 @@ body {
 } */
 
 
+.content main .bottom-data .comics table td.date {
+    /* display: flex; */
+    max-width: 80%;
+    /* Điều chỉnh giá trị max-width cho phù hợp với nội dung của bạn */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 5px;
+}
+

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F4 Comics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container2 {
+            width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            display: flex;
+            flex-direction: column;
+            /* Adjust alignment and spacing */
+            align-items: center;
+            gap: 20px;
+            /* Adjust gap between elements */
+            align-items: center;
+        }
+
+        h4 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .preview {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .image-list {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 540px;
+            /* max-width: 200px; */
+            border-right: 1px solid #ccc;
+            /* Adding a border for separation */
+            /* Adjust styles for better appearance */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .image-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .image-list li {
+            display: block;
+            cursor: pointer;
+            padding: 10px;
+            margin: 5px;
+
+        }
+
+        .image-list li:hover {
+            background-color: #f0f0f0;
+            /* Change to the desired hover color */
+            text-decoration: none;
+        }
+
+        /* div 1 */
+        .image-viewer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* padding: 24px; */
+            /* gap: 24px; */
+            max-width: 1000px;
+            width: calc((100% - 200px));
+            align-self: stretch;
+            /* height: calc(((100vh - 100pxpx)) - 15px); */
+            overflow: auto;
+            box-sizing: border-box;
+        }
+
+        /* div 2 */
+        .display-area {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            gap: 4px;
+            width: 100%;
+            min-height: 500px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            background-color: #ccc;
+        }
+
+        /* img trong div 2 */
+        .display-area img {
+            background: #ccc;
+
+            /* max-height: 890px; */
+            /*  */
+            box-sizing: border-box;
+            vertical-align: middle;
+            border-style: none;
+            overflow-clip-margin: content-box;
+            overflow: clip;
+
+            width: 100%;
+            height: 100%;
+            max-height: 500px;
+            object-fit: contain;
+        }
+        .image-list h4 {
+            position: sticky;
+            top: 20px; /* Điều chỉnh khoảng cách từ đỉnh trang xuống phần tử */
+            background-color: #fff; /* Màu nền cho phần tử đính cố định */
+            z-index: 1; /* Đảm bảo phần tử đính cố định hiển thị trên các phần tử khác */
+            padding: 8px 0; /* Thêm padding để tạo khoảng trắng xung quanh */
+            margin-bottom: 10px; /* Khoảng cách phần tử đính cố định với phần tử dưới nó */
+        }
+    </style>
+</head>
+<body>
+    <main class="main">
+        <div class="container2" id="formContainer2">
+            <div class="preview">
+                <div class="image-list">
+                    <h4>Uploaded Images:</h4>
+                    <ul id="imageList">
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                        <li>169.jpeg</li>
+                    </ul>
+                </div>
+                <div class="image-viewer">
+                    <h4>Image Viewer:</h4>
+                    <div class="display-area" id="imageDisplayArea">
+                        <img id="currentImage" src="../../css/admin/images/1.jpg" alt="Uploaded Image" />
+                    </div>
+                </div>
+            </div>
+            <div style="display: block; text-align:center;">
+                <input type="button" id="finalizeUploadButton" value="Submit">
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
