@@ -10,37 +10,67 @@ sideLinks.forEach(item => {
     })
 });
 
+// document.addEventListener("DOMContentLoaded", function () {
+//     // Lấy tất cả các hàng có class "comic-row"
+//     const comicRows = document.querySelectorAll('.comic-row');
+
+//     // Lặp qua từng hàng và thêm sự kiện click
+//     comicRows.forEach(row => {
+//         row.addEventListener('click', () => {
+//             const comicId = row.dataset.id;
+
+//             // Tạo URL mới với ID và chuyển hướng đến comic.php
+//             const url = `comic.php?id=${encodeURIComponent(comicId)}`;
+//             window.location.href = url;
+//         });
+
+//         // Lấy các button "Edit" và "Delete" trong mỗi hàng
+//         const editButton = row.querySelector('input[value="Edit"]');
+//         const deleteButton = row.querySelector('input[value="Delete"]');
+
+//         // Thêm sự kiện click cho nút Edit
+//         editButton.addEventListener('click', (event) => {
+//             event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
+//             window.location.href = 'editcomic.php'; // Chuyển hướng sang edit.php khi click vào nút Edit
+//         });
+
+//         // Thêm sự kiện click cho nút Delete
+//         deleteButton.addEventListener('click', (event) => {
+//             event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
+//             window.location.href = 'deletecomic.php'; // Chuyển hướng sang delete.php khi click vào nút Delete
+//         });
+//     });
+// });
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Lấy tất cả các hàng có class "comic-row"
     const comicRows = document.querySelectorAll('.comic-row');
 
-    // Lặp qua từng hàng và thêm sự kiện click
     comicRows.forEach(row => {
         row.addEventListener('click', () => {
             const comicId = row.dataset.id;
-
-            // Tạo URL mới với ID và chuyển hướng đến comic.php
             const url = `comic.php?id=${encodeURIComponent(comicId)}`;
             window.location.href = url;
         });
 
-        // Lấy các button "Edit" và "Delete" trong mỗi hàng
         const editButton = row.querySelector('input[value="Edit"]');
         const deleteButton = row.querySelector('input[value="Delete"]');
 
-        // Thêm sự kiện click cho nút Edit
         editButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-            window.location.href = 'editcomic.php'; // Chuyển hướng sang edit.php khi click vào nút Edit
+            event.stopPropagation();
+            const comicId = row.dataset.id; // Get the ID from the row
+            const editUrl = `editcomic.php?id=${encodeURIComponent(comicId)}`; // Append ID to edit URL
+            window.location.href = editUrl;
         });
 
-        // Thêm sự kiện click cho nút Delete
         deleteButton.addEventListener('click', (event) => {
-            event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-            window.location.href = 'deletecomic.php'; // Chuyển hướng sang delete.php khi click vào nút Delete
+            event.stopPropagation();
+            const comicId = row.dataset.id; // Get the ID from the row
+            const deleteUrl = `deletecomic.php?id=${encodeURIComponent(comicId)}`; // Append ID to delete URL
+            window.location.href = deleteUrl;
         });
     });
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const chapterRows = document.querySelectorAll(".chapter-row");
@@ -125,7 +155,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Thêm sự kiện click vào td mới
         newRow.addEventListener("click", function () {
-            location.href = 'uploadchapter.php';
+            // location.href = 'uploadchapter.php';
+            const urlParams = new URLSearchParams(window.location.search);
+            const webtoonId = urlParams.get('id');
+
+            if (webtoonId) {
+                const url = `uploadchapter.php?id=${encodeURIComponent(webtoonId)}`;
+                window.location.href = url;
+            } else {
+                console.error('Missing webtoon ID');
+            }
         });
 
         // Thêm dòng mới vào tbody
@@ -133,15 +172,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-    const createChapterBtn = document.querySelector('.header input[type="button"][value="Create Chapter"]');
+// document.addEventListener("DOMContentLoaded", function () {
+//     const createChapterBtn = document.querySelector('.header input[type="button"][value="Create Chapter"]');
 
-    if (createChapterBtn) {
-        createChapterBtn.addEventListener("click", function () {
-            location.href = 'uploadchapter.php';
-        });
-    }
-});
+//     if (createChapterBtn) {
+//         createChapterBtn.addEventListener("click", function () {
+//             location.href = 'uploadchapter.php';
+//         });
+//     }
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
     const createProjectBtn = document.querySelector('.upload-comic input[type="button"][value="Create Project"]');
@@ -152,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function () {
             location.href = 'uploadcomic.php';
         });
     }
-});F
+}); F
 
 
 
