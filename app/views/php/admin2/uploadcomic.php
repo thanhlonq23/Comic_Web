@@ -12,20 +12,30 @@ try {
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Truy vấn dữ liệu từ bảng categories
-    $sql = "SELECT name FROM categories";
-    $statement = $connection->prepare($sql);
-    $statement->execute();
+    $sqlCategories = "SELECT name FROM categories";
+    $statementCategories = $connection->prepare($sqlCategories);
+    $statementCategories->execute();
 
     // Lấy kết quả trả về dưới dạng mảng kết hợp
-    $categorySuggestionsData = $statement->fetchAll(PDO::FETCH_COLUMN);
+    $categorySuggestionsData = $statementCategories->fetchAll(PDO::FETCH_COLUMN);
+
+    // Truy vấn dữ liệu từ bảng authors
+    $sqlAuthors = "SELECT name FROM authors";
+    $statementAuthors = $connection->prepare($sqlAuthors);
+    $statementAuthors->execute();
+
+    // Lấy kết quả trả về từ bảng authors dưới dạng mảng kết hợp
+    $authorSuggestionsData = $statementAuthors->fetchAll(PDO::FETCH_COLUMN);
 
     // Chuyển đổi kết quả thành dạng JSON để sử dụng trong JavaScript
     $categorySuggestionsDataJSON = json_encode($categorySuggestionsData);
+    $authorSuggestionsDataJSON = json_encode($authorSuggestionsData);
 } catch (PDOException $e) {
     echo "Lỗi kết nối: " . $e->getMessage();
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -263,11 +273,31 @@ try {
             // Hàm để tạo một phần tử danh mục được chọn
             function createCategoryElement(category) {
                 const categoryElement = document.createElement('span');
-                categoryElement.textContent = category;
+                categoryElement.textContent = capitalizeFirstLetter(category); //Viết hoa chữ cái đâu
                 categoryElement.classList.add('selected-category');
 
                 // Tạo sự kiện click để xóa danh mục đã chọn khi click vào nó
                 categoryElement.addEventListener('click', function() {
+                    selectedCategories.removeChild(categoryElement);
+                });
+
+                return categoryElement;
+            }
+
+            function createUserInputCategoryElement(category) {
+                const categoryElement = document.createElement('span');
+                categoryElement.textContent = capitalizeFirstLetter(category);
+                categoryElement.classList.add('new-category');
+
+                // Tạo sự kiện click để xóa danh mục đã chọn khi click vào nó
+                categoryElement.addEventListener('click', function() {
+                    // Xóa khỏi mảng userInputCategories
+                    const index = userInputCategories.indexOf(category);
+                    if (index !== -1) {
+                        userInputCategories.splice(index, 1);
+                    }
+
+                    // Xóa phần tử khỏi giao diện
                     selectedCategories.removeChild(categoryElement);
                 });
 
@@ -302,26 +332,64 @@ try {
                 }
             });
 
+            // Hàm chuyển đổi chữ cái đầu tiên thành viết hoa
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
+
+            //hàm thêm categories vào 2 mảng
             categorySuggestions.addEventListener('mouseout', function(event) {
                 if (event.target.tagName === 'DIV') {
                     event.target.classList.remove('category-hover');
                 }
             });
+
+            // Sự kiện click để xóa phần tử new-category
+            selectedCategories.addEventListener('click', function(event) {
+                if (event.target.classList.contains('new-category')) {
+                    const categoryText = event.target.textContent.trim();
+                    const index = userInputCategories.indexOf(categoryText);
+                    if (index !== -1) {
+                        userInputCategories.splice(index, 1);
+                    }
+                    selectedCategories.removeChild(event.target);
+                }
+            });
+
+
             addCategoryButton.addEventListener('click', function() {
                 const category = categoriesInput.value.trim();
                 if (category !== '') {
                     const categoryElement = document.createElement('span');
-                    categoryElement.textContent = category;
+                    const capitalizedCategory = capitalizeFirstLetter(category);
+                    categoryElement.textContent = capitalizedCategory;
                     categoryElement.classList.add('new-category');
 
-                    // Thêm vào mảng userInputCategories
-                    userInputCategories.push(category);
+                    categoryElement.addEventListener('click', function() {
+                        // Xóa khỏi mảng userInputCategories
+                        const index = userInputCategories.findIndex(category => category === capitalizedCategory);
+                        //sử dụng findIndex để tìm vị trí của phần tử trong mảng userInputCategories
+                        if (index !== -1) {
+                            userInputCategories.splice(index, 1);
+                        }
 
+                        // Xóa phần tử khỏi giao diện
+                        selectedCategories.removeChild(categoryElement);
+                    });
+
+                    // Thêm vào mảng userInputCategories
+                    userInputCategories.push(capitalizeFirstLetter(category));
                     selectedCategories.appendChild(categoryElement);
+
                     categoriesInput.value = '';
                     categorySuggestions.innerHTML = '';
                 }
             });
+
+
+
+
+
 
             submit.addEventListener('click', function() {
                 // Kiểm tra các trường dữ liệu của biểu mẫu thứ hai
