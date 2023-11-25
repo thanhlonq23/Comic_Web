@@ -8,10 +8,10 @@ class admin extends Controller
     {
         parent::__construct();
         Session::checkSession();
+        $this->checkRole();
     }
     public function index()
     {
-        $this->checkRole();
         $this->dashboard();
     }
 
@@ -25,7 +25,7 @@ class admin extends Controller
     }
 
 
-    public function checkRole()
+    public static function checkRole()
     {
         if (Session::get('role') != 'admin') {
             echo "<h1>Bạn không có quyền truy cập trang admin</h1>";

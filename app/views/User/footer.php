@@ -1,4 +1,4 @@
-<footer class="bg-dark text-center text-white">
+<footer class="footer bg-dark text-center text-white mt-auto py-3">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
         <!-- Section: Social media -->
@@ -23,4 +23,3 @@
     </div>
     <!-- Copyright -->
 </footer>
-<!-- Thêm chỗ link thư viện này để có css vs js cho header footer -->

@@ -28,7 +28,7 @@ class Session
         self::init();
         if (self::get('login') == false) {
             self::destroy();
-            header("Location:" . BASE_URL . "/login");
+            header("Location:" . BASE_URL . "/?url=login");
         }
     }
     public static function destroy()

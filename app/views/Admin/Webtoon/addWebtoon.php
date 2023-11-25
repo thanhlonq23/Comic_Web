@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Thêm truyện:</h1>
 <div class="container mt-5">
-    <form action="<?php echo BASE_URL ?>/webtoon/add" method="post" enctype="multipart/form-data">
+    <form action="<?php echo BASE_URL ?>/?url=webtoon/add" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Tên truyện:</label>
             <input type="text" class="form-control" name="name" placeholder="Nhập tên truyện">

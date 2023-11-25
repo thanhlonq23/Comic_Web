@@ -16,6 +16,7 @@ class webtoon extends Controller
 
     public function webtoon_Main()
     {
+        admin::checkRole();
         $id = $_GET['id'];
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
@@ -25,6 +26,7 @@ class webtoon extends Controller
 
     public function list_Webtoon()
     {
+        admin::checkRole();
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoons'] = $webtoonModel->selectAll($this->table);
         $this->load->view("Admin/Webtoon/comicslist", $data);
@@ -33,6 +35,7 @@ class webtoon extends Controller
 
     public function add_Webtoon()
     {
+        admin::checkRole();
         $this->load->view("Admin/nav");
         $this->load->view("Admin/webtoon/addWebtoon");
     }
@@ -40,6 +43,7 @@ class webtoon extends Controller
 
     public function delete_Webtoon($id)
     {
+        admin::checkRole();
         // Tên file là id
         $file = $id;
 
@@ -70,6 +74,7 @@ class webtoon extends Controller
 
     public function edit_Webtoon($id)
     {
+        admin::checkRole();
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
@@ -157,14 +162,14 @@ class webtoon extends Controller
                 $this->upload($fileName);
 
                 $message['msg'] = "Cập nhật truyện thành công";
-                header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
             } else {
                 $message['msg'] = "Cập nhật truyện thất bại";
-                header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
             }
         } else {
             $message['msg'] = "Cập nhật truyện thất bại";
-            header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
         }
     }
 
@@ -242,10 +247,19 @@ class webtoon extends Controller
     // Lấy ra truyện
     public function recent_Webtoon()
     {
-        $cond = "1=1 ORDER BY date DESC LIMIT 5";
+        $cond = "1=1 ORDER BY date DESC";
         $collum = 'id,name,status,cover,date';
         $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        $data['recent_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        return $data;
+    }
+
+    public function recommended_Webtoon($number)
+    {
+        $cond = "1=1 ORDER BY date DESC LIMIT $number";
+        $collum = 'id,name,status,cover,date';
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
         return $data;
     }
 }

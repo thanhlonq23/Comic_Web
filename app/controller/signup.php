@@ -42,6 +42,7 @@ class signup extends Controller
             if ($result == true) {
                 echo "Đăng kí thành công";
             } else {
+                print_r($data);
                 echo "Email không hợp lệ";
             }
         } else {

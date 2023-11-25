@@ -1,6 +1,6 @@
  <!-- Thanh bên, menu -->
  <div class="sidebar">
-     <a href="<?php echo BASE_URL ?>/?url=admin" class="logo">
+     <a href="<?php echo BASE_URL ?>" class="logo">
          <img src="./public/Logo/logo.png" alt="Logo" class="logo-img">
          <div class="logo-name"><span>F4 </span>Comics</div>
      </a>

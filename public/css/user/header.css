@@ -1,0 +1,40 @@
+.home-text {
+    color: yellow;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.home-text:hover {
+    color: red
+}
+
+.menu-text {
+    color: white;
+    font-size: 16px;
+    font-family: Arial;
+    font-weight: 700;
+    word-wrap: break-word
+}
+
+.menu-text:hover {
+    color: lightgreen
+}
+
+@media (min-width: 992) {
+    .sub-home-bar {
+        display: none;
+    }
+}
+
+@media (max-width: 992px) {
+    .home-bar {
+        display: none;
+        /* Hide category lists on small screens */
+    }
+
+    .sub-home-bar {
+        display: block;
+    }
+}

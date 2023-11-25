@@ -29,4 +29,18 @@
     <?php
     }
     ?>
+
+    <!-- Hiện thông báo -->
+    <div>
+        <h4 style='color: green'><br>
+            <?php
+            if (!empty($_GET['msg'])) {
+                $msg = unserialize(urldecode($_GET['msg']));
+                foreach ($msg as $key => $value) {
+                    echo $value;
+                }
+            }
+            ?>
+        </h4>
+    </div>
 </div>
