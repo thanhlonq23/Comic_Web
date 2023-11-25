@@ -1,0 +1,16 @@
+.cover-item {
+    position: relative;
+    width: 200px;
+    /* Đặt chiều rộng mong muốn của div */
+    height: 300px;
+    /* Đặt chiều cao mong muốn của div */
+    overflow: hidden;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+    /* Khung viền */
+}
+
+img.cover {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

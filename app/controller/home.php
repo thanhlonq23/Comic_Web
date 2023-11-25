@@ -6,7 +6,6 @@ class home extends Controller
 {
     public function __construct()
     {
-        $data = array();
         parent::__construct();
     }
 
@@ -21,8 +20,9 @@ class home extends Controller
         $this->load->view("User/header");
 
         // Lấy ra truyện
-        $data1 = $this->recent_Comic();
-        $data2 = $this->recommended_Comic();
+        $webtoon = new webtoon();
+        $data1 = $webtoon->recent_Webtoon();
+        $data2 = $webtoon->recommended_Webtoon(8);
         $data = array_merge_recursive($data1, $data2);
 
         $this->load->view("User/HomePage/page", $data);
@@ -32,19 +32,5 @@ class home extends Controller
     public function notFound()
     {
         $this->load->view("404");
-    }
-
-    public function recommended_Comic()
-    {
-        $webtoon = new webtoon();
-        $data = $webtoon->recommended_Webtoon(8);
-        return $data;
-    }
-
-    public function recent_Comic()
-    {
-        $webtoon = new webtoon();
-        $data = $webtoon->recent_Webtoon();
-        return $data;
     }
 }

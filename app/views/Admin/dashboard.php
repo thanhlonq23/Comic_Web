@@ -58,7 +58,7 @@
                 </thead>
 
                 <?php
-                foreach ($recent_Webtoon as $key => $value) {
+                foreach ($recommended_Webtoon as $key => $value) {
                 ?>
                     <tbody>
                         <tr class="comicdb-row" style="cursor: pointer;">

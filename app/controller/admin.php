@@ -18,7 +18,7 @@ class admin extends Controller
     public function dashboard()
     {
         $webtoon = new webtoon();
-        $data = $webtoon->recent_Webtoon();
+        $data = $webtoon->recommended_Webtoon(4);
 
         $this->load->view("Admin/nav");
         $this->load->view("Admin/dashboard", $data);

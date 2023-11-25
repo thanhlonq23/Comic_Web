@@ -27,8 +27,7 @@ class webtoon extends Controller
     public function list_Webtoon()
     {
         admin::checkRole();
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectAll($this->table);
+        $data = $this->list();
         $this->load->view("Admin/Webtoon/comicslist", $data);
     }
 
@@ -130,6 +129,14 @@ class webtoon extends Controller
             $message['msg'] = "Thêm truyện thất bại";
             header("Location:" . BASE_URL . "/?url=webtoon/add_Webtoon/&msg=" . urlencode(serialize($message)));
         }
+    }
+
+
+    public function list()
+    {
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectAll($this->table);
+        return $data;
     }
 
 
@@ -242,6 +249,14 @@ class webtoon extends Controller
         $data['webtoons'] = $webtoonModel->select($collum, $this->table);
         return $data;
     }
+
+    public function getByCond($cond)
+    {
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+        return $data;
+    }
+
 
 
     // Lấy ra truyện

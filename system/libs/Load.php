@@ -10,12 +10,12 @@ class Load
         if ($data != null) {
             extract($data);
         }
-        include 'app/views/' . $fileName . '.php';
+        include_once 'app/views/' . $fileName . '.php';
     }
 
     public function model($fileName)
     {
-        include 'app/models/' . $fileName . '.php';
+        include_once 'app/models/' . $fileName . '.php';
         return new $fileName();
     }
 }

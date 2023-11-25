@@ -102,6 +102,13 @@ class chapter extends Controller
         }
     }
 
+    public function getByCond($cond)
+    {
+        $chapterModel = $this->load->model("chapterModel");
+        $data['chapters'] = $chapterModel->selectByCond($this->table, $cond);
+        return $data;
+    }
+
 
     public function edit($id)
     {

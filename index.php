@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./public/css/user/comicPage.css">
     <link rel="stylesheet" href="./public/css/admin/admin.css">
     <link rel="stylesheet" href="./public/css/user/header.css">
     <link rel="stylesheet" href="./public/css/user/homePage.css">
+
 
 </head>
 

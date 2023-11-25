@@ -11,8 +11,8 @@
                 ?>
                     <div class="comic-item">
                         <li class="nav-item">
-                            <a href="#" target="_blank">
-                                <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="<?php echo $value['name'] ?>" class="cover">
+                            <a href="<?php echo BASE_URL . '/?url=comicPage/homePage/&id=' . $value['id'] ?>" target="_blank">
+                                <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " class="cover">
                                 <div class="comic-title">
                                     <div class="fs-5"><?php echo $value['name'] ?></div>
                                 </div>
@@ -38,7 +38,7 @@
                 ?>
                     <div class="comic-item">
                         <li class="nav-item">
-                            <a href="#" target="_blank">
+                            <a href="<?php echo BASE_URL ?>/?url=admin" target="_blank">
                                 <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?>" alt="Học Bá Vô Danh" class="cover">
                                 <div class="comic-title">
                                     <div class="fs-5"><?php echo $value['name'] ?></div>
