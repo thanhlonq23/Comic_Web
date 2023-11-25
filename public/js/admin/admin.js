@@ -212,13 +212,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // Thêm sự kiện click cho nút Edit
     editButton.addEventListener("click", (event) => {
       event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "editcomic.php"; // Chuyển hướng sang edit.php khi click vào nút Edit
+      window.location.href = "#"; // Chuyển hướng sang edit.php khi click vào nút Edit
     });
 
     // Thêm sự kiện click cho nút Delete
     deleteButton.addEventListener("click", (event) => {
       event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "deletecomic.php"; // Chuyển hướng sang delete.php khi click vào nút Delete
+      window.location.href = "#"; // Chuyển hướng sang delete.php khi click vào nút Delete
     });
   });
 });
@@ -231,17 +231,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editButton.addEventListener("click", function (event) {
       event.preventDefault();
-      location.href = "editchapter.php";
+      location.href = "#";
     });
 
     deleteButton.addEventListener("click", function (event) {
       event.preventDefault();
-      location.href = "deletechapter.php";
+      location.href = "#";
     });
 
     row.addEventListener("click", function (event) {
       if (event.target !== editButton && event.target !== deleteButton) {
-        location.href = "reading.php";
+        location.href = "#";
       }
     });
   });
@@ -331,7 +331,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (createChapterBtn) {
     createChapterBtn.addEventListener("click", function () {
-      location.href = "uploadchapter.php";
+      location.href = "#";
     });
   }
 });
@@ -344,7 +344,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (createProjectBtn) {
     createProjectBtn.addEventListener("click", function (event) {
       event.preventDefault();
-      location.href = "uploadcomic.php";
+      location.href = "#";
     });
   }
 });
@@ -373,7 +373,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 function goBackComicslist() {
-  window.location.href = "comicslist.php";
+  window.location.href = "#";
 }
 
 //upload chapter demo
