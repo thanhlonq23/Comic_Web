@@ -5,18 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $authorName = $_POST['authorName'];
     $describe = $_POST['description'];
     $status = $_POST['status'];
-    // $selected_categories = $_POST['selectedCategories'];
-    // $new_categories = $_POST['new_categories'];
-
-    // Xử lý chuỗi các thể loại mới thành mảng
-    // $new_categories_array = explode(',', $selected_categorie);
 
     // Xử lý việc di chuyển và lưu trữ ảnh cover vào thư mục
     $parentDirectory = "../../uploads/";
-
-    // Chuyển tên webtoon thành một đường dẫn hợp lệ bằng cách loại bỏ các ký tự không phù hợp
-    // $comicDirectoryName = preg_replace('/[^a-zA-Z0-9]/', '_', $name);
-
     $comicDirectory = $parentDirectory . $name;
     $coverDirectory = $comicDirectory . "/cover/";
 
@@ -41,64 +32,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->beginTransaction();
 
 
-        // Tạo ID cho tác giả mới
-        $random_number_author = mt_rand(10000, 99999);
-        $author_id = 'Author' . $random_number_author;
-        // Thêm tác giả mới vào bảng Authors
-        $insert_author_sql = "INSERT INTO Authors (id, name) VALUES (:author_id, :authorName)";
-        $insert_author_stmt = $conn->prepare($insert_author_sql);
-        $insert_author_stmt->bindParam(':author_id', $author_id);
-        $insert_author_stmt->bindParam(':authorName', $authorName);
-        $insert_author_stmt->execute();
+        // // Tạo ID cho tác giả mới
+        // $random_number_author = mt_rand(10000, 99999);
+        // $author_id = 'Author' . $random_number_author;
+        // // Thêm tác giả mới vào bảng Authors
+        // $insert_author_sql = "INSERT INTO Authors (id, name) VALUES (:author_id, :authorName)";
+        // $insert_author_stmt = $conn->prepare($insert_author_sql);
+        // $insert_author_stmt->bindParam(':author_id', $author_id);
+        // $insert_author_stmt->bindParam(':authorName', $authorName);
+        // $insert_author_stmt->execute();
 
-        // Lưu thông tin category mới nếu có
-        // Xử lý thông tin category mới nếu có
-        // foreach ($new_categories_array as $new_category_name) {
-        //     if (!empty($new_category_name)) {
-        //         $check_sql = "SELECT * FROM categories WHERE name = :new_category_name";
-        //         $check_stmt = $conn->prepare($check_sql);
-        //         $check_stmt->bindParam(':new_category_name', $new_category_name);
-        //         $check_stmt->execute();
-
-        //         if ($check_stmt->rowCount() == 0) {
-        //             $id = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-        //             $insert_sql = "INSERT INTO categories (id, name) VALUES (:id, :new_category_name)";
-        //             $insert_stmt = $conn->prepare($insert_sql);
-        //             $insert_stmt->bindParam(':id', $id);
-        //             $insert_stmt->bindParam(':new_category_name', $new_category_name);
-        //             $insert_stmt->execute();
-
-        //             // $selected_categories[] = $id; // Thêm ID mới vào mảng các thể loại đã chọn
-        //         } else {
-        //             // Thể loại đã tồn tại trong CSDL, không cần thêm mới
-        //             // Bạn có thể thực hiện hành động khác tại đây (ví dụ: thông báo cho người dùng)
-        //         }
-        //     }
-        // }
-
-        // $category_names = explode(',', $categories);
-
-        // foreach ($category_names as $category_name) {
-        //     $category_name = trim($category_name); // Loại bỏ khoảng trắng thừa
-
-        //     // Thực hiện kiểm tra nếu category đã tồn tại trong bảng categories
-        //     $check_sql = "SELECT * FROM categories WHERE name = :category_name";
-        //     $check_stmt = $conn->prepare($check_sql);
-        //     $check_stmt->bindParam(':category_name', $category_name);
-        //     $check_stmt->execute();
-
-        //     $result = $check_stmt->fetch(PDO::FETCH_ASSOC);
-
-        //     if (!$result) {
-        //         // Nếu category chưa tồn tại, thêm mới vào bảng categories
-        //         $insert_sql = "INSERT INTO categories (name) VALUES (:category_name)";
-        //         $insert_stmt = $conn->prepare($insert_sql);
-        //         $insert_stmt->bindParam(':category_name', $category_name);
-        //         $insert_stmt->execute();
-        //     }
-        // }
-
-        // Lưu thông tin về webtoon vào bảng webtoons
+        // --------------------------------------------------------Lưu thông tin về webtoon vào bảng webtoons
         $currentDate = date("Y-m-d");
         $targetDirectory = "../../uploads/" . $name . "/cover/";
         // Xử lý tệp ảnh cover và di chuyển vào thư mục cover của webtoon
@@ -124,57 +68,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_webtoon_stmt->bindParam(':currentDate', $currentDate);
         $insert_webtoon_stmt->execute();
 
-        // //Xử lý thông tin quan hệ giữa webtoon và categories
-        // foreach ($new_categories_array as $new_category_name) {
-        //     if (!empty($new_category_name)) {
-        //         $check_sql = "SELECT * FROM categories WHERE name = :new_category_name";
-        //         $check_stmt = $conn->prepare($check_sql);
-        //         $check_stmt->bindParam(':new_category_name', $new_category_name);
-        //         $check_stmt->execute();
-
-        //         if ($check_stmt->rowCount() == 0) {
-        //             $id = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-        //             $insert_sql = "INSERT INTO categories (id, name) VALUES (:id, :new_category_name)";
-        //             $insert_stmt = $conn->prepare($insert_sql);
-        //             $insert_stmt->bindParam(':id', $id);
-        //             $insert_stmt->bindParam(':new_category_name', $new_category_name);
-        //             $insert_stmt->execute();
-
-        //             $selected_categories[] = $id; // Thêm ID mới vào mảng các thể loại đã chọn
-        //         } else {
-        //             // Nếu thể loại đã tồn tại, bạn có thể thực hiện một hành động nào đó ở đây
-        //             // Ví dụ: thông báo cho người dùng, không thêm lại thể loại đã tồn tại, vv.
-        //         }
-        //     }
-        // }
-
-        // // Lưu thông tin quan hệ giữa webtoon và categories vào bảng webtoons_categories
-        // foreach ($selected_categories as $category_id) {
-        //     $webtoon_category_sql = "INSERT INTO webtoons_categories (webtoons_id, categories_id) VALUES (:comic_id, :category_id)";
-        //     $webtoon_category_stmt = $conn->prepare($webtoon_category_sql);
-        //     $webtoon_category_stmt->bindParam(':comic_id', $comic_id);
-        //     $webtoon_category_stmt->bindParam(':category_id', $category_id);
-        //     $webtoon_category_stmt->execute();
-        // }
-
-        // Hàm xử lý thông tin quan hệ giữa webtoon và categories từ một mảng categories
+        //--------------------------------------------------------- Hàm xử lý thông tin quan hệ giữa webtoon và categories từ một mảng categories
         function handleCategoriesRelationship($categories, $conn, $comic_id)
         {
             $selected_categories = [];
 
-            foreach ($categories as $category_name) {
-                if (!empty($category_name)) {
-                    $check_sql = "SELECT * FROM categories WHERE name = :category_name";
+            foreach ($categories as $author_name) {
+                if (!empty($author_name)) {
+                    $check_sql = "SELECT * FROM categories WHERE name = :author_name";
                     $check_stmt = $conn->prepare($check_sql);
-                    $check_stmt->bindParam(':category_name', $category_name);
+                    $check_stmt->bindParam(':author_name', $author_name);
                     $check_stmt->execute();
 
                     if ($check_stmt->rowCount() == 0) {
                         $id = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
-                        $insert_sql = "INSERT INTO categories (id, name) VALUES (:id, :category_name)";
+                        $insert_sql = "INSERT INTO categories (id, name) VALUES (:id, :author_name)";
                         $insert_stmt = $conn->prepare($insert_sql);
                         $insert_stmt->bindParam(':id', $id);
-                        $insert_stmt->bindParam(':category_name', $category_name);
+                        $insert_stmt->bindParam(':author_name', $author_name);
                         $insert_stmt->execute();
 
                         $selected_categories[] = $id; // Thêm ID mới vào mảng các thể loại đã chọn
@@ -207,7 +118,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $categoryNamesUserInput = explode(',', $userInputSelectedCategories);
             handleCategoriesRelationship($categoryNamesUserInput, $conn, $comic_id);
         }
+        //--------------------------------------------------------- Hàm xử lý thông tin quan hệ giữa webtoon và authors-----------------------------------------------------
+        function handleAuthorsRelationship($authors, $conn, $comic_id)
+        {
+            $selected_authors = [];
 
+            foreach ($authors as $author_name) {
+                if (!empty($author_name)) {
+                    $check_sql = "SELECT * FROM authors WHERE name = :author_name";
+                    $check_stmt = $conn->prepare($check_sql);
+                    $check_stmt->bindParam(':author_name', $author_name);
+                    $check_stmt->execute();
+
+                    if ($check_stmt->rowCount() == 0) {
+                        $id = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 10);
+                        $insert_sql = "INSERT INTO authors (id, name) VALUES (:id, :author_name)";
+                        $insert_stmt = $conn->prepare($insert_sql);
+                        $insert_stmt->bindParam(':id', $id);
+                        $insert_stmt->bindParam(':author_name', $author_name);
+                        $insert_stmt->execute();
+
+                        $selected_authors[] = $id; // Thêm ID mới vào mảng các thể loại đã chọn
+                    } else {
+                        $result = $check_stmt->fetch(PDO::FETCH_ASSOC);
+                        $selected_authors[] = $result['id']; // Sử dụng ID đã tồn tại
+                    }
+                }
+            }
+
+            foreach ($selected_authors as $author_id) {
+                $webtoon_author_sql = "INSERT INTO webtoons_authors (webtoon_id, authors_id) VALUES (:comic_id, :author_id)";
+                $webtoon_author_stmt = $conn->prepare($webtoon_author_sql);
+                $webtoon_author_stmt->bindParam(':comic_id', $comic_id);
+                $webtoon_author_stmt->bindParam(':author_id', $author_id);
+                $webtoon_author_stmt->execute();
+            }
+        }
+
+        // Xử lý thông tin quan hệ giữa webtoon và authors từ biến selectedauthors
+        if (isset($_POST['selectedAuthors'])) {
+            $selectedAuthors = $_POST['selectedAuthors'];
+            $authorNamesSelected = explode(',', $selectedAuthors);
+            handleAuthorsRelationship($authorNamesSelected, $conn, $comic_id);
+        }
+
+        // Xử lý thông tin quan hệ giữa webtoon và authors từ biến userInputSelectedAuthors
+        if (isset($_POST['userInputSelectedCategories'])) {
+            $userInputSelectedAuthors = $_POST['userInputSelectedAuthors'];
+            $authorNamesUserInput = explode(',', $userInputSelectedAuthors);
+            handleAuthorsRelationship($authorNamesUserInput, $conn, $comic_id);
+        }
 
         $conn->commit();
         echo "Thông tin đã được thêm vào CSDL.";

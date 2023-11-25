@@ -32,6 +32,17 @@ try {
         $stmtChapters->execute();
         $chapters = $stmtChapters->fetchAll(PDO::FETCH_ASSOC);
 
+        // Thêm truy vấn để lấy thông tin tác giả từ bảng authors
+        $queryAuthors = "SELECT authors.name
+        FROM authors
+        INNER JOIN webtoons_authors ON authors.id = webtoons_authors.authors_id
+        WHERE webtoons_authors.webtoon_id = :comicId";
+
+        $stmtAuthors = $conn->prepare($queryAuthors);
+        $stmtAuthors->bindParam(':comicId', $comicId);
+        $stmtAuthors->execute();
+        $authors = $stmtAuthors->fetchAll(PDO::FETCH_ASSOC);
+
         // Hiển thị danh sách các thể loại
         $queryCategories = "SELECT categories.id, categories.name
         FROM categories
@@ -91,9 +102,22 @@ try {
                         <div class="describe">
                             <p><?php echo $comic['describe']; ?></p>
                         </div>
-                        <div>
-                            <p><span>Tác giả:</span>Châu</p>
-                        </div>
+                        <?php
+                        // Hiển thị thông tin tác giả
+                        if (!empty($authors)) {
+                            echo "<div><p><span>Tác giả:</span>";
+                            $authorCount = count($authors);
+                            foreach ($authors as $key => $author) {
+                                echo $author['name'];
+                                if ($key !== $authorCount - 1) {
+                                    echo ", ";
+                                }
+                            }
+                            echo "</p></div>";
+                        } else {
+                            echo "<p>No authors found for this comic.</p>";
+                        }
+                        ?>
                         <div>
                             <?php if ($comic['status'] == 0) : ?>
                                 <p><span>Status:</span> On-going</p>

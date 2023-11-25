@@ -105,7 +105,8 @@ try {
         }
 
         /* Categories */
-        .selected-category {
+        .selected-category,
+        .selected-author {
             display: inline-block;
             margin-right: 5px;
             padding: 5px;
@@ -119,7 +120,8 @@ try {
             /* Thêm thuộc tính position */
         }
 
-        .new-category {
+        .new-category,
+        .new-author {
             display: inline-block;
             margin-right: 5px;
             padding: 5px;
@@ -135,7 +137,9 @@ try {
         }
 
         .selected-category:hover,
-        .new-category:hover {
+        .new-category:hover,
+        .selected-author:hover,
+        .new-author:hover {
             display: inline-block;
             margin-right: 5px;
             padding: 5px;
@@ -147,7 +151,8 @@ try {
             position: relative;
         }
 
-        .category-hover {
+        .category-hover,
+        .author-hover {
             background-color: #f4f4f4;
             cursor: pointer;
         }
@@ -166,10 +171,15 @@ try {
                     <label for="comicName">Name:</label>
                     <input type="text" id="comicName" name="comicName" required>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="author-comic">Author:</label>
-                    <input type="text" id="author-comic" name="author-comic" required>
-                </div>
+                    <div style="display: flex; align-items: center;">
+                        <input type="text" id="author-comic" name="author-comic" required>
+                        <button type="button" id="addAuthor">Add</button>
+                    </div>
+                    <div id="authorSuggestions"></div>
+                    <div id="selectedAuthor"></div>
+                </div> -->
                 <div style="display: flex; justify-content: center;align-items: center;">
                     <input id="Next" type="button" value="Next">
                     <input id="Back1" type="button" value="Back" onclick="goBackComicslist()">
@@ -180,6 +190,19 @@ try {
         <div class="container">
             <h1>Thêm mới truyện tranh</h1>
             <form action="#" method="post" enctype="multipart/form-data">
+                <!-- <div class="form-group">
+                    <label for="comicName">Name:</label>
+                    <input type="text" id="comicName" name="comicName" required>
+                </div> -->
+                <div class="form-group">
+                    <label for="author-comic">Author:</label>
+                    <div style="display: flex; align-items: center;"> <!-- Thêm container flexbox -->
+                        <input type="text" id="author-comic" name="author-comic" required>
+                        <button type="button" id="addAuthor">Add</button>
+                    </div>
+                    <div id="authorSuggestions"></div>
+                    <div id="selectedAuthors"></div>
+                </div>
                 <div class="form-group">
                     <label for="status">Status:</label>
                     <select id="status" name="status" required>
@@ -217,30 +240,31 @@ try {
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let comicName = ''; // Biến để lưu tên truyện tranh từ form 1
-            let authorName = ''; // Biến để lưu tên tác giả
+            // let authorName = ''; // Biến để lưu tên tác giả
 
             const firstForm = document.querySelector('.container:nth-of-type(1)');
             const secondForm = document.querySelector('.container:nth-of-type(2)');
+            const Form = document.querySelector('.container');
             const next = document.querySelector("#Next");
             const back1 = document.querySelector("#Back1");
             const back2 = document.querySelector("#Back2");
             const submit = document.querySelector("#Submit");
 
-            // Hide the second form initially
+            // // Hide the second form initially
             secondForm.style.display = 'none';
 
             next.addEventListener('click', function() {
 
-                // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất
-                // const comicName = document.querySelector("#comicName").value.trim();
-                // const authorComic = document.querySelector("#author-comic").value.trim();
+            //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất
+            //     // const comicName = document.querySelector("#comicName").value.trim();
+            //     // const authorComic = document.querySelector("#author-comic").value.trim();
 
-                // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất và lưu vào form 2
-                comicName = firstForm.querySelector("#comicName").value.trim();
-                authorName = firstForm.querySelector("#author-comic").value.trim();
-
-                // Nếu cả hai trường dữ liệu đã được điền
-                if (comicName !== '' && authorName !== '') {
+            //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất và lưu vào form 2
+            //     comicName = firstForm.querySelector("#comicName").value.trim();
+            //     authorName = firstForm.querySelector("#author-comic").value.trim();
+            comicName = Form.querySelector("#comicName").value.trim();
+            //     // Nếu cả hai trường dữ liệu đã được điền
+                if (comicName !== '') {
                     firstForm.style.display = 'none';
                     secondForm.style.display = 'block';
                 } else {
@@ -259,7 +283,7 @@ try {
                 firstForm.style.display = 'block';
             });
 
-
+            //Giải quyết Categories
             let userInputCategories = [];
             const categoriesInput = document.getElementById('categories');
             const categorySuggestions = document.getElementById('categorySuggestions');
@@ -316,7 +340,8 @@ try {
             });
 
             categorySuggestions.addEventListener('click', function(event) {
-                if (event.target.tagName === 'DIV') {
+                if (event.target.tagName === 'DIV') //kiểm tra xem phần tử được nhấp (click) có phải là một thẻ <div> không.
+                {
                     const category = event.target.textContent.trim();
                     const categoryElement = createCategoryElement(category);
                     selectedCategories.appendChild(categoryElement);
@@ -332,10 +357,7 @@ try {
                 }
             });
 
-            // Hàm chuyển đổi chữ cái đầu tiên thành viết hoa
-            function capitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
+
 
             //hàm thêm categories vào 2 mảng
             categorySuggestions.addEventListener('mouseout', function(event) {
@@ -385,8 +407,121 @@ try {
                     categorySuggestions.innerHTML = '';
                 }
             });
+            //Kết thúc giải quyết categories
 
 
+            //giải quyết authors
+            // Lấy các phần tử cần thiết từ DOM
+            let userInputAuthors = [];
+            const authorInput = document.getElementById('author-comic');
+            const authorSuggestionsContainer = document.getElementById('authorSuggestions');
+            const selectedAuthors = document.getElementById('selectedAuthors');
+            const addAuthorButton = document.getElementById('addAuthor');
+
+            // Dữ liệu tác giả từ PHP (giả sử đã được lấy từ cơ sở dữ liệu)
+            const authorSuggestionsData = <?php echo json_encode($authorSuggestionsData); ?>;
+
+            function createAuthorElement(author) {
+                const authorElement = document.createElement('span');
+                authorElement.textContent = capitalizeFirstLetter(author);
+                authorElement.classList.add('selected-author');
+
+                authorElement.addEventListener('click', function() {
+                    selectedAuthors.removeChild(authorElement);
+                });
+
+                return authorElement;
+            }
+
+            function createUserInputAuthorElement(author) {
+                const authorElement = document.createElement('span');
+                authorElement.textContent = capitalizeFirstLetter(author);
+                authorElement.classList.add('new-author');
+
+                authorElement.addEventListener('click', function() {
+                    const index = userInputAuthors.indexOf(author);
+                    if (index !== -1) {
+                        userInputAuthors.splice(index, 1);
+                    }
+                    selectedAuthors.removeChild(authorElement);
+                });
+
+                return authorElement;
+            }
+
+            authorInput.addEventListener('input', function() {
+                const inputText = this.value.toLowerCase();
+                const suggestions = authorSuggestionsData.filter(author =>
+                    author.toLowerCase().includes(inputText)
+                );
+
+                authorSuggestions.innerHTML = suggestions
+                    .map(suggestion => `<div>${suggestion}</div>`)
+                    .join('');
+            });
+
+            authorSuggestions.addEventListener('click', function(event) {
+                if (event.target.tagName === 'DIV') {
+                    const author = event.target.textContent.trim();
+                    const authorElement = createAuthorElement(author);
+                    selectedAuthors.appendChild(authorElement);
+
+                    authorInput.value = '';
+                    authorSuggestions.innerHTML = '';
+                }
+            });
+
+            authorSuggestions.addEventListener('mouseover', function(event) {
+                if (event.target.tagName === 'DIV') {
+                    event.target.classList.add('author-hover');
+                }
+            });
+
+            authorSuggestions.addEventListener('mouseout', function(event) {
+                if (event.target.tagName === 'DIV') {
+                    event.target.classList.remove('author-hover');
+                }
+            });
+
+            selectedAuthors.addEventListener('click', function(event) {
+                if (event.target.classList.contains('new-author')) {
+                    const authorText = event.target.textContent.trim();
+                    const index = userInputAuthors.indexOf(authorText);
+                    if (index !== -1) {
+                        userInputAuthors.splice(index, 1);
+                    }
+                    selectedAuthors.removeChild(event.target);
+                }
+            });
+
+            addAuthorButton.addEventListener('click', function() {
+                const author = authorInput.value.trim();
+                if (author !== '') {
+                    const authorElement = document.createElement('span');
+                    const capitalizedAuthor = capitalizeFirstLetter(author);
+                    authorElement.textContent = capitalizedAuthor;
+                    authorElement.classList.add('new-author');
+
+                    authorElement.addEventListener('click', function() {
+                        const index = userInputAuthors.findIndex(author => author === capitalizedAuthor);
+                        if (index !== -1) {
+                            userInputAuthors.splice(index, 1);
+                        }
+                        selectedAuthors.removeChild(authorElement);
+                    });
+
+                    userInputAuthors.push(capitalizeFirstLetter(author));
+                    selectedAuthors.appendChild(authorElement);
+
+                    authorInput.value = '';
+                    authorSuggestions.innerHTML = '';
+                }
+            });
+
+            // Hàm chuyển đổi chữ cái đầu tiên thành viết hoa
+            function capitalizeFirstLetter(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1);
+            }
 
 
 
@@ -404,17 +539,24 @@ try {
                 const selectedCategories = selectedCategoriesArray.join(',');
                 const userInputSelectedCategories = userInputCategories.join(',');
 
+                const selectedAuthorElements = document.querySelectorAll('.selected-author');
+                const selectedAuthorsArray = Array.from(selectedAuthorElements).map(element => element.textContent.trim());
+                const selectedAuthors = selectedAuthorsArray.join(',');
+                const userInputSelectedAuthors = userInputAuthors.join(',');
+
                 // Kiểm tra tất cả các trường dữ liệu từ cả hai form
-                if (status !== '' && coverImage !== '' && description !== '' && comicName !== '' && authorName !== '' && (selectedCategories || userInputSelectedCategories) !== '') {
+                if (status !== '' && coverImage !== '' && description !== '' && comicName !== '' && (selectedAuthors || userInputSelectedAuthors) !== '' && (selectedCategories || userInputSelectedCategories) !== '') {
                     // Tạo object chứa thông tin từ cả hai form
                     const formData = new FormData();
                     formData.append('comicName', comicName);
-                    formData.append('authorName', authorName);
+                    // formData.append('authorName', authorName);
                     formData.append('status', status);
                     formData.append('coverImage', coverImage);
                     formData.append('description', description);
                     formData.append('selectedCategories', selectedCategories);
                     formData.append('userInputSelectedCategories', userInputSelectedCategories);
+                    formData.append('selectedAuthors', selectedAuthors);
+                    formData.append('userInputSelectedAuthors', userInputSelectedAuthors);
 
                     // Xử lý việc gửi biểu mẫu tới tệp PHP
                     // Sử dụng AJAX hoặc gửi biểu mẫu để gửi dữ liệu đến tệp PHP của bạn để xử lý cơ sở dữ liệu
