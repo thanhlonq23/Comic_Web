@@ -1,1 +1,0 @@
-Đây là delete comic
