@@ -1,4 +1,4 @@
-<?php
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy tên truyện tranh từ form
     $name = $_POST['name'];
@@ -21,4 +21,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: upload_cover.php?name=" . urlencode($name));
     exit();
 }
-?>
+
