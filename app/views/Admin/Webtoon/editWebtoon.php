@@ -3,7 +3,7 @@
     <?php
     foreach ($webtoonByID as $key => $value) {
     ?>
-        <form action="<?php echo BASE_URL ?>/webtoon/edit/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data">
+        <form action="<?php echo BASE_URL ?>/?url=webtoon/edit/<?php echo $value['id'] ?>" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 Tên Truyện <br>
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên Truyện" value="<?php echo $value['name'] ?>">

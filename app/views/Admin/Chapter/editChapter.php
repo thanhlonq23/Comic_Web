@@ -3,7 +3,7 @@
     <?php
     foreach ($chapterByID as $key => $value) {
     ?>
-        <form action="<?php echo BASE_URL ?>/chapter/edit/<?php echo $value['id'] ?>" method="post">
+        <form action="<?php echo BASE_URL ?>/?url=chapter/edit/<?php echo $value['id'] ?>" method="post">
             <div class="mb-3">
                 <label class="form-label">Chapter Name:</label>
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên Chapter" value="<?php echo $value['name'] ?>">
@@ -20,6 +20,13 @@
             <button type="submit" class="btn btn-primary">Cập nhật</button>
         </form>
     <?php
+    }
+    // Hiện thông báo
+    if (!empty($_GET['msg'])) {
+        $msg = unserialize(urldecode($_GET['msg']));
+        foreach ($msg as $key => $value) {
+            echo "<p style='color: green'><br> $value </p>";
+        }
     }
     ?>
 </div>

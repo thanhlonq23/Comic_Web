@@ -27,7 +27,7 @@ class author extends Controller
         $cond = "id = '$id'";
         $authorModel = $this->load->model('authorModel');
         $authorModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/Author/list_Author");
+        header("Location:" . BASE_URL . "/?url=Author/list_Author");
     }
 
     public function add_Author()
@@ -48,10 +48,10 @@ class author extends Controller
         $result = $authorModel->insert($this->table, $data);
         if ($result != 0) {
             $message['msg'] = "Thêm tác giả thành công";
-            header("Location:" . BASE_URL . "/Author/add_Author?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=Author/add_Author&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Thêm tác giả thất bại";
-            header("Location:" . BASE_URL . "/Author/add_Author?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=Author/add_Author&msg=" . urlencode(serialize($message)));
         }
     }
 
@@ -78,10 +78,10 @@ class author extends Controller
         $result = $authorModel->update($this->table, $data, $cond);
         if ($result != 0) {
             $message['msg'] = "Cập nhật tác giả thành công";
-            header("Location:" . BASE_URL . "/Author/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=Author/&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Cập nhật tác giả thất bại";
-            header("Location:" . BASE_URL . "/Author/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=Author/&msg=" . urlencode(serialize($message)));
         }
     }
 

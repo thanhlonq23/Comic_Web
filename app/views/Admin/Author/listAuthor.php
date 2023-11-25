@@ -34,11 +34,11 @@
                     <td class="col-3 text-center"><?php echo $value['id'] ?></td>
                     <td class="col-4 text-center"><?php echo $value['name'] ?></td>
                     <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/author/edit_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
+                        <a href="<?php echo BASE_URL ?>/?url=author/edit_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
                     </td>
 
                     <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/author/delete_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
+                        <a href="<?php echo BASE_URL ?>/?url=author/delete_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
                     </td>
                 </tr>
             <?php

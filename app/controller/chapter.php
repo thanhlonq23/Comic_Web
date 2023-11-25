@@ -13,21 +13,66 @@ class chapter extends Controller
         $this->list_Chapter();
     }
 
+    public function chapter_Main($id)
+    {
+        $cond = "webtoon_id = '$id' ORDER BY name";
+        $chapterModel = $this->load->model("chapterModel");
+
+        $data['chapters'] = $chapterModel->selectByCond($this->table, $cond);
+        $this->load->view("Admin/Chapter/chapter", $data);
+    }
+
     public function list_Chapter()
     {
         $chapterModel = $this->load->model("chapterModel");
         $data['chapters'] = $chapterModel->selectAll($this->table);
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/Chapter/listChapter", $data);
-        // $this->load->view("Admin/footer");
+        $this->load->view("Admin/Chapter/chapter", $data);
     }
+
 
     public function add_Chapter()
     {
-        $data = $this->getWebtoon();
-        $this->load->view("Admin/header");
+        include_once('./app/controller/webtoon.php');
+        $webtoon = new webtoon();
+        $data = $webtoon->get_Webtoon();
+        $this->load->view("Admin/nav");
         $this->load->view("Admin/chapter/addChapter", $data);
     }
+
+    public function edit_Chapter($id)
+    {
+        $cond = "id = '$id'";
+        $chapterModel = $this->load->model("chapterModel");
+        $data['chapterByID'] = $chapterModel->selectByCond($this->table, $cond);
+
+        $this->load->view("Admin/header");
+        $this->load->view("Admin/Chapter/editChapter", $data);
+    }
+
+    public function delete_Chapter($id)
+    {
+        $cond = "id = '$id'";
+        $chapterModel = $this->load->model('chapterModel');
+
+        // Tên chapter
+        $dir = $id;
+
+        // Xử lý lấy tên webtoon
+        $getChapter = $chapterModel->selectByCond($this->table, $cond);
+        $webtoonDir = $getChapter[0]['webtoon_id'];
+
+        $this->delete($webtoonDir, $dir);
+        $chapterModel->delete($this->table, $cond);
+        header("Location:" . BASE_URL . "/?url=admin/info/&id=$webtoonDir");
+    }
+
+
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
 
     public function add()
     {
@@ -50,55 +95,13 @@ class chapter extends Controller
 
         if (($result != 0) && $this->upload($webtoon_id, $dir)) {
             $message['msg'] = "Thêm chapter thành công";
-            header("Location:" . BASE_URL . "/chapter/add_Chapter?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Thêm chapter thất bại";
-            header("Location:" . BASE_URL . "/chapter/add_Chapter?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
         }
     }
 
-    private function getWebtoon()
-    {
-        $table = 'webtoons';
-        $collum = 'id,name';
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->select($collum, $table);
-        return $data;
-    }
-    private function getid()
-    {
-        $randomID = '';
-        for ($i = 0; $i < 3; $i++) {
-            $randomID .= rand(0, 9);
-        }
-
-        return 'chapter' . $randomID;
-    }
-    public function delete_Chapter($id)
-    {
-        $cond = "id = '$id'";
-        $chapterModel = $this->load->model('chapterModel');
-
-        // Tên chapter
-        $dir = $id;
-
-        // Xử lý lấy tên webtoon
-        $getChapter = $chapterModel->selectByCond($this->table, $cond);
-        $webtoonDir = $getChapter[0]['webtoon_id'];
-
-        $this->delete($webtoonDir, $dir);
-        $chapterModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/Chapter/list_Chapter");
-    }
-    public function edit_Chapter($id)
-    {
-        $cond = "id = '$id'";
-        $chapterModel = $this->load->model("chapterModel");
-        $data['chapterByID'] = $chapterModel->selectByCond($this->table, $cond);
-
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/Chapter/editChapter", $data);
-    }
 
     public function edit($id)
     {
@@ -113,11 +116,22 @@ class chapter extends Controller
 
         if ($result != 0) {
             $message['msg'] = "Cập nhật chapter thành công";
-            header("Location:" . BASE_URL . "/Chapter/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/edit_Chapter/" . $id . "/&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Cập nhật chapter thất bại";
-            header("Location:" . BASE_URL . "/Chapter/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/edit_Chapter/" . $id . "/&msg=" . urlencode(serialize($message)));
         }
+    }
+
+
+    private function getid()
+    {
+        $randomID = '';
+        for ($i = 0; $i < 3; $i++) {
+            $randomID .= rand(0, 9);
+        }
+
+        return 'chapter' . $randomID;
     }
 
 

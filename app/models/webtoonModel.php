@@ -24,6 +24,12 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+    public function selectCollum($table, $collum, $cond)
+    {
+        $sql = "SELECT $collum FROM $table WHERE $cond";
+        return $this->db->select($sql);
+    }
+
     public function insert($table, $data)
     {
         return $this->db->insert($table, $data);

@@ -25,7 +25,7 @@ class user extends Controller
         $cond = "id = '$id'";
         $userModel = $this->load->model('userModel');
         $userModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/User/list_User");
+        header("Location:" . BASE_URL . "/?url=User/list_User");
     }
     public function edit_User($id)
     {
@@ -58,10 +58,10 @@ class user extends Controller
         $result = $userModel->update($this->table, $data, $cond);
         if ($result != 0) {
             $message['msg'] = "Cập nhật người dùng thành công";
-            header("Location:" . BASE_URL . "/User/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=User/&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Cập nhật người dùng thất bại";
-            header("Location:" . BASE_URL . "/User/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=User/&msg=" . urlencode(serialize($message)));
         }
     }
 }

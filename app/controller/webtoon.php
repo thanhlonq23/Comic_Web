@@ -14,22 +14,78 @@ class webtoon extends Controller
         $this->list_Webtoon();
     }
 
+    public function webtoon_Main()
+    {
+        $id = $_GET['id'];
+        $cond = "id = '$id'";
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+        $this->load->view("Admin/Webtoon/webtoon", $data);
+    }
 
     public function list_Webtoon()
     {
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoons'] = $webtoonModel->selectAll($this->table);
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/Webtoon/listWebtoon", $data);
-        // $this->load->view("Admin/footer");
+        $this->load->view("Admin/Webtoon/comicslist", $data);
     }
 
 
     public function add_Webtoon()
     {
-        $this->load->view("Admin/header");
+        $this->load->view("Admin/nav");
         $this->load->view("Admin/webtoon/addWebtoon");
     }
+
+
+    public function delete_Webtoon($id)
+    {
+        // Tên file là id
+        $file = $id;
+
+        // Điều kiện
+        $cond = "id = '$id'";
+
+        // Lấy tên bìa
+        $webtoonModel = $this->load->model('webtoonModel');
+        $getCover = $webtoonModel->selectByCond($this->table, $cond);
+        $cover = $getCover[0]['cover'];
+
+        // Xóa được thư mục,bìa thành công mới đến xóa trong db
+        if ($this->deleteDir($file) && $this->deleteFile($cover)) {
+            try {
+                $webtoonModel->delete($this->table, $cond);
+            } catch (Exception  $th) {
+                $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại";
+                header("Location:" . BASE_URL . "/?url=admin/comic_List/&msg=" . urlencode(serialize($message)));
+                exit;
+            }
+            header("Location:" . BASE_URL . "/?url=admin/comic_List");
+        } else {
+            $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại11";
+            header("Location:" . BASE_URL . "/?url=admin/comic_List/&msg=" . urlencode(serialize($message)));
+        }
+    }
+
+
+    public function edit_Webtoon($id)
+    {
+        $cond = "id = '$id'";
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
+
+        $this->load->view("Admin/nav");
+        $this->load->view("Admin/Webtoon/editWebtoon", $data);
+    }
+
+
+
+
+
+    //==================================================================Các hàm xử lý==================================================================//
+
+
+
 
 
     public function add()
@@ -60,59 +116,19 @@ class webtoon extends Controller
 
             if ($result != 0) {
                 $message['msg'] = "Thêm truyện thành công";
-                header("Location:" . BASE_URL . "/webtoon/add_Webtoon?msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=webtoon/add_Webtoon/&msg=" . urlencode(serialize($message)));
             } else {
                 $message['msg'] = "Thêm truyện thất bại";
-                header("Location:" . BASE_URL . "/webtoon/add_Webtoon?msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=webtoon/add_Webtoon/&msg=" . urlencode(serialize($message)));
             }
         } else {
             $message['msg'] = "Thêm truyện thất bại";
-            header("Location:" . BASE_URL . "/webtoon/add_Webtoon?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=webtoon/add_Webtoon/&msg=" . urlencode(serialize($message)));
         }
     }
 
 
-    public function delete_Webtoon($id)
-    {
-        // Tên file là id
-        $file = $id;
-
-        // Điều kiện
-        $cond = "id = '$id'";
-
-        // Lấy tên bìa
-        $webtoonModel = $this->load->model('webtoonModel');
-        $getCover = $webtoonModel->selectByCond($this->table, $cond);
-        $cover = $getCover[0]['cover'];
-
-        // Xóa được thư mục,bìa thành công mới đến xóa trong db
-        if ($this->deleteDir($file) && $this->deleteFile($cover)) {
-            try {
-                $webtoonModel->delete($this->table, $cond);
-            } catch (Exception  $th) {
-                $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại";
-                header("Location:" . BASE_URL . "/webtoon/list_Webtoon?msg=" . urlencode(serialize($message)));
-                exit;
-            }
-            header("Location:" . BASE_URL . "/webtoon/list_Webtoon");
-        } else {
-            $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại11";
-            header("Location:" . BASE_URL . "/webtoon/list_Webtoon?msg=" . urlencode(serialize($message)));
-        }
-    }
-
-
-    public function edit_Webtoon($id)
-    {
-        $cond = "id = '$id'";
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
-
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/Webtoon/editWebtoon", $data);
-    }
-
-
+    // Cập nhật
     public function edit($id)
     {
         // Lấy tên ảnh bìa
@@ -141,23 +157,16 @@ class webtoon extends Controller
                 $this->upload($fileName);
 
                 $message['msg'] = "Cập nhật truyện thành công";
-                header("Location:" . BASE_URL . "/Webtoon/?msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
             } else {
                 $message['msg'] = "Cập nhật truyện thất bại";
-                header("Location:" . BASE_URL . "/Webtoon/?msg=" . urlencode(serialize($message)));
+                header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
             }
         } else {
             $message['msg'] = "Cập nhật truyện thất bại";
-            header("Location:" . BASE_URL . "/Webtoon/?msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=Webtoon/&msg=" . urlencode(serialize($message)));
         }
     }
-
-
-
-
-    //==================================================================Các hàm xử lý==================================================================//
-
-
 
 
     // Lưu ảnh
@@ -217,5 +226,26 @@ class webtoon extends Controller
             return unlink($filePath);
         }
         return false;
+    }
+
+
+    // Lấy ra id và tên
+    public function get_Webtoon()
+    {
+        $collum = 'id,name';
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->select($collum, $this->table);
+        return $data;
+    }
+
+
+    // Lấy ra truyện
+    public function recent_Webtoon()
+    {
+        $cond = "1=1 ORDER BY date DESC LIMIT 5";
+        $collum = 'id,name,status,cover,date';
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        return $data;
     }
 }

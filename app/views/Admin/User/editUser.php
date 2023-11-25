@@ -3,7 +3,7 @@
     <?php
     foreach ($userByID as $key => $value) {
     ?>
-        <form action="<?php echo BASE_URL ?>/user/edit/<?php echo $value['id'] ?>" method="post">
+        <form action="<?php echo BASE_URL ?>/?url=user/edit/<?php echo $value['id'] ?>" method="post">
             Name <br>
             <div class="mb-3">
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên" value="<?php echo $value['name'] ?>">

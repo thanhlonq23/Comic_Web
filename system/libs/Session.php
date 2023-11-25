@@ -3,7 +3,10 @@ class Session
 {
     public static function init()
     {
-        session_start();
+        if (empty(session_id())) {
+            // Chỉ gọi session_start() nếu session_id() là rỗng
+            session_start();
+        }
     }
 
     public static function get($key)

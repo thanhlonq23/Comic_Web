@@ -13,7 +13,7 @@
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
-                                <form autocomplete="off" action="<?php echo BASE_URL ?>/login/auth_login" method="POST">
+                                <form autocomplete="off" action="<?php echo BASE_URL ?>/?url=login/auth_login" method="POST">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">
                                         <span class="h1 fw-bold mb-0">Đăng nhập</span>
@@ -38,7 +38,7 @@
 
                                     <p class="mb-5 pb-lg-2" style="color: #393f81;">
                                         <br>Bạn chưa có tài khoản?
-                                        <a href="<?php echo BASE_URL ?>/signup" style="text-decoration: none;"><br>Đăng kí ở đây</a>
+                                        <a href="<?php echo BASE_URL ?>/?url=signup" style="text-decoration: none;"><br>Đăng kí ở đây</a>
                                     </p>
                                 </form>
 

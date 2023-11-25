@@ -28,15 +28,15 @@
                 // Kiểm tra xem session đã đăng nhập chưa
                 if (isset($_SESSION['login'])) {
                     // Nếu đã đăng nhập, hiển thị nút đăng xuất
-                    echo '<a href="' . BASE_URL . '/login/logout">';
+                    echo '<a href="' . BASE_URL . '/?url=login/logout">';
                     echo '<button type="button" class="btn btn-outline-light me-2">Logout</button>';
                     echo '</a>';
                 } else {
                     // Nếu chưa đăng nhập, hiển thị nút login và sign-up
-                    echo '<a href="' . BASE_URL . '/login">';
+                    echo '<a href="' . BASE_URL . '/?url=login">';
                     echo '<button type="button" class="btn btn-outline-light me-2">Login</button>';
                     echo '</a>';
-                    echo '<a href="' . BASE_URL . '/signup">';
+                    echo '<a href="' . BASE_URL . '/?url=signup">';
                     echo '<button type="button" class="btn btn-warning">Sign-up</button>';
                     echo '</a>';
                 }

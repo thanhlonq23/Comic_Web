@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">Thêm Chapter:</h1>
 <div class="container mt-5">
-    <form action="<?php echo BASE_URL ?>/chapter/add" method="post" enctype="multipart/form-data">
+    <form action="<?php echo BASE_URL ?>/?url=chapter/add" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Webtoon:</label>
             <select class="form-select form-select-lg mb-3" name="webtoon_id">

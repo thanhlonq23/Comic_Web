@@ -17,7 +17,7 @@ class login extends Controller
     {
         Session::init();
         if (Session::get('login') == true) {
-            header("Location:" . BASE_URL . "/admin");
+            header("Location:" . BASE_URL . "/?url=admin");
         }
         $this->load->view("auth/login");
     }
@@ -38,7 +38,7 @@ class login extends Controller
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'admin');
-                header("Location:" . BASE_URL . "/admin");
+                header("Location:" . BASE_URL . "/?url=admin");
             } else {
                 Session::init();
                 Session::set('login', true);
@@ -46,7 +46,7 @@ class login extends Controller
                 header("Location:" . BASE_URL);
             }
         } else {
-            header("Location:" . BASE_URL . "/login");
+            header("Location:" . BASE_URL . "/?url=login");
         }
     }
 

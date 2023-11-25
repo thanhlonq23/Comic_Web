@@ -3,7 +3,7 @@
     <?php
     foreach ($authorByID as $key => $value) {
     ?>
-        <form action="<?php echo BASE_URL ?>/author/edit/<?php echo $value['id'] ?>" method="post">
+        <form action="<?php echo BASE_URL ?>/?url=author/edit/<?php echo $value['id'] ?>" method="post">
             <div class="mb-3">
                 Tên tác giả <br>
                 <input type="text" class="form-control" name="name" placeholder="Nhập tên tác giả" value="<?php echo $value['name'] ?>">

@@ -16,8 +16,8 @@
                                 Webtoon
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/webtoon/list_Webtoon">List</a></li>
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/webtoon/add_Webtoon">Add</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=webtoon/list_Webtoon">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=webtoon/add_Webtoon">Add</a></li>
                             </ul>
                         </li>
                         <li class=" nav-item dropdown">
@@ -25,8 +25,8 @@
                                 Chapter
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/chapter/list_Chapter">List</a></li>
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/chapter/add_Chapter">Add</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=chapter/list_Chapter">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=chapter/add_Chapter">Add</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -34,8 +34,8 @@
                                 Author
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/list_Author">List</a></li>
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/author/add_Author">Add</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=author/list_Author">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=author/add_Author">Add</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -43,7 +43,7 @@
                                 User
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/user/list_User">List</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=user/list_User">List</a></li>
                                 <li><a class="dropdown-item">Cấp quyền Admin</a></li>
                             </ul>
                         </li>
@@ -53,11 +53,11 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <li><a class="dropdown-item" href="<?php echo BASE_URL ?>">Tài khoản</a></li>
-                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/login/logout">Đăng xuất</a></li>
+                                <li><a class="dropdown-item" href="<?php echo BASE_URL ?>/?url=login/logout">Đăng xuất</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?php echo BASE_URL ?>/admin"> Home</a>
+                            <a class="nav-link" href="<?php echo BASE_URL ?>/?url=admin"> Home</a>
                         </li>
                     </ul>
                     <span class="navbar-text">

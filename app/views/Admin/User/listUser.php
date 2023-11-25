@@ -41,10 +41,10 @@
                     <td class="text-center"><?php echo $value['role'] ?></td>
                     <!-- <td class="text-center"><?php //echo $value['password'] ?></td> -->
                     <td class="text-center">
-                        <a href="<?php echo BASE_URL ?>/user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
+                        <a href="<?php echo BASE_URL ?>/?url=user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
                     </td>
                     <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
+                        <a href="<?php echo BASE_URL ?>/?url=user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
                     </td>
                 </tr>
 
