@@ -250,6 +250,7 @@ try {
             });
 
 
+            let userInputCategories = [];
             const categoriesInput = document.getElementById('categories');
             const categorySuggestions = document.getElementById('categorySuggestions');
             const selectedCategories = document.getElementById('selectedCategories');
@@ -277,11 +278,11 @@ try {
                 const inputText = this.value.toLowerCase();
                 const suggestions = categorySuggestionsData.filter(category =>
                     category.toLowerCase().includes(inputText)
-                );//So sánh dữ liệu nhập và dữ liệu từ database qua chữ thường sau khi biến đổi
+                ); //So sánh dữ liệu nhập và dữ liệu từ database qua chữ thường sau khi biến đổi
 
-                // categorySuggestions.innerHTML = suggestions
-                //     .map(suggestion => `<div>${suggestion}</div>`)
-                //     .join('');
+                categorySuggestions.innerHTML = suggestions
+                    .map(suggestion => `<div>${suggestion}</div>`)
+                    .join('');
             });
 
             categorySuggestions.addEventListener('click', function(event) {
@@ -306,19 +307,17 @@ try {
                     event.target.classList.remove('category-hover');
                 }
             });
-
             addCategoryButton.addEventListener('click', function() {
                 const category = categoriesInput.value.trim();
                 if (category !== '') {
                     const categoryElement = document.createElement('span');
                     categoryElement.textContent = category;
-
-                    // Thêm class 'new-category' cho phần tử danh mục mới được thêm
                     categoryElement.classList.add('new-category');
 
-                    selectedCategories.appendChild(categoryElement);
+                    // Thêm vào mảng userInputCategories
+                    userInputCategories.push(category);
 
-                    // Clear input field and suggestion container after adding category
+                    selectedCategories.appendChild(categoryElement);
                     categoriesInput.value = '';
                     categorySuggestions.innerHTML = '';
                 }
@@ -335,9 +334,10 @@ try {
                 const selectedCategoryElements = document.querySelectorAll('.selected-category');
                 const selectedCategoriesArray = Array.from(selectedCategoryElements).map(element => element.textContent.trim());
                 const selectedCategories = selectedCategoriesArray.join(',');
+                const userInputSelectedCategories = userInputCategories.join(',');
 
                 // Kiểm tra tất cả các trường dữ liệu từ cả hai form
-                if (status !== '' && coverImage !== '' && description !== '' && comicName !== '' && authorName !== '' && selectedCategories !== '') {
+                if (status !== '' && coverImage !== '' && description !== '' && comicName !== '' && authorName !== '' && (selectedCategories || userInputSelectedCategories) !== '') {
                     // Tạo object chứa thông tin từ cả hai form
                     const formData = new FormData();
                     formData.append('comicName', comicName);
@@ -346,6 +346,8 @@ try {
                     formData.append('coverImage', coverImage);
                     formData.append('description', description);
                     formData.append('selectedCategories', selectedCategories);
+                    formData.append('userInputSelectedCategories', userInputSelectedCategories);
+
                     // Xử lý việc gửi biểu mẫu tới tệp PHP
                     // Sử dụng AJAX hoặc gửi biểu mẫu để gửi dữ liệu đến tệp PHP của bạn để xử lý cơ sở dữ liệu
                     // Ví dụ: sử dụng Fetch API hoặc XMLHttpRequest
@@ -357,9 +359,12 @@ try {
                         })
                         // .then(response => {
                         //     if (response.ok) {
-                        //         return response.json(); // hoặc response.json() nếu bạn mong đợi dữ liệu dưới dạng JSON
+                        //         for (const pair of formData.entries()) {
+                        //             console.log(pair[0] + ', ' + pair[1]);
+                        //         }
+                        //         throw new Error('Network response was not ok.');
+                        //         // Thực hiện các xử lý khác nếu cần
                         //     }
-                        //     throw new Error('Network response was not ok.');
                         // })
                         .then(data => {
                             // Xử lý kết quả nếu cần thiết
@@ -368,6 +373,10 @@ try {
                         .catch(error => {
                             console.error('Error:', error);
                         });
+
+                    // for (const pair of formData.entries()) {
+                    //     console.log(pair[0] + ', ' + pair[1]);
+                    // }
                 } else {
                     alert("Vui lòng nhập đầy đủ thông tin trước khi gửi.");
                     // Hoặc bạn có thể thực hiện các hành động khác, như hiển thị thông báo cho người dùng.
