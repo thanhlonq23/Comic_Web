@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
     const chapterRows = document.querySelectorAll(".chapter-row");
 
@@ -151,76 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             location.href = 'uploadcomic.php';
         });
     }
-});
-
-function goBackComicslist() {
-    window.location.href = 'comicslist.php';
-}
+});F
 
 
-//upload chapter demo
-
-$(document).ready(function () {
-    function setupFileUpload() {
-        const dragArea = $('.drag-area');
-        const fileInput = $('input[type="file"]');
-        const submitButton = $('input[type="button"]');
-
-        // Kéo và thả thư mục
-        dragArea.on('dragover', function (e) {
-            e.preventDefault();
-            dragArea.addClass('active');
-        });
-
-        dragArea.on('dragleave', function () {
-            dragArea.removeClass('active');
-        });
-
-        dragArea.on('drop', function (e) {
-            e.preventDefault();
-            const files = e.originalEvent.dataTransfer.items;
-            handleFiles(files);
-            dragArea.removeClass('active');
-        });
-
-        // Chọn thư mục khi click vào khu vực tải lên
-        dragArea.on('click', function () {
-            fileInput.click();
-        });
-
-        // Xử lý sự kiện khi chọn thư mục
-        fileInput.on('change', function () {
-            const files = fileInput[0].files;
-            handleFiles(files);
-        });
-
-        // Hàm kiểm tra và xử lý các tệp tin hình ảnh
-        function handleFiles(files) {
-            let hasImageFiles = false;
-
-            for (let i = 0; i < files.length; i++) {
-                if (files[i].type === 'image/jpeg' || files[i].type === 'image/png' || files[i].type === 'image/jpg') {
-                    hasImageFiles = true;
-                    break;
-                }
-            }
-
-            if (hasImageFiles) {
-                // Code để xử lý tệp tin hình ảnh
-                console.log('Files are valid. Ready to upload.');
-            } else {
-                alert('No image files found in the selected folder!');
-            }
-        }
-
-        // Xử lý sự kiện nhấn nút "Submit Upload"
-        submitButton.on('click', function () {
-            const files = fileInput[0].files;
-            handleFiles(files);
-        });
-    }
-
-    // Gọi hàm setupFileUpload khi tài liệu được tải
-    setupFileUpload();
-});
 

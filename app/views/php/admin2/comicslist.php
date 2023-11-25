@@ -13,8 +13,9 @@ if ($conn->connect_error) {
     die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
 }
 
-// Truy vấn dữ liệu kèm số lượng chapters và lưu vào biến "total_chapters" từ bảng webtoons
-$sql = "SELECT webtoons.*, COUNT(chapters.id) AS total_chapters
+// Truy vấn dữ liệu, số lượng chapters qua khóa ngoại "webtoon_chapter_id" và lưu vào biến "total_chapters", định dạng lại Date lưu vào biến "formatted_date" từ bảng webtoons
+$sql = "SELECT webtoons.*, COUNT(chapters.id) AS total_chapters,
+        DATE_FORMAT(webtoons.date, '%d/%m/%Y') AS formatted_date
         FROM webtoons
         LEFT JOIN chapters ON webtoons.id = chapters.webtoon_id
         GROUP BY webtoons.id";
@@ -83,9 +84,6 @@ $result = $conn->query($sql);
                     </thead>
                     <tbody>
                         <?php
-                        // ... (Mã kết nối đến cơ sở dữ liệu, truy vấn đã có từ trước)
-                        $basePath = "C:/Users/Nguyen thi ha chau/OneDrive - QUANG TRUNG COLLEGE/f4comics/"; // Đường dẫn gốc tới thư mục chứa ảnh
-
                         // Kiểm tra và hiển thị dữ liệu từ cơ sở dữ liệu
                         if ($result->num_rows > 0) {
                             while ($row = $result->fetch_assoc()) {
@@ -105,7 +103,7 @@ $result = $conn->query($sql);
                                 }
                                 echo "</td>";
                                 echo "</span></td>";
-                                echo "<td class='date'>" . $row['date'] . "</td>";
+                                echo "<td class='date'>" . $row['formatted_date'] . "</td>";
                                 echo "<td>" . $row['total_chapters'] . " Chapters</td>";
                                 echo "<td>";
                                 echo "<input type='button' value='Edit'>";

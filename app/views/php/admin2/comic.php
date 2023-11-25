@@ -82,7 +82,7 @@ try {
             <div class="comics">
                 <div class="top-cover">
                     <div class="image-container">
-                        <img src="<?php echo $comic['cover']; ?>" alt="Comic Cover">
+                        <div class="imageIncontainer" style="background-image: url('<?php echo $comic['cover']; ?>');" alt="Comic Cover"></div>
                     </div>
                     <div class="text-container">
                         <div>
@@ -127,7 +127,7 @@ try {
                 <div class="header">
                     <i class='bx bxs-book-open'></i>
                     <h3><span><?php echo $totalChapters; ?></span> Chapters</h3>
-                    <input type="button" value="Create Chapter">
+                    <input type="button" class="create-chapter-btn" value="Create Chapter" data-id="<?php echo $webtoonId; ?>">
                 </div>
                 <table>
                     <thead>
@@ -165,6 +165,24 @@ try {
     </div>
 
     <script src="../../js/admin/admin.js"></script>
+    <script>
+        // Sự kiện Click Create Chapter button chuyển sang uploadchapter.php theo Id trên url
+        document.addEventListener("DOMContentLoaded", function() {
+            const createChapterButton = document.querySelector('.create-chapter-btn');
+
+            createChapterButton.addEventListener('click', () => {
+                const urlParams = new URLSearchParams(window.location.search);
+                const webtoonId = urlParams.get('id');
+
+                if (webtoonId) {
+                    const url = `uploadchapter.php?id=${encodeURIComponent(webtoonId)}`;
+                    window.location.href = url;
+                } else {
+                    console.error('Missing webtoon ID');
+                }
+            });
+        });
+    </script>
 
 </body>
 

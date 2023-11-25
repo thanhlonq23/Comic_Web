@@ -797,19 +797,33 @@ body {
     /* Căn giữa theo chiều dọc */
 }
 
-.content main .bottom-data .comics .top-cover .image-container img {
+/* Chiều rộng tối đa của ảnh là 100% để ảnh co giãn đúng tỷ lệ */
+/* Chiều cao tối đa của ảnh là 100% để ảnh co giãn đúng tỷ lệ */
+/* Chỉ định chiều rộng tự động */
+/* Chỉ định chiều cao tự động */
+/* Hiển thị toàn bộ hình ảnh trong khung, không cắt bớt và không biến dạng */
+/* .content main .bottom-data .comics .top-cover .image-container img {
     max-width: 100%;
-    /* Chiều rộng tối đa của ảnh là 100% để ảnh co giãn đúng tỷ lệ */
     max-height: 100%;
-    /* Chiều cao tối đa của ảnh là 100% để ảnh co giãn đúng tỷ lệ */
     width: auto;
-    /* Chỉ định chiều rộng tự động */
     height: auto;
-    /* Chỉ định chiều cao tự động */
     object-fit: contain;
-    /* Hiển thị toàn bộ hình ảnh trong khung, không cắt bớt và không biến dạng */
+    border-radius: 10px;
+} */
+.content main .bottom-data .comics .top-cover .image-container .imageIncontainer {
+    width: 240px;
+    height: 360px;
+    overflow: hidden;
+    flex: 0 0 240px;
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
     border-radius: 10px;
 }
+
 
 .content main .bottom-data .comics .top-cover .text-container {
     margin-top: 30px;
@@ -832,23 +846,28 @@ body {
     /* Đặt padding-top thành 0 */
 }
 
-.content main .bottom-data .comics .top-cover .text-container > div:nth-child(2) {
-    margin-top: 30px; /* Khoảng cách giữa div thứ 2 và div trước đó */
+.content main .bottom-data .comics .top-cover .text-container>div:nth-child(2) {
+    margin-top: 30px;
+    /* Khoảng cách giữa div thứ 2 và div trước đó */
 }
 
-.content main .bottom-data .comics .top-cover .text-container > div:nth-child(n + 3) {
+.content main .bottom-data .comics .top-cover .text-container>div:nth-child(n + 3) {
     margin-top: 10px;
 }
+
 /* Khoảng cách giữa div thứ 3 trở đi và div trước đó */
-.content main .bottom-data .comics .top-cover .text-container > div:nth-child(n + 3):not(:last-of-type) p{
+.content main .bottom-data .comics .top-cover .text-container>div:nth-child(n + 3):not(:last-of-type) p {
     display: inline-block;
     margin: 0;
 }
+
 /* div thứ 3 trở đi trừ thằng cuối */
-.content main .bottom-data .comics .top-cover .text-container > div:nth-child(n + 3):not(:last-of-type) p span{
+.content main .bottom-data .comics .top-cover .text-container>div:nth-child(n + 3):not(:last-of-type) p span {
     display: inline-block;
-    margin-right: 10px; /* Khoảng cách giữa p và span */
-    font-weight: 800; /* Đặt định dạng cho span */
+    margin-right: 10px;
+    /* Khoảng cách giữa p và span */
+    font-weight: 800;
+    /* Đặt định dạng cho span */
 }
 
 
@@ -861,7 +880,8 @@ body {
     margin-bottom: 10px;
     position: relative;
     /* Để tạo vùng chứa cho thanh cuộn */
-    text-align: left; /* Thêm thuộc tính căn lề văn bản sang trái */
+    text-align: left;
+    /* Thêm thuộc tính căn lề văn bản sang trái */
 }
 
 /* Tạo vùng chứa thanh cuộn */
@@ -932,7 +952,9 @@ body {
 
 /*CSS button rename delete*/
 .content main .bottom-data .comics table input[type="button"],
-.content main .bottom-data .comics .header input[type="button"] {
+.content main .bottom-data .comics .header input[type="button"],
+.container1 input[type="button"],
+.container2 input[type="button"] {
     padding: 8px 16px;
     border: none;
     border-radius: 5px;
@@ -951,7 +973,8 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     justify-self: center;
-    margin: 0 10px; /* Khoảng cách giữa các nút */
+    margin: 0 10px;
+    /* Khoảng cách giữa các nút */
 }
 
 
@@ -978,4 +1001,3 @@ body {
     white-space: nowrap;
     padding: 5px;
 }
-

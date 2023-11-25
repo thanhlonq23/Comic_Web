@@ -212,6 +212,95 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .info-chapter {
+            margin-top: 20px;
+            /* margin-left: 30px; */
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-chapter {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-field {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-field label {
+            margin-right: 10px;
+            min-width: 120px;
+            font-weight: 500;
+        }
+
+        .input-field input[type="text"],
+        .input-field select {
+            flex: 1;
+            max-width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .input-field input[type="text"]:focus,
+        .input-field select:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        /* Phần thông tin chapter */
+        .info-chapter {
+            width: 100%;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        /* Thẻ h2 */
+        .info-chapter h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Các trường nhập liệu */
+        .input-field {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: calc(100% - 12px);
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Thêm một chút hiệu ứng cho trạng thái select */
+        select {
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        select:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
     </style>
 </head>
 
@@ -223,7 +312,26 @@
 
     <main class="main">
         <div class="container1" id="formContainer1">
-            <h3>Upload your File or Folder:</h3>
+            <h2>Chapter Information:</h2>
+            <div class="info-chapter">
+                <div id="warningMessage" style="margin-left: 130px; margin-bottom:2px;font-size: 12px; color: red; display: none;">Please enter a valid chapter number (minimum: 1).</div>
+                <div class="input-field">
+                    <label for="chapterInput">Chapter:</label>
+                    <input type="text" id="chapterInput" name="chapterNumber" min="1" required>
+                </div>
+                <div class="input-field">
+                    <label for="nameInput">Name Chapter:</label>
+                    <input type="text" id="nameInput" required>
+                </div>
+                <div class="input-field">
+                    <label for="status">Trạng thái:</label>
+                    <select name="status" id="status" required>
+                        <option value="0">Free</option>
+                        <option value="1">Lock</option>
+                    </select>
+                </div>
+            </div>
+            <h2>Upload your File or Folder:</h2>
             <div class="drag-area" id="dragDropArea">
                 <div class="icon">
                     <i class="fas fa-images"></i>
@@ -237,7 +345,7 @@
             </div>
 
             <div style="display: block; text-align:center;">
-                <input type="button" id="submitButton" value="Submit">
+                <input type="button" id="submitButton" value="Next">
             </div>
         </div>
         <div class="container2" id="formContainer2" style="display: none;">
@@ -388,6 +496,27 @@
                     reader.readAsDataURL(loadedImages[index]);
                     //Phương thức readAsDataURL() của đối tượng FileReader sẽ đọc nội dung của file được chọn và trả về dưới dạng URL (base64 encoded string).
                 }
+            }
+        });
+
+        //Nhập số chapter
+        const chapterInput = document.getElementById('chapterInput');
+        const warningMessage = document.getElementById('warningMessage');
+
+        chapterInput.addEventListener('input', function(event) {
+            let value = event.target.value;
+
+            // Loại bỏ bất kỳ ký tự nào không phải số
+            value = value.replace(/\D/g, '');
+
+            // Cập nhật giá trị của trường nhập liệu
+            event.target.value = value;
+
+            // Kiểm tra nếu giá trị không hợp lệ, hiển thị cảnh báo
+            if (value < 1 || value % 1 !== 0) {
+                warningMessage.style.display = 'block';
+            } else {
+                warningMessage.style.display = 'none';
             }
         });
     </script>

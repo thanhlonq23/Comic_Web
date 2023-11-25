@@ -1,3 +1,30 @@
+<?php
+// Kết nối đến cơ sở dữ liệu, sử dụng thông tin kết nối của bạn
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "truyentranh";
+
+// Tạo kết nối
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Kết nối đến cơ sở dữ liệu thất bại: " . $conn->connect_error);
+}
+
+// Truy vấn dữ liệu, số lượng chapters qua khóa ngoại "webtoon_chapter_id" và lưu vào biến "total_chapters", định dạng lại Date lưu vào biến "formatted_date" từ bảng webtoons
+$sql = "SELECT webtoons.*, COUNT(chapters.id) AS total_chapters,
+        DATE_FORMAT(webtoons.date, '%d/%m/%Y') AS formatted_date
+        FROM webtoons
+        LEFT JOIN chapters ON webtoons.id = chapters.webtoon_id
+        GROUP BY webtoons.id
+        ORDER BY webtoons.date DESC
+        LIMIT 5 "; // Giới hạn kết quả trả về chỉ 5 bản ghi, sắp xếp theo ngày giảm dần
+//ORDER BY webtoons.date DESC để sắp xếp kết quả theo ngày giảm dần
+$result = $conn->query($sql);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,29 +47,6 @@
 
     <!-- Nội dung chính -->
     <main class="main">
-        <!--
-              Header với tiêu đề và đường dẫn dẫn đến những phần khác
-            <div class="header">
-                <div class="left">
-                    <h1>Dashboard</h1>
-                    <ul class="breadcrumb">
-                        <li><a href="#">
-                                Analytics
-                            </a></li>
-                        /
-                        <li><a href="#" class="active">Shop</a></li>
-                    </ul>
-                </div>
-                <a href="#" class="report">
-                    <i class='bx bx-cloud-download'></i>
-                    <span>Download CSV</span>
-                </a>
-            </div>
-            -->
-
-        <!-- Insights -->
-        <!-- Phần Insights hiển thị các chỉ số chính -->
-
         <ul class="insights">
             <li>
                 <i class='bx bxs-book-open'></i>
@@ -93,7 +97,7 @@
                         <i class='bx bx-search'></i> -->
                 </div>
                 <table>
-                <thead>
+                    <thead>
                         <tr>
                             <th style="padding-left: 7px; font-size: 17px;">Comics</th>
                             <!-- <th>Uploading Date</th> -->
@@ -103,99 +107,60 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="comicdb-row" style="cursor: pointer;">
-                            <td>
-                                <img src="../../css/admin/images/1.jpg" alt="Comic 1">
-                                <p>Hệ Thống Tự Cứu Của Nhân Vật Phản Diện</p>
-
-                            </td>
-                            <!-- <td>14-08-2023</td> -->
-                            <td><span class="status completed">Completed</span></td>
-                            <td>07/09/2003</td>
-                            <td>30 chapters</td>
-                        </tr>
-                        <tr class="comicdb-row" style="cursor: pointer;">
-
-                            <td>
-                                <img src="../../css/admin/images/3.jpg" alt="Comic 2">
-                                <p>Ma Đạo Tổ Sư</p>
-                            </td>
-                            <!-- <td>14-08-2023</td> -->
-                            <td><span class="status completed">Completed</span></td>
-                            <td>07/09/2003</td>
-                            <td>30 chapters</td>
-                        </tr>
-                        <tr class="comicdb-row" style="cursor: pointer;">
-
-                            <td>
-                                <img src="../../css/admin/images/4.jpg" alt="Comic 3">
-                                <p>Thiên Quan Tứ Phúc</p>
-                            </td>
-                            <!-- <td>14-08-2023</td> -->
-                            <td><span class="status process">Processing</span></td>
-                            <td>07/09/2003</td>
-                            <td>30 chapters</td>
-                        </tr>
+                        <?php
+                        // Thay thế dữ liệu cứng bằng dữ liệu từ truy vấn SQL trong comicslist.php
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr class='comicdb-row' data-id='" . $row['id'] . "' style='cursor: pointer;'>";
+                                echo "<td>";
+                                echo "<img src='" . $row['cover'] . "' alt='" . $row['name'] . "'>";
+                                echo "<p>" . $row['name'] . "</p>";
+                                echo "</td>";
+                                // Hiển thị trạng thái từ dữ liệu
+                                echo "<td>";
+                                if ($row['status'] == 0) {
+                                    echo "<span class='status process'>Processing</span>";
+                                } elseif ($row['status'] == 1) {
+                                    echo "<span class='status completed'>Completed</span>";
+                                } else {
+                                    echo "<span class='status'>Unknown</span>"; // Trạng thái không xác định
+                                }
+                                echo "</td>";
+                                echo "<td class='date'>" . $row['formatted_date'] . "</td>";
+                                echo "<td>" . $row['total_chapters'] . " Chapters</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='4'>Không có dữ liệu</td></tr>";
+                        }
+                        ?>
                     </tbody>
 
                 </table>
             </div>
-
-            <!-- Events -->
-            <!-- Phần Sự kiện -->
-            <!-- <div class="events">
-        <div class="header">
-            <i class='bx bx-note'></i>
-            <h3>Remiders</h3>
-            <i class='bx bx-filter'></i>
-            <i class='bx bx-plus'></i>
         </div>
-        <ul class="task-event">
-            <li class="completed">
-                <div class="task-title">
-                    <i class='bx bx-check-circle'></i>
-                    <p>SAuthors</p>
-                </div>
-                <i class='bx bx-dots-vertical-rounded'></i>
-            </li>
-            <li class="completed">
-                <div class="task-title">
-                    <i class='bx bx-check-circle'></i>
-                    <p>COins</p>
-                </div>
-                <i class='bx bx-dots-vertical-rounded'></i>
-            </li>
-            <li class="not-completed">
-                <div class="task-title">
-                    <i class='bx bx-x-circle'></i>
-                    <p>New</p>
-                </div>
-                <i class='bx bx-dots-vertical-rounded'></i>
-            </li>
-        </ul>
-    </div> -->
-
-            <!-- End of Reminders-->
-
-        </div>
-
 
     </main>
     <!-- End of Main content-->
 
     </div>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const comicRows = document.querySelectorAll(".comicdb-row");
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lấy tất cả các hàng có class ".comicdb-row"
+            const comicRows = document.querySelectorAll('.comicdb-row');
 
-        comicRows.forEach(function(row) {
-            row.addEventListener("click", function(event) {
-                // Chuyển hướng tới trang comic khi click vào comic row
-                location.href = 'comic.php';
+            // Lặp qua từng hàng và thêm sự kiện click
+            comicRows.forEach(row => {
+                row.addEventListener('click', () => {
+                    const comicId = row.dataset.id;
+
+                    // Tạo URL mới với ID và chuyển hướng đến comic.php
+                    const url = `comic.php?id=${encodeURIComponent(comicId)}`;
+                    window.location.href = url;
+                });
             });
         });
-    });
-</script>
+    </script>
     <script src="../../js/admin/admin.js"></script>
 
 

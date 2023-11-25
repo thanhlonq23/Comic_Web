@@ -46,7 +46,7 @@
             <div class="comics">
                 <div class="top-cover">
                     <div class="image-container">
-                        <img src="../../css/admin/images/3.jpg" alt="Comic 1">
+                        <div class="imageIncontainer" style="background-image: url('../../css/admin/images/3.jpg');" alt="Comic Cover"></div>
                     </div>
                     <div class="text-container">
                         <div>
