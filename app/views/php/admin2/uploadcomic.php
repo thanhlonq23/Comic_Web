@@ -563,30 +563,30 @@ try {
                     // Ví dụ: sử dụng Fetch API hoặc XMLHttpRequest
                     // Sau khi gửi thành công, bạn có thể chuyển hướng đến một trang khác hoặc hiển thị thông báo thành công
                     // Sử dụng Fetch API để gửi dữ liệu đến uploadComic.php
-                    fetch('http://f4comics.com:81/f4comics/app/views/php/admin2/uploadAuthorComic.php', {
-                            method: 'POST',
-                            body: formData,
-                        })
-                        // .then(response => {
-                        //     if (response.ok) {
-                        //         for (const pair of formData.entries()) {
-                        //             console.log(pair[0] + ', ' + pair[1]);
-                        //         }
-                        //         throw new Error('Network response was not ok.');
-                        //         // Thực hiện các xử lý khác nếu cần
-                        //     }
-                        // })
-                        .then(data => {
-                            // Xử lý kết quả nếu cần thiết
-                            window.location.href = 'dashboard.php';
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
+                    // fetch('http://f4comics.com:81/f4comics/app/views/php/admin2/uploadAuthorComic.php', {
+                    //         method: 'POST',
+                    //         body: formData,
+                    //     })
+                    //     // .then(response => {
+                    //     //     if (response.ok) {
+                    //     //         for (const pair of formData.entries()) {
+                    //     //             console.log(pair[0] + ', ' + pair[1]);
+                    //     //         }
+                    //     //         throw new Error('Network response was not ok.');
+                    //     //         // Thực hiện các xử lý khác nếu cần
+                    //     //     }
+                    //     // })
+                    //     .then(data => {
+                    //         // Xử lý kết quả nếu cần thiết
+                    //         window.location.href = 'dashboard.php';
+                    //     })
+                    //     .catch(error => {
+                    //         console.error('Error:', error);
+                    //     });
 
-                    // for (const pair of formData.entries()) {
-                    //     console.log(pair[0] + ', ' + pair[1]);
-                    // }
+                    for (const pair of formData.entries()) {
+                        console.log(pair[0] + ', ' + pair[1]);
+                    }
                 } else {
                     alert("Vui lòng nhập đầy đủ thông tin trước khi gửi.");
                     // Hoặc bạn có thể thực hiện các hành động khác, như hiển thị thông báo cho người dùng.
