@@ -3,20 +3,13 @@ class Database extends PDO
 {
     public function __construct($connect, $user, $pass)
     {
-        // Lơp cha giống super() java
         parent::__construct($connect, $user, $pass);
     }
 
     public function select($sql, $data = array(), $fetchStyle = PDO::FETCH_ASSOC)
     {
 
-        // $sql = "SELECT * FROM :id , :name";
         $pst = $this->prepare($sql);
-
-        // $pst->bindParam($data['key'], $data['values']);
-        // $pst->bindParam($data['key'], $data['values']);
-        // $pst->bindParam($data['key'], $data['values']);
-
 
         // Gán tham số cho từng giá trị tự động
         foreach ($data as $key => $value) {
@@ -27,34 +20,15 @@ class Database extends PDO
         $pst->execute();
 
         // Lấy ra giá trị truy vấn
-        // $pst->fetchAll() => trả về mảng liên tục
         return $pst->fetchAll($fetchStyle); // $fetchStyle phương thức trả về mảng liên kết
     }
 
 
     public function insert($table, $data)
     {
-
-        // sql = 'INSERT INTO chapters(id,name,date) VALUES(1,AAA,2003) '
-        // $table = 'chapters';
-        /**
-         * data=[
-         *  'id'=>'1'
-         *  'name'=>'aaa'
-         *  'date'>'2003'
-         * ]
-         * 
-         * id,name,date
-         * 
-         * 
-         */
-
         try {
             // Xử lý lấy key : (id,name,date)
             $keys = implode(',', array_keys($data));
-            // $key = 'id,name,date'
-
-            // sql = 'INSERT INTO chapters(id,name,date) VALUES(:id, :name, :date) '
 
             // Gán vào giữa nên phải nối ':' vào implode
             $values = ':' . implode(', :', array_keys($data));

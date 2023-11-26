@@ -21,12 +21,15 @@
 
 <body>
     <?php
-    // Tự động gọi class
+    // Tự động gọi tất cả class trong Folder system
     spl_autoload_register(function ($class) {
         include_once './system/libs/' . $class . '.php';
     });
 
+    // Gọi ra domain
     include_once('./app/config/config.php');
+
+    // Khởi tạo biến main để điều khiển chương trình
     $main = new Main();
     ?>
 

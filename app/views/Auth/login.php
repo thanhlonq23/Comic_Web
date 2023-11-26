@@ -1,3 +1,5 @@
+<br><br>
+
 <section class="vh-100">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -13,6 +15,8 @@
                         <div class="col-md-6 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
 
+
+                                <!-- Form đăng nhập -->
                                 <form autocomplete="off" action="<?php echo BASE_URL ?>/?url=login/auth_login" method="POST">
 
                                     <div class="d-flex align-items-center mb-3 pb-1">

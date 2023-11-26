@@ -15,18 +15,7 @@ class Main
         }
     }
 
-    /*
-        http://localhost/Comic_Web/?url=author/edit_Author/12
-
-        Cắt chuỗi ra $url = [
-            '0'=> author,
-            '1'=> edit_Author,
-            '2'=> 12
-        ]
-    
-    */
-
-
+    // http://localhost/Comicweb/
 
 
     // Lấy ra url
@@ -38,8 +27,6 @@ class Main
         // Nếu url không rỗng thì thực hiện cắt các thành phần để xử lý
         if ($this->url != null) {
             $this->url = rtrim($this->url, '/');
-
-            // explode : Cắt chuỗi thành mảng dựa trên '/'
             $this->url  = explode('/', filter_var($this->url, FILTER_SANITIZE_URL)); // Lúc này $url = mảng liên tục
         } else {
             // Nếu url là null thì xóa biến url

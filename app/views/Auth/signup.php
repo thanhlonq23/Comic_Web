@@ -9,7 +9,7 @@
 
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                 <a href="<?php echo BASE_URL ?>">
-                                    <img src="./app/upload/logo/f4.jpg" class="img-fluid">
+                                    <img src="./public/Logo/f4.jpg" class="img-fluid">
                                 </a>
                             </div>
 

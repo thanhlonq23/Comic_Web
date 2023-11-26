@@ -1,3 +1,3 @@
 <?php
-// Tạo biến tĩnh gọi được ở mọi nơi
+// Tạo 1 hằng số
 define("BASE_URL", "http://localhost/Comic_Web");
