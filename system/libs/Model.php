@@ -5,7 +5,7 @@ class Model
 
     public function __construct()
     {
-        $connect = 'mysql:dbname=f4comics; host=localhost; charset=utf8';
+        $connect = 'mysql:dbname=truyentranh; host=localhost; charset=utf8';
         $user = 'root';
         $pass = '';
         $this->db = new Database($connect, $user, $pass);
