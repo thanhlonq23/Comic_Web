@@ -14,6 +14,9 @@ class webtoon extends Controller
         $this->list_Webtoon();
     }
 
+
+
+    // Trang truyện chính
     public function webtoon_Main()
     {
         $id = $_GET['id'];
@@ -23,6 +26,9 @@ class webtoon extends Controller
         $this->load->view("Admin/Webtoon/webtoon", $data);
     }
 
+
+
+    // Danh sách truyện
     public function list_Webtoon()
     {
         $data = $this->list();
@@ -30,6 +36,8 @@ class webtoon extends Controller
     }
 
 
+
+    // Trang thêm truyện
     public function add_Webtoon()
     {
         $this->load->view("Admin/nav");
@@ -37,6 +45,30 @@ class webtoon extends Controller
     }
 
 
+
+    // Trang sửa truyện
+    public function edit_Webtoon($id)
+    {
+        $cond = "id = '$id'";
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
+
+        $this->load->view("Admin/nav");
+        $this->load->view("Admin/Webtoon/editWebtoon", $data);
+    }
+
+
+
+
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
+
+
+    // Xử lý xóa truyện
     public function delete_Webtoon($id)
     {
         // Tên file là id
@@ -67,27 +99,11 @@ class webtoon extends Controller
     }
 
 
-    public function edit_Webtoon($id)
-    {
-        $cond = "id = '$id'";
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
-
-        $this->load->view("Admin/nav");
-        $this->load->view("Admin/Webtoon/editWebtoon", $data);
-    }
 
 
-
-
-
-    //==================================================================Các hàm xử lý==================================================================//
-
-
-
-
-
+    // Xử lý sửa truyện
     public function add()
+
     {
         $id = $this->getid();
         $name = $_POST['name'];
@@ -127,6 +143,8 @@ class webtoon extends Controller
     }
 
 
+
+    // Lấy ra danh sách truyện
     public function list()
     {
         $webtoonModel = $this->load->model("webtoonModel");
@@ -135,7 +153,7 @@ class webtoon extends Controller
     }
 
 
-    // Cập nhật
+    // Xử lý cập nhật
     public function edit($id)
     {
         // Lấy tên ảnh bìa
@@ -176,7 +194,7 @@ class webtoon extends Controller
     }
 
 
-    // Lưu ảnh
+    // Xử lý Lưu ảnh
     private function upload($fileName)
     {
         $path_uploads = "public/Uploads/Cover/Webtoon/";
@@ -200,7 +218,7 @@ class webtoon extends Controller
         return 'webtoon' . $randomID;
     }
 
-    // Tạo thư mục chứa ảnh 
+    // Xử lý Tạo thư mục chứa ảnh 
     private function createDir($newDir)
     {
         $dirPath = "public/Uploads/Comic";
@@ -215,7 +233,8 @@ class webtoon extends Controller
     }
 
 
-    // Xử lý xóa
+
+    // Xử lý xóa thư mục
     private function deleteDir($dir)
     {
         $dirPath = "public/Uploads/Comic/" . $dir;
@@ -225,6 +244,10 @@ class webtoon extends Controller
         }
         return false;
     }
+
+
+
+    // Xử lý xóa file
     private function deleteFile($cover)
     {
         $filePath = "public/Uploads/Cover/Webtoon/" . $cover;
@@ -245,13 +268,6 @@ class webtoon extends Controller
         return $data;
     }
 
-    public function getByCond($cond)
-    {
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
-        return $data;
-    }
-
 
 
     // Lấy ra truyện
@@ -264,6 +280,19 @@ class webtoon extends Controller
         return $data;
     }
 
+
+
+    // Lấy ra truyện có điều kiện
+    public function getByCond($cond)
+    {
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+        return $data;
+    }
+
+
+
+    // Lấy ra truyện được đề xuất
     public function recommended_Webtoon($number)
     {
         $cond = "1=1 ORDER BY date DESC LIMIT $number";

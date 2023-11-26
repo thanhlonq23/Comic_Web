@@ -12,30 +12,45 @@ class user extends Controller
         $this->list_User();
     }
 
+
+
+    //  Trang danh sách user
     public function list_User()
     {
         $userModel = $this->load->model("userModel");
         $data['users'] = $userModel->selectAll($this->table);
+        $this->load->view("Admin/nav");
         $this->load->view("Admin/header");
         $this->load->view("Admin/User/listUser", $data);
     }
-    public function delete_User($id)
-    {
-        $cond = "id = '$id'";
-        $userModel = $this->load->model('userModel');
-        $userModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/?url=User/list_User");
-    }
+
+    
+
+    // Trang sửa user
     public function edit_User($id)
     {
         $cond = "id = '$id'";
         $userModel = $this->load->model("userModel");
         $data['userByID'] = $userModel->selectByCond($this->table, $cond);
 
+        $this->load->view("Admin/nav");
         $this->load->view("Admin/header");
         $this->load->view("Admin/User/editUser", $data);
     }
 
+
+    
+
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
+
+    
+    
+    // Xử lý sửa user
     public function edit($id)
     {
         $name = $_POST['name'];
@@ -62,5 +77,16 @@ class user extends Controller
             $message['msg'] = "Cập nhật người dùng thất bại";
             header("Location:" . BASE_URL . "/?url=User/&msg=" . urlencode(serialize($message)));
         }
+    }
+
+
+    
+    // Xử lý xóa user
+    public function delete_User($id)
+    {
+        $cond = "id = '$id'";
+        $userModel = $this->load->model('userModel');
+        $userModel->delete($this->table, $cond);
+        header("Location:" . BASE_URL . "/?url=User/list_User");
     }
 }

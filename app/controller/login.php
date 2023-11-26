@@ -4,7 +4,6 @@ class login extends Controller
 {
     public function __construct()
     {
-        $data = array();
         parent::__construct();
     }
 
@@ -13,6 +12,8 @@ class login extends Controller
         $this->login();
     }
 
+
+    // Trang đăng nhập
     public function login()
     {
         Session::init();
@@ -22,6 +23,19 @@ class login extends Controller
         $this->load->view("auth/login");
     }
 
+
+
+ 
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
+
+
+
+    // Xác minh đăng nhập
     public function auth_login()
     {
         $table_Admin = 'users';
@@ -29,28 +43,36 @@ class login extends Controller
         $password = md5($_POST['password']);
 
         $loginModel = $this->load->model('loginModel');
+
+        // 2 Lớp
+        // Kiểm tra xem có username username và password có đúng trong db không
         $row = $loginModel->login($table_Admin, $username, $password);
 
-        if ($row == 1) {
+        if ($row != 0) {
             $result = $loginModel->getLogin($table_Admin, $username, $password);
 
+            // Db so sánh k pb chữ hoa chữ thường
             // strcasecmp so sanh chuoi khong phan biet chu hoa chu thuong
             if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password) && ($result[0]['role'] == 'admin')) {
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'admin');
                 header("Location:" . BASE_URL . "/?url=admin");
-            } else {
+            } else if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password)) {
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'user');
                 header("Location:" . BASE_URL);
+            } else {
+                header("Location:" . BASE_URL . "/?url=login");
             }
         } else {
             header("Location:" . BASE_URL . "/?url=login");
         }
     }
 
+
+    // Đăng xuất
     public function logout()
     {
         Session::init();

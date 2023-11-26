@@ -15,6 +15,8 @@ class comicPage extends Controller
         Session::checkSession();
     }
 
+
+    // Trang thông tin truyện
     public function homePage()
     {
         $this->load->view("User/header");
@@ -27,6 +29,9 @@ class comicPage extends Controller
         $this->load->view("User/footer");
     }
 
+    
+    
+    // Trang đọc truyện
     public function readPage($webtoon_ID)
     {
         $chapter_ID = $_GET['chapter'];
@@ -50,6 +55,8 @@ class comicPage extends Controller
 
 
 
+
+    // Xử lý lấy dữ liệu webtoon
     private function getData()
     {
         $id = $_GET['id'];
@@ -65,6 +72,9 @@ class comicPage extends Controller
         return $data;
     }
 
+
+    
+    // Xử lý lấy ra ảnh trong thư mục chapter
     private function getImg($webtoonId, $chapterID)
     {
         $folderPath = "./public/Uploads/Comic/$webtoonId/$chapterID"; // Đường dẫn đến thư mục chứa ảnh

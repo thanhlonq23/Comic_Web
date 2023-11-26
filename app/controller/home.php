@@ -15,6 +15,8 @@ class home extends Controller
         Session::checkSession();
     }
 
+
+    // Trang chủ
     public function homePage()
     {
         $this->load->view("User/header");
@@ -30,6 +32,8 @@ class home extends Controller
         $this->load->view("User/footer");
     }
 
+
+    // Trang 404
     public function notFound()
     {
         $this->load->view("404");

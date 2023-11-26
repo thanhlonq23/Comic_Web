@@ -15,6 +15,18 @@ class admin extends Controller
         $this->dashboard();
     }
 
+    
+    // Kiểm tra quyền
+    public static function checkRole()
+    {
+        if (Session::get('role') != 'admin') {
+            echo "<h1>Bạn không có quyền truy cập trang admin</h1>";
+            exit();
+        }
+    }
+    
+    
+    // Trang chủ admin
     public function dashboard()
     {
         $webtoon = new webtoon();
@@ -25,14 +37,7 @@ class admin extends Controller
     }
 
 
-    public static function checkRole()
-    {
-        if (Session::get('role') != 'admin') {
-            echo "<h1>Bạn không có quyền truy cập trang admin</h1>";
-            exit();
-        }
-    }
-
+    // Mục thông tin truyện
     public function info()
     {
         $id = $_GET['id'];
@@ -44,6 +49,8 @@ class admin extends Controller
         $chapter->chapter_Main($id);
     }
 
+
+    // Mục danh sách truyện
     public function comic_List()
     {
         $this->load->view("Admin/nav");

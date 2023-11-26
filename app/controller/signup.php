@@ -4,7 +4,6 @@ class signup extends Controller
 {
     public function __construct()
     {
-        $data = array();
         parent::__construct();
     }
 
@@ -13,19 +12,21 @@ class signup extends Controller
         $this->load->view("Auth/signup");
     }
 
+
+    // Trang đăng kí
     public function signup()
     {
-        if ($this->checkPost()) {
-            $username = $_POST['username'];
-            $name = $_POST['name'];
-            $password = md5($_POST['password']);
-            $rePassword = md5($_POST['rePassword']);
-            $email = $_POST['email'];
-            $phoneNumber = $_POST['phoneNumber'];
-        }
+        $username = $_POST['username'];
+        $name = $_POST['name'];
+        $password = md5($_POST['password']);
+        $rePassword = md5($_POST['rePassword']);
+        $email = $_POST['email'];
+        $phoneNumber = $_POST['phoneNumber'];
 
         $table = "users";
         $userModel = $this->load->model('userModel');
+
+        // Kiểm tra xem có bị trùng username trong db không
         $checkUser = $this->checkUsername($username, $userModel, $table);
 
         if (($password == $rePassword) && $checkUser) {
@@ -39,10 +40,11 @@ class signup extends Controller
             );
 
             $result = $userModel->insert($table, $data);
+
             if ($result == true) {
                 echo "Đăng kí thành công";
             } else {
-                print_r($data);
+                // Email được để duy nhất không db
                 echo "Email không hợp lệ";
             }
         } else {
@@ -50,6 +52,17 @@ class signup extends Controller
         }
     }
 
+
+
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
+
+
+    // Kiểm tra username có trùng trong db không
     private function checkUsername($username, $usersModel, $table)
     {
         $row = $usersModel->selectUser($table, $username);
@@ -67,13 +80,5 @@ class signup extends Controller
         }
 
         return 'user' . $randomID;
-    }
-
-    private function checkPost()
-    {
-        if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['rePassword']) && isset($_POST['email']) && isset($_POST['phoneNumber']) && isset($_POST['name'])) {
-            return true;
-        }
-        return false;
     }
 }

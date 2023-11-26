@@ -8,11 +8,13 @@ class chapter extends Controller
         Session::checkSession();
         parent::__construct();
     }
-    public function index() 
+    public function index()
     {
         $this->list_Chapter();
     }
 
+
+    // Thông tin chapter
     public function chapter_Main($id)
     {
         $cond = "webtoon_id = '$id' ORDER BY name";
@@ -22,6 +24,8 @@ class chapter extends Controller
         $this->load->view("Admin/Chapter/chapter", $data);
     }
 
+
+    // Danh sách chapter
     public function list_Chapter()
     {
         $chapterModel = $this->load->model("chapterModel");
@@ -30,6 +34,7 @@ class chapter extends Controller
     }
 
 
+    // Hiện trang thêm chapter
     public function add_Chapter()
     {
         include_once('./app/controller/webtoon.php');
@@ -39,6 +44,8 @@ class chapter extends Controller
         $this->load->view("Admin/chapter/addChapter", $data);
     }
 
+
+    // Hiện trang sửa chapter
     public function edit_Chapter($id)
     {
         $cond = "id = '$id'";
@@ -49,6 +56,8 @@ class chapter extends Controller
         $this->load->view("Admin/Chapter/editChapter", $data);
     }
 
+
+    // Xóa chapter
     public function delete_Chapter($id)
     {
         $cond = "id = '$id'";
@@ -74,6 +83,7 @@ class chapter extends Controller
 
 
 
+    // Xử lý thêm chapter
     public function add()
     {
         $id = $this->getid();
@@ -102,6 +112,8 @@ class chapter extends Controller
         }
     }
 
+
+    // Lấy ra dữ liệu chapter dựa trên điều kiện
     public function getByCond($cond)
     {
         $chapterModel = $this->load->model("chapterModel");
@@ -110,6 +122,7 @@ class chapter extends Controller
     }
 
 
+    // Xử lý sửa chapter
     public function edit($id)
     {
         $cond = "id = '$id'";
@@ -131,17 +144,7 @@ class chapter extends Controller
     }
 
 
-    private function getid()
-    {
-        $randomID = '';
-        for ($i = 0; $i < 3; $i++) {
-            $randomID .= rand(0, 9);
-        }
-
-        return 'chapter' . $randomID;
-    }
-
-
+    // Lưu chapter vào thư mục
     private function upload($webtoonDir, $dir)
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -176,6 +179,8 @@ class chapter extends Controller
         }
     }
 
+
+    // Xóa thư mục ảnh chapter
     private function delete($webtoonDir, $dir)
     {
         function rmdir_recursive($dirPath)
@@ -198,5 +203,16 @@ class chapter extends Controller
         $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
         echo $dirPath;
         rmdir_recursive($dirPath);
+    }
+
+
+    private function getid()
+    {
+        $randomID = '';
+        for ($i = 0; $i < 3; $i++) {
+            $randomID .= rand(0, 9);
+        }
+
+        return 'chapter' . $randomID;
     }
 }

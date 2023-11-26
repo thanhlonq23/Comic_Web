@@ -12,6 +12,8 @@ class author extends Controller
         $this->list_Author();
     }
 
+
+    // Danh sách tác giả
     public function list_Author()
     {
         $authorModel = $this->load->model("authorModel");
@@ -20,6 +22,10 @@ class author extends Controller
         $this->load->view("Admin/header");
         $this->load->view("Admin/Author/listAuthor", $data);
     }
+
+
+
+    // Xóa tác giả
     public function delete_Author($id)
     {
         $cond = "id = '$id'";
@@ -28,12 +34,38 @@ class author extends Controller
         header("Location:" . BASE_URL . "/?url=Author/list_Author");
     }
 
+
+    //  Trang thêm tác giả
     public function add_Author()
     {
         $this->load->view("Admin/header");
         $this->load->view("Admin/author/addAuthor");
     }
 
+
+    //  Trang sửa thông tin tác giả
+    public function edit_Author($id)
+    {
+        $cond = "id = '$id'";
+        $authorModel = $this->load->model("authorModel");
+        $data['authorByID'] = $authorModel->selectByCond($this->table, $cond);
+
+        $this->load->view("Admin/header");
+        $this->load->view("Admin/author/editAuthor", $data);
+    }
+
+
+
+
+
+    //=======================================================Các hàm xử lý========================================================//
+
+
+
+
+
+
+    // Xử lý thêm
     public function add()
     {
         $name = $_POST['name'];
@@ -53,16 +85,10 @@ class author extends Controller
         }
     }
 
-    public function edit_Author($id)
-    {
-        $cond = "id = '$id'";
-        $authorModel = $this->load->model("authorModel");
-        $data['authorByID'] = $authorModel->selectByCond($this->table, $cond);
 
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/author/editAuthor", $data);
-    }
 
+
+    // Xử lý sửa
     public function edit($id)
     {
         $name = $_POST['name'];
@@ -83,6 +109,7 @@ class author extends Controller
         }
     }
 
+    
     private function getid()
     {
         $randomID = '';
