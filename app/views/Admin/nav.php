@@ -4,21 +4,27 @@
          <img src="./public/Logo/logo.png" alt="Logo" class="logo-img">
          <div class="logo-name"><span>F4 </span>Comics</div>
      </a>
+     <?php
+        $currentURL = $_SERVER['REQUEST_URI'];
 
-     <ul class="side-menu ">
-         <li>
-             <a href="<?php echo BASE_URL ?>/?url=admin">
-                 <i class='bx bxs-dashboard'></i>Dashboard </a>
-         </li>
-         <li>
-             <a href="<?php echo BASE_URL ?>?url=admin/comic_List">
-                 <i class='bx bx-store-alt'></i>Comics List</a>
-         </li>
-         <li>
-             <a href="#">
-                 <i class='bx bx-analyse'></i>Setting</a>
-         </li>
+        $menuItems = [
+            'admin/dashboard' => ['label' => 'Dashboard', 'icon' => 'bx bxs-dashboard'],
+            'admin/comic_List' => ['label' => 'Comics List', 'icon' => 'bx bx-store-alt'],
+            // Các mục menu khác
+        ];
+        ?>
+
+     <ul class="side-menu">
+         <?php foreach ($menuItems as $url => $item) : ?>
+             <li <?php if (strpos($currentURL, $url) !== false) echo 'class="active"'; ?>>
+                 <a href="<?php echo BASE_URL ?>/?url=<?php echo $url; ?>">
+                     <i class='<?php echo $item['icon']; ?>'></i>
+                     <?php echo $item['label']; ?>
+                 </a>
+             </li>
+         <?php endforeach; ?>
      </ul>
+
 
      <ul class=" side-menu">
          <li>
@@ -50,3 +56,15 @@
              <img src="./public/Logo/logo.png">
          </a>
      </nav>
+
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     <script>
+         $(document).ready(function() {
+             var url = window.location.pathname;
+             $('.side-menu a').each(function() {
+                 if ($(this).attr('href') === url) {
+                     $(this).closest('li').addClass('active');
+                 }
+             });
+         });
+     </script>

@@ -23,7 +23,14 @@ class admin extends Controller
         $this->load->view("Admin/nav");
         $this->load->view("Admin/dashboard", $data);
     }
+    public function comicslist()
+    {
+        $webtoon = new webtoon();
+        $data = $webtoon->list();
 
+        $this->load->view("Admin/nav");
+        $this->load->view("Admin/comicslist", $data);
+    }
 
     public static function checkRole()
     {

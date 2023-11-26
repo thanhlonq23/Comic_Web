@@ -1,3 +1,4 @@
+<div class="container">
 <!-- Nội dung chính -->
 <main class="main">
     <ul class="insights">
@@ -95,3 +96,4 @@
     </div>
 
 </main>
+</div>

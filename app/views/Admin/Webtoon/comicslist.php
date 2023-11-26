@@ -11,6 +11,7 @@
 </style>
 
 <!-- Nội dung chính -->
+<div class="container">
 <main class="main">
     <div style="background-color: #f6f6f9; padding: 15px; width: 100% ;border-radius: 20px; position: sticky; top: 50px;">
         <div class="upload-comic">
@@ -97,3 +98,4 @@
     </div>
 
 </main>
+</div>

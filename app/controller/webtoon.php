@@ -2,19 +2,22 @@
 class webtoon extends Controller
 {
     private $table = 'webtoons';
-    public function __construct()
+    public function __construct() //Khởi tạo phương thức kiểm tra phiên và gọi hàm khởi tạo cha.
     {
         Session::checkSession();
         parent::__construct();
+        //gọi hàm khởi tạo của lớp cha, có thể được kế thừa từ một lớp Controller,  chuẩn bị trước khi sử dụng các phương thức và thuộc tính của lớp
     }
+    //==================================================================Các phương thức xử lý==================================================================//
 
 
     public function index()
     {
-        $this->list_Webtoon();
+        $this->list_Webtoon(); //Gọi phương thức list_Webtoon()
+        // $this cho phép truy cập và sử dụng các thành phần của đối tượng hiện tại mà không cần phải tạo một thực thể mới của lớp đó.
     }
 
-    public function webtoon_Main()
+    public function webtoon_Main() //Hiển thị một webtoon cụ thể dựa trên ID được lấy từ URL.
     {
         $id = $_GET['id'];
         $cond = "id = '$id'";
@@ -23,21 +26,21 @@ class webtoon extends Controller
         $this->load->view("Admin/Webtoon/webtoon", $data);
     }
 
-    public function list_Webtoon()
+    public function list_Webtoon() //Hiển thị danh sách các webtoon.
     {
         $data = $this->list();
         $this->load->view("Admin/Webtoon/comicslist", $data);
     }
 
 
-    public function add_Webtoon()
+    public function add_Webtoon() //Hiển thị giao diện để thêm một webtoon mới.
     {
         $this->load->view("Admin/nav");
         $this->load->view("Admin/webtoon/addWebtoon");
     }
 
 
-    public function delete_Webtoon($id)
+    public function delete_Webtoon($id) //Xóa một webtoon dựa trên ID cung cấp. Xóa các tệp và thư mục liên quan.
     {
         // Tên file là id
         $file = $id;
@@ -67,7 +70,7 @@ class webtoon extends Controller
     }
 
 
-    public function edit_Webtoon($id)
+    public function edit_Webtoon($id) //Hiển thị giao diện để chỉnh sửa một webtoon cụ thể.
     {
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
@@ -87,13 +90,13 @@ class webtoon extends Controller
 
 
 
-    public function add()
+    public function add() //Xử lý việc thêm một webtoon mới, bao gồm tải ảnh bìa và tạo thư mục để lưu trữ.
     {
         $id = $this->getid();
         $name = $_POST['name'];
         $description = $_POST['description'];
 
-        // Tên thư mục chứa chapter = id 
+        // Tên thư mục chứa chapter = id
         $newDir = $id;
 
         // Xử lý tạo tên bìa
@@ -127,7 +130,7 @@ class webtoon extends Controller
     }
 
 
-    public function list()
+    public function list() //Truy xuất và trả về danh sách tất cả webtoon.
     {
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoons'] = $webtoonModel->selectAll($this->table);
@@ -136,12 +139,12 @@ class webtoon extends Controller
 
 
     // Cập nhật
-    public function edit($id)
+    public function edit($id) //Xử lý việc chỉnh sửa một webtoon hiện có, bao gồm cập nhật ảnh bìa.
     {
         // Lấy tên ảnh bìa
         $uploadedFileName = $_FILES["cover"]["name"];
 
-        // Tạo tên duy nhất 
+        // Tạo tên duy nhất
         $fileName = uniqid() . "_" . $uploadedFileName;
 
         $cond = "id = '$id'";
@@ -200,7 +203,7 @@ class webtoon extends Controller
         return 'webtoon' . $randomID;
     }
 
-    // Tạo thư mục chứa ảnh 
+    // Tạo thư mục chứa ảnh
     private function createDir($newDir)
     {
         $dirPath = "public/Uploads/Comic";

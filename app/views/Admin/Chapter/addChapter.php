@@ -24,7 +24,7 @@
 
         <div class="mb-3">
             <label class="form-label">File:</label>
-            <input class="form-control" type="file" name="images[]" accept=".png,.jpg,.mov" multiple>
+            <input class="form-control" type="file" name="images[]" accept=".png,.jpg,.mov,.jpeg" multiple>
         </div>
 
         <button type="submit" class="btn btn-primary">Thêm</button>
