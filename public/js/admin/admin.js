@@ -1,3 +1,4 @@
+
 const sideLinks = document.querySelectorAll(
   ".sidebar .side-menu li a:not(.logout)"
 );
@@ -15,30 +16,22 @@ sideLinks.forEach((item) => {
 document.addEventListener("DOMContentLoaded", function () {
   // Lấy tất cả các hàng có class "comic-row"
   const comicRows = document.querySelectorAll(".comic-row");
+  var rows = document.querySelectorAll('.comic-row');
+  var baseUrl = "http://localhost:81/f4comics";
+  //Sửa lại đường link
 
   // Lặp qua từng hàng và thêm sự kiện click
-  comicRows.forEach((row) => {
-    row.addEventListener("click", () => {
-      window.location.href = "comic.php"; // Chuyển hướng sang comic.php khi click vào hàng
-    });
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
 
-    // Lấy các button "Edit" và "Delete" trong mỗi hàng
-    const editButton = row.querySelector('input[value="Edit"]');
-    const deleteButton = row.querySelector('input[value="Delete"]');
-
-    // Thêm sự kiện click cho nút Edit
-    editButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "#"; // Chuyển hướng sang edit.php khi click vào nút Edit
-    });
-
-    // Thêm sự kiện click cho nút Delete
-    deleteButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "#"; // Chuyển hướng sang delete.php khi click vào nút Delete
+// Lấy giá trị của $value['id'] từ href của thẻ a trong hàng được click
+var id = this.querySelector('a').getAttribute('href').split('id=')[1];
+      // Chuyển hướng trang web tới đường link mong muốn
+      window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
     });
   });
 });
+
 document.addEventListener("DOMContentLoaded", function () {
   const chapterRows = document.querySelectorAll(".chapter-row");
 

@@ -54,7 +54,7 @@
                     <?php
                     foreach ($webtoons as $key => $value) {
                     ?>
-                        <tr class="comic-row" style="cursor: pointer;">
+                        <tr class="comic-row" style="cursor: pointer;" >
                             <td>
                                 <a href="<?php echo BASE_URL ?>/?url=admin/info/&id=<?php echo $value['id'] ?>">
                                     <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="Ảnh bìa" width="100" style="height:auto;">
