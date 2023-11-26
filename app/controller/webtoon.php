@@ -16,7 +16,6 @@ class webtoon extends Controller
 
     public function webtoon_Main()
     {
-        admin::checkRole();
         $id = $_GET['id'];
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
@@ -26,7 +25,6 @@ class webtoon extends Controller
 
     public function list_Webtoon()
     {
-        admin::checkRole();
         $data = $this->list();
         $this->load->view("Admin/Webtoon/comicslist", $data);
     }
@@ -34,7 +32,6 @@ class webtoon extends Controller
 
     public function add_Webtoon()
     {
-        admin::checkRole();
         $this->load->view("Admin/nav");
         $this->load->view("Admin/webtoon/addWebtoon");
     }
@@ -42,7 +39,6 @@ class webtoon extends Controller
 
     public function delete_Webtoon($id)
     {
-        admin::checkRole();
         // Tên file là id
         $file = $id;
 
@@ -73,7 +69,6 @@ class webtoon extends Controller
 
     public function edit_Webtoon($id)
     {
-        admin::checkRole();
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);

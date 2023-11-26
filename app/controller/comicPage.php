@@ -18,8 +18,25 @@ class comicPage extends Controller
     public function homePage()
     {
         $this->load->view("User/header");
+        
+        // Lấy ra dữ liệu webtoon
         $data = $this->getData();
+
+        // Hiển thị
         $this->load->view("User/Comic/comicPage", $data);
+        $this->load->view("User/footer");
+    }
+
+    public function readPage($webtoon_ID)
+    {
+        $chapter_ID = $_GET['chapter'];
+
+        // Lấy ra mảng gồm đường dẫn và các img
+        $data = $this->getImg($webtoon_ID, $chapter_ID);
+
+        // Hiển thị
+        $this->load->view("User/header");
+        $this->load->view("User/Comic/readPage", $data);
         $this->load->view("User/footer");
     }
 
@@ -46,5 +63,19 @@ class comicPage extends Controller
         $data2 = $chapter->getByCond($cond2);
         $data = array_merge_recursive($data1, $data2);
         return $data;
+    }
+
+    private function getImg($webtoonId, $chapterID)
+    {
+        $folderPath = "./public/Uploads/Comic/$webtoonId/$chapterID"; // Đường dẫn đến thư mục chứa ảnh
+
+        $dir['dir'] = [
+            'folderPath' => $folderPath
+        ];
+
+        // Lấy danh sách tất cả các file trong thư mục
+        $files['files'] = scandir($folderPath);
+
+        return array_merge_recursive($files, $dir);
     }
 }

@@ -10,11 +10,21 @@ class Database extends PDO
     {
         $pst = $this->prepare($sql);
 
+        // Gán tham số cho từng giá trị
         foreach ($data as $key => $value) {
             $pst->bindParam($key, $value);
         }
         $pst->execute();
         return $pst->fetchAll($fetchStyle); // $fetchStyle phương thức mặc định trả về mảng
+    }
+
+
+    //
+    public function selectUser($sql, $username, $password, $fetchStyle = PDO::FETCH_ASSOC)
+    {
+        $pst = $this->prepare($sql);
+        $pst->execute(array($username, $password));
+        return $pst->fetchAll($fetchStyle);
     }
 
     public function insert($table, $data)
@@ -26,6 +36,7 @@ class Database extends PDO
             $sql = "INSERT INTO $table($keys) VALUES($values)";
             $pst = $this->prepare($sql);
 
+            // Gán tham số cho từng giá trị
             foreach ($data as $key => $value) {
                 $pst->bindValue(":$key", $value);
             }
@@ -40,6 +51,8 @@ class Database extends PDO
     {
         try {
             $updateKeys = null;
+
+            // Xử lý tạo chuỗi cho update
             foreach ($data as $key => $value) {
                 $updateKeys .= "$key=:$key,";
             }
@@ -49,6 +62,7 @@ class Database extends PDO
             $sql = "UPDATE $table SET $updateKeys WHERE $condition";
             $pst = $this->prepare($sql);
 
+            // Gán tham số cho từng giá trị
             foreach ($data as $key => $value) {
                 $pst->bindValue(":$key", $value);
             }
@@ -62,6 +76,8 @@ class Database extends PDO
     public function delete($table, $condition, $limit = 1)
     {
         $sql = "DELETE FROM $table WHERE $condition LIMIT $limit";
+
+        // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
         return $this->exec($sql);
     }
 
@@ -74,12 +90,5 @@ class Database extends PDO
             $pst->execute(array($username, $password));
         }
         return $pst->rowCount(); // Trả về số hàng đã ảnh hưởng
-    }
-
-    public function selectUser($sql, $username, $password)
-    {
-        $pst = $this->prepare($sql);
-        $pst->execute(array($username, $password));
-        return $pst->fetchAll(PDO::FETCH_ASSOC);
     }
 }

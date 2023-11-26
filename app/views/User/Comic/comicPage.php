@@ -76,7 +76,7 @@
                     <?php
                     foreach ($chapters as $key => $value) {
                     ?>
-                        <a href="#" style="font-size: large;">
+                        <a href="<?php echo BASE_URL ?>?url=comicPage/readPage/<?php echo $value['webtoon_id'] ?>&chapter=<?php echo $value['id'] ?>" style="font-size: large;">
                             <li class="row">
                                 <div class="col-7">
                                     <?php echo $value['name'] ?>
