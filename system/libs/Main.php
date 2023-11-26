@@ -75,7 +75,10 @@ class Main
     }
 
 
+<<<<<<< HEAD
     // Phân tích url để gọi ra method trong lớp controller
+=======
+>>>>>>> fd09e1a (upload final main)
     // Phân tích url để gọi ra phương thức trong lớp controller
     public function callMethod()
     {
