@@ -19,7 +19,7 @@
 
 <body>
 
-    <h1>
+
         <?php
         // Tự động gọi class
         spl_autoload_register(function ($class) {
@@ -29,7 +29,7 @@
         include_once('./app/config/config.php');
         $main = new Main();
         ?>
-    </h1>
+
 
 
     <script src="./public/js/admin/admin.js"></script>

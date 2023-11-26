@@ -1,4 +1,3 @@
-<div class="container">
 <!-- Nội dung chính -->
 <main class="main">
     <ul class="insights">
@@ -58,11 +57,11 @@
                     </tr>
                 </thead>
 
-                <?php
-                foreach ($recommended_Webtoon as $key => $value) {
-                ?>
-                    <tbody>
-                        <tr class="comicdb-row" style="cursor: pointer;">
+                <tbody>
+                    <?php
+                    foreach ($recommended_Webtoon as $key => $value) {
+                    ?>
+                        <tr class="comicdb-row" style="cursor: pointer;" datadb-id="<?php echo BASE_URL ?>/?url=admin/info/&id=<?php echo $value['id'] ?>">
                             <td>
                                 <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="Comic">
                                 <p><?php echo $value['name'] ?></p>
@@ -86,14 +85,13 @@
                             </td>
                             <td>30 chapters</td>
                         </tr>
-                    </tbody>
-                <?php
-                }
-                ?>
+                    <?php
+                    }
+                    ?>
+                </tbody>
             </table>
         </div>
 
     </div>
 
 </main>
-</div>

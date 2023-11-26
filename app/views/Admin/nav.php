@@ -56,15 +56,3 @@
              <img src="./public/Logo/logo.png">
          </a>
      </nav>
-
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-     <script>
-         $(document).ready(function() {
-             var url = window.location.pathname;
-             $('.side-menu a').each(function() {
-                 if ($(this).attr('href') === url) {
-                     $(this).closest('li').addClass('active');
-                 }
-             });
-         });
-     </script>
