@@ -19,8 +19,6 @@ class author extends Controller
 
         $this->load->view("Admin/header");
         $this->load->view("Admin/Author/listAuthor", $data);
-        // $this->load->view("Admin/footer");
-
     }
     public function delete_Author($id)
     {
@@ -91,7 +89,6 @@ class author extends Controller
         for ($i = 0; $i < 4; $i++) {
             $randomID .= rand(0, 9);
         }
-
         return 'author' . $randomID;
     }
 }

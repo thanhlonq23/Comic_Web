@@ -46,11 +46,10 @@
 
                         // Kiểm tra nếu là file ảnh
                         if (is_file($filePath) && in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
-                            // echo '<img src="' . $filePath . '" alt="' . $file . '" /><br>';
                     ?>
 
                             <!-- Hiển thị ảnh -->
-                            <div class="page-chaper">
+                            <div class="page-chaper row">
                                 <img src="<?php echo $filePath ?>">
                             </div>
 

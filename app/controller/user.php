@@ -18,7 +18,6 @@ class user extends Controller
         $data['users'] = $userModel->selectAll($this->table);
         $this->load->view("Admin/header");
         $this->load->view("Admin/User/listUser", $data);
-        // $this->load->view("Admin/footer");
     }
     public function delete_User($id)
     {

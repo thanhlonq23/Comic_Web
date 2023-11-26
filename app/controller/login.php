@@ -34,6 +34,7 @@ class login extends Controller
         if ($row == 1) {
             $result = $loginModel->getLogin($table_Admin, $username, $password);
 
+            // strcasecmp so sanh chuoi khong phan biet chu hoa chu thuong
             if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password) && ($result[0]['role'] == 'admin')) {
                 Session::init();
                 Session::set('login', true);

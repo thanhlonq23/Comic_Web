@@ -1,0 +1,8 @@
+div .page-chaper {
+  overflow: hidden;
+}
+.page-chaper img {
+  width: 100%;
+  height: 100%;
+  overflow: cover;
+}

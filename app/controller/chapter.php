@@ -8,7 +8,7 @@ class chapter extends Controller
         Session::checkSession();
         parent::__construct();
     }
-    public function index()
+    public function index() 
     {
         $this->list_Chapter();
     }
