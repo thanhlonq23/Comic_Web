@@ -8,7 +8,7 @@ class chapter extends Controller
         Session::checkSession();
         parent::__construct();
     }
-    public function index() 
+    public function index()
     {
         $this->list_Chapter();
     }
@@ -196,7 +196,7 @@ class chapter extends Controller
 
         // Sử dụng hàm để xóa thư mục
         $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
-        echo $dirPath;
+        // echo $dirPath;
         rmdir_recursive($dirPath);
     }
 }

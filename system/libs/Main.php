@@ -23,7 +23,7 @@ class Main
             '1'=> edit_Author,
             '2'=> 12
         ]
-    
+
     */
 
 
@@ -77,7 +77,7 @@ class Main
     }
 
 
-    // Phân tích url để gọi ra phương thức trong lớp controller 
+    // Phân tích url để gọi ra phương thức trong lớp controller
     public function callMethod()
     {
         // Nếu tồn tại url[2] => Tồn tại tham số => Tồn tại url[1] => Tồn tại phương thức
