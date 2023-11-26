@@ -438,6 +438,7 @@ require_once '../admin2/nav.php';
                 }
             }
         });
+
     </script>
 
 

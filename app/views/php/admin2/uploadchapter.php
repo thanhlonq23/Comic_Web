@@ -156,7 +156,7 @@
             width: 100%;
             padding: 30px; */
             width: calc((100% - 400px));
-            margin: 200px 0 0 200px;
+            margin: 0 200px;
             padding: 20px;
             background: #fff;
             border-radius: 20px;
@@ -240,6 +240,7 @@
         }
 
         .input-field input[type="text"],
+        .input-field input[type="number"],
         .input-field select {
             flex: 1;
             max-width: 100%;
@@ -250,6 +251,7 @@
         }
 
         .input-field input[type="text"]:focus,
+        .input-field input[type="number"]:focus,
         .input-field select:focus {
             outline: none;
             border-color: #007bff;
@@ -300,7 +302,6 @@
             outline: none;
             border-color: #3498db;
         }
-
     </style>
 </head>
 
@@ -322,6 +323,10 @@
                 <div class="input-field">
                     <label for="nameInput">Name Chapter:</label>
                     <input type="text" id="nameInput" required>
+                </div>
+                <div class="input-field">
+                    <label for="priceInput">Price:</label>
+                    <input type="number" id="priceInput" required>
                 </div>
                 <div class="input-field">
                     <label for="status">Trạng thái:</label>
@@ -422,6 +427,66 @@
                 updateDragDropAreaContent(loadedImages);
             });
 
+            //Nhập số chapter
+            const chapterInput = document.getElementById('chapterInput');
+            const warningMessage = document.getElementById('warningMessage');
+
+            chapterInput.addEventListener('input', function(event) {
+                let value = event.target.value;
+
+                // Loại bỏ bất kỳ ký tự nào không phải số
+                value = value.replace(/\D/g, '');
+
+                // Cập nhật giá trị của trường nhập liệu
+                event.target.value = value;
+
+                // Kiểm tra nếu giá trị không hợp lệ, hiển thị cảnh báo
+                if (value < 1 || value % 1 !== 0) {
+                    warningMessage.style.display = 'block';
+                } else {
+                    warningMessage.style.display = 'none';
+                }
+            });
+
+            // Lấy parameters từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const comicId = urlParams.get('comicId'); // Lấy giá trị của tham số 'comicId'
+            finalizeUploadButton.addEventListener("click", () => {
+                // Lấy các giá trị từ Form 1 và Form 2
+                const chapterNumber = document.getElementById("chapterInput").value;
+                const name = document.getElementById("nameInput").value;
+                const price = document.getElementById("priceInput").value;
+                const status = document.getElementById("status").value;
+
+                // Tạo đối tượng FormData để gửi dữ liệu
+                const formData = new FormData();
+                formData.append('comicId', comicId); // Gửi comicId
+                formData.append('chapterNumber', chapterNumber);
+                formData.append('name', name);
+                formData.append('price', price);
+                formData.append('status', status);
+
+                // Thêm tất cả các ảnh đã chọn vào FormData
+                loadedImages.forEach((image, index) => {
+                    formData.append(`image_${index + 1}`, image);
+                });
+
+                // Gửi dữ liệu đến uploadChapterComic.php
+                fetch('http://f4comics.com:81/f4comics/app/views/php/admin2/uploadChapterComic.php', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => {
+                        // Xử lý kết quả từ uploadChapterComic.php (nếu cần)
+                        console.log(response);
+                        // Chuyển hướng hoặc hiển thị thông báo tùy theo kết quả
+                    })
+                    .catch(error => {
+                        // Xử lý lỗi nếu có
+                        console.error('Error:', error);
+                    });
+            });
+            //
 
 
             fileInput.addEventListener("change", () => {
@@ -443,6 +508,11 @@
             });
 
             submitButton.addEventListener("click", () => {
+                // Thu thập thông tin từ Form 1
+                const chapterNumber = document.getElementById("chapterInput").value;
+                const name = document.getElementById("nameInput").value;
+                const price = document.getElementById("priceInput").value;
+                const status = document.getElementById("status").value;
                 // Xử lý sự kiện khi người dùng ấn nút 'Submit' trên form 1
                 // Ẩn form 1 và hiển thị form 2
                 firstForm.style.display = "none";
@@ -463,13 +533,15 @@
                 displayImage(0);
             });
 
-            finalizeUploadButton.addEventListener("click", () => {
-                // Xử lý sự kiện khi người dùng ấn nút 'Finalize Upload' trên form 2
-                // Thực hiện các hành động khi hoàn tất quá trình tải lên (ví dụ: gửi dữ liệu đến upload.php)
-                console.log("Finalizing upload...", loadedImages);
-                // Ví dụ: const formData = new FormData(); formData.append("images", loadedImages);
-                // fetch("upload.php", { method: "POST", body: formData });
-            });
+            // finalizeUploadButton.addEventListener("click", () => {
+            //     // Xử lý sự kiện khi người dùng ấn nút 'Finalize Upload' trên form 2
+            //     // Thực hiện các hành động khi hoàn tất quá trình tải lên (ví dụ: gửi dữ liệu đến upload.php)
+            //     console.log("Finalizing upload...", loadedImages);
+            //     // Ví dụ: const formData = new FormData(); formData.append("images", loadedImages);
+            //     // fetch("upload.php", { method: "POST", body: formData });
+            // });
+
+
 
             //Sự kiện hiển thị ảnh tương ứng với chỉ số index được truyền vào.
             function displayImage(index) {
@@ -496,27 +568,6 @@
                     reader.readAsDataURL(loadedImages[index]);
                     //Phương thức readAsDataURL() của đối tượng FileReader sẽ đọc nội dung của file được chọn và trả về dưới dạng URL (base64 encoded string).
                 }
-            }
-        });
-
-        //Nhập số chapter
-        const chapterInput = document.getElementById('chapterInput');
-        const warningMessage = document.getElementById('warningMessage');
-
-        chapterInput.addEventListener('input', function(event) {
-            let value = event.target.value;
-
-            // Loại bỏ bất kỳ ký tự nào không phải số
-            value = value.replace(/\D/g, '');
-
-            // Cập nhật giá trị của trường nhập liệu
-            event.target.value = value;
-
-            // Kiểm tra nếu giá trị không hợp lệ, hiển thị cảnh báo
-            if (value < 1 || value % 1 !== 0) {
-                warningMessage.style.display = 'block';
-            } else {
-                warningMessage.style.display = 'none';
             }
         });
     </script>

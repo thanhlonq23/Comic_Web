@@ -255,15 +255,15 @@ try {
 
             next.addEventListener('click', function() {
 
-            //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất
-            //     // const comicName = document.querySelector("#comicName").value.trim();
-            //     // const authorComic = document.querySelector("#author-comic").value.trim();
+                //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất
+                //     // const comicName = document.querySelector("#comicName").value.trim();
+                //     // const authorComic = document.querySelector("#author-comic").value.trim();
 
-            //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất và lưu vào form 2
-            //     comicName = firstForm.querySelector("#comicName").value.trim();
-            //     authorName = firstForm.querySelector("#author-comic").value.trim();
-            comicName = Form.querySelector("#comicName").value.trim();
-            //     // Nếu cả hai trường dữ liệu đã được điền
+                //     // Kiểm tra các trường dữ liệu của biểu mẫu thứ nhất và lưu vào form 2
+                //     comicName = firstForm.querySelector("#comicName").value.trim();
+                //     authorName = firstForm.querySelector("#author-comic").value.trim();
+                comicName = Form.querySelector("#comicName").value.trim();
+                //     // Nếu cả hai trường dữ liệu đã được điền
                 if (comicName !== '') {
                     firstForm.style.display = 'none';
                     secondForm.style.display = 'block';
@@ -563,7 +563,7 @@ try {
                     // Ví dụ: sử dụng Fetch API hoặc XMLHttpRequest
                     // Sau khi gửi thành công, bạn có thể chuyển hướng đến một trang khác hoặc hiển thị thông báo thành công
                     // Sử dụng Fetch API để gửi dữ liệu đến uploadComic.php
-                    fetch('http://f4comics.com:81/f4comics/app/views/php/process/uploadAuthorComic.php', {
+                    fetch('http://f4comics.com:81/f4comics/app/views/php/admin2/uploadAuthorComic.php', {
                             method: 'POST',
                             body: formData,
                         })

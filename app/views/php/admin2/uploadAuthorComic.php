@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // --------------------------------------------------------Lưu thông tin về webtoon vào bảng webtoons
         $currentDate = date("Y-m-d");
-        $targetDirectory = "../../uploads/" . $name . "/cover/";
+        $targetDirectory = "../uploads/" . $name . "/cover/";
         // Xử lý tệp ảnh cover và di chuyển vào thư mục cover của webtoon
         $coverFileName = $_FILES['coverImage']['name']; // Tên tệp ảnh cover
         $coverTempFile = $_FILES['coverImage']['tmp_name']; // Tên tệp tạm thời trên máy chủ
