@@ -201,7 +201,6 @@ class chapter extends Controller
 
         // Sử dụng hàm để xóa thư mục
         $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
-        echo $dirPath;
         rmdir_recursive($dirPath);
     }
 
