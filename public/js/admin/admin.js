@@ -1,3 +1,4 @@
+
 const sideLinks = document.querySelectorAll(
   ".sidebar .side-menu li a:not(.logout)"
 );
@@ -13,32 +14,57 @@ sideLinks.forEach((item) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Lấy tất cả các hàng có class "comic-row"
-  const comicRows = document.querySelectorAll(".comic-row");
+  var rows = document.querySelectorAll('.comicdb-row');
+  // var baseUrl = "http://localhost:81/f4comics";
 
-  // Lặp qua từng hàng và thêm sự kiện click
-  comicRows.forEach((row) => {
-    row.addEventListener("click", () => {
-      window.location.href = "comic.php"; // Chuyển hướng sang comic.php khi click vào hàng
-    });
-
-    // Lấy các button "Edit" và "Delete" trong mỗi hàng
-    const editButton = row.querySelector('input[value="Edit"]');
-    const deleteButton = row.querySelector('input[value="Delete"]');
-
-    // Thêm sự kiện click cho nút Edit
-    editButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "#"; // Chuyển hướng sang edit.php khi click vào nút Edit
-    });
-
-    // Thêm sự kiện click cho nút Delete
-    deleteButton.addEventListener("click", (event) => {
-      event.stopPropagation(); // Ngăn chặn sự kiện click trên hàng
-      window.location.href = "#"; // Chuyển hướng sang delete.php khi click vào nút Delete
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
+      var id = this.getAttribute('datadb-id');
+      // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
+      window.location.href = id;
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  var rows = document.querySelectorAll('.comic-row');
+  // var baseUrl = "http://localhost:81/f4comics";
+
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
+      var id = this.getAttribute('data-id');
+      // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
+      window.location.href = id;
+    });
+  });
+});
+// document.addEventListener("DOMContentLoaded", function () {
+//   var rows = document.querySelectorAll('.comic-row');
+
+//   rows.forEach(function (row) {
+//     var id = row.getAttribute('data-id');
+
+//     const editButton = row.querySelector('input[value="Edit"]');
+//     const deleteButton = row.querySelector('input[value="Delete"]');
+
+//     editButton.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       location.href = 'webtoon/edit_Webtoon/' + id;
+//     });
+
+//     deleteButton.addEventListener("click", function (event) {
+//       location.href = 'webtoon/delete_Webtoon/' + id;
+//     });
+
+//     row.addEventListener("click", function (event) {
+//       if (event.target !== editButton && event.target !== deleteButton) {
+//         window.location.href = id;
+//       }
+//     });
+//   });
+// });
+
+
 document.addEventListener("DOMContentLoaded", function () {
   const chapterRows = document.querySelectorAll(".chapter-row");
 

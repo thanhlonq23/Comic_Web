@@ -1,3 +1,4 @@
+<!-- Này là phần hiển thị chapter và thêm chapter ở ơhias dưới của mỗi comic  -->
 <main class="main">
     <!-- Phần dữ liệu phía dưới -->
     <div class="bottom-data">

@@ -1,4 +1,5 @@
 <!-- Nội dung chính -->
+<!-- Này là phần đầu của hiển thị từng comic  -->
 <main class="main">
     <div class="bottom-data">
         <div class="comics">
@@ -7,7 +8,7 @@
                 foreach ($webtoons as $key => $value) {
                 ?>
                     <div class="image-container">
-                        <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?>" alt="Comic 1">
+                        <div class="imageIncontainer" style="background-image: url('./public/Uploads/Cover/Webtoon/<?php echo $value['cover']; ?>');" alt="Comic Cover"></div>
                     </div>
                     <div class="text-container">
                         <div>

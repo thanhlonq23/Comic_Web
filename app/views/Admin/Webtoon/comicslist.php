@@ -1,15 +1,3 @@
-<style>
-    td.date {
-        /* display: flex; */
-        max-width: 80%;
-        /* Điều chỉnh giá trị max-width cho phù hợp với nội dung của bạn */
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 5px;
-    }
-</style>
-
 <!-- Nội dung chính -->
 <main class="main">
     <div style="background-color: #f6f6f9; padding: 15px; width: 100% ;border-radius: 20px; position: sticky; top: 50px;">
@@ -43,7 +31,7 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="padding-left: 7px; font-size: 17px;" colspan="2">Comics</th>
+                        <th style="padding-left: 7px; font-size: 17px;">Comics</th>
                         <th style="padding-left: 7px;font-size: 17px;">Status</th>
                         <th style="font-size: 17px;">Publish Date</th>
                         <th style="padding-left: 7px;font-size: 17px;">Chapter</th>
@@ -54,14 +42,9 @@
                     <?php
                     foreach ($webtoons as $key => $value) {
                     ?>
-                        <tr class="comic-row" style="cursor: pointer;">
+                        <tr class="comic-row" data-id="<?php echo BASE_URL ?>/?url=admin/info/&id=<?php echo $value['id'] ?>" style="cursor: pointer;">
                             <td>
-                                <a href="<?php echo BASE_URL ?>/?url=admin/info/&id=<?php echo $value['id'] ?>">
-                                    <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="Ảnh bìa" width="100" style="height:auto;">
-                                </a>
-                            </td>
-
-                            <td class="col-5">
+                                <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?> " alt="Ảnh bìa">
                                 <p><?php echo $value['name'] ?></p>
                             </td>
                             <td>
@@ -77,7 +60,7 @@
                                 } ?>
                             </td>
                             <td class="date">
-                                <?php
+                            <?php
                                 echo date("d/m/Y", strtotime($value['date']))
                                 ?>
                             </td>

@@ -56,7 +56,7 @@ body {
 #label-profile {
   display: block;
   /* Hoặc inline-block */
-  width: 150px;
+  width: 85px;
   /* Độ rộng tối đa của nhãn */
   font-size: 15px;
   /* Kích thước chữ */
@@ -464,6 +464,9 @@ body {
   align-items: center;
   grid-gap: 24px;
   cursor: pointer;
+}
+.content main .insights ul {
+  padding-left: 0rem;
 }
 
 .content main .insights li .bx {
@@ -1002,3 +1005,27 @@ body {
     background-color: #c0392b;
 } */
 
+ol,
+ul {
+  padding-left: 0rem;
+}
+
+.content
+  main
+  .bottom-data
+  .comics
+  .top-cover
+  .image-container
+  .imageIncontainer {
+  width: 240px;
+  height: 360px;
+  overflow: hidden;
+  flex: 0 0 240px;
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
