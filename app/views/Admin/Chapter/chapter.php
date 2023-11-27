@@ -1,3 +1,16 @@
+<?php
+$webtoonId = ''; // Khai báo biến webtoonId
+
+// Lấy giá trị của tham số 'id' từ URL nếu có
+$url = $_SERVER['REQUEST_URI'];
+$parsed_url = parse_url($url);
+if (isset($parsed_url['query'])) {
+    parse_str($parsed_url['query'], $query_params);
+    if (isset($query_params['id'])) {
+        $webtoonId = $query_params['id'];
+    }
+}
+?>
 <!-- Này là phần hiển thị chapter và thêm chapter ở ơhias dưới của mỗi comic  -->
 <main class="main">
     <!-- Phần dữ liệu phía dưới -->
@@ -10,12 +23,14 @@
             <div class="header">
                 <i class='bx bxs-book-open'></i>
                 <h3>Chapters</h3>
-                <a href="<?php echo BASE_URL ?>/?url=chapter/add_Chapter">
+
+                <a href="<?php echo BASE_URL ?>/?url=chapter/add_Chapter/&id=<?php echo $webtoonId ?>">
                     <button style="display: block; background-color: #00c493; color: #ffffff; font-size: 16px; cursor: pointer; padding: 12px 24px;
                     border-radius: 8px;border: none; outline: none;">
                         Create Chapter
                     </button>
                 </a>
+
             </div>
             <table>
                 <thead>
@@ -27,19 +42,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $webtoonId = ''; // Khai báo biến webtoonId
-
-                    // Lấy giá trị của tham số 'id' từ URL nếu có
-                    $url = $_SERVER['REQUEST_URI'];
-                    $parsed_url = parse_url($url);
-                    if (isset($parsed_url['query'])) {
-                        parse_str($parsed_url['query'], $query_params);
-                        if (isset($query_params['id'])) {
-                            $webtoonId = $query_params['id'];
-                        }
-                    }
-                    ?>
                     <?php
                     foreach ($chapters as $key => $value) {
                     ?>

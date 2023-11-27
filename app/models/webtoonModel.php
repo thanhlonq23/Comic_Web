@@ -30,9 +30,24 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+    // public function insert($table, $data)
+    // {
+    //     return $this->db->insert($table, $data);
+    // }
+
     public function insert($table, $data)
     {
-        return $this->db->insert($table, $data);
+        // Kiểm tra nếu đang insert vào bảng 'chapters'
+        if ($table === 'chapters') {
+            // Tạo mới đối tượng của chapterModel
+            $chapterModel = new chapterModel();
+
+            // Gọi hàm insertChapterForWebtoon từ chapterModel
+            return $chapterModel->insertChapterForWebtoon($data['webtoon_id'], $data);
+        } else {
+            // Thực hiện insert cho các trường hợp khác
+            return $this->db->insert($table, $data);
+        }
     }
 
     public function update($table, $data, $cond)
