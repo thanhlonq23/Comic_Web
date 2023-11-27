@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Thêm Chapter:</h1>
+<h1 style="text-align: center;">Thêm Category:</h1>
 <div class="container mt-5">
     <form action="<?php echo BASE_URL ?>/?url=chapter/add" method="post" enctype="multipart/form-data">
         <div class="mb-3">
@@ -18,13 +18,8 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Chapter Name:</label>
+            <label class="form-label">Categories Name:</label>
             <input type="text" class="form-control" name="name" placeholder="Nhập tên Chapter">
-        </div>
-
-        <div class="mb-3">
-            <label class="form-label">File:</label>
-            <input class="form-control" type="file" name="images[]" accept=".png,.jpg,.mov,.jpeg" multiple>
         </div>
 
         <button type="submit" class="btn btn-primary">Thêm</button>

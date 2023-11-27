@@ -66,29 +66,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const chapterRows = document.querySelectorAll(".chapter-row");
+  var rows = document.querySelectorAll('.chapter-row');
+  // var baseUrl = "http://localhost:81/f4comics";
 
-  chapterRows.forEach(function (row) {
-    const editButton = row.querySelector('input[value="Edit"]');
-    const deleteButton = row.querySelector('input[value="Delete"]');
-
-    editButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      location.href = "#";
-    });
-
-    deleteButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      location.href = "#";
-    });
-
-    row.addEventListener("click", function (event) {
-      if (event.target !== editButton && event.target !== deleteButton) {
-        location.href = "#";
-      }
+  rows.forEach(function (row) {
+    row.addEventListener('click', function () {
+      var id = this.getAttribute('data-chapter-id');
+      // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
+      window.location.href = id;
     });
   });
 });
+
+// document.addEventListener("DOMContentLoaded", function () {
+//   const chapterRows = document.querySelectorAll(".chapter-row");
+//   // /public/Uploads/Comic/$webtoonId/$chapterID
+//   chapterRows.forEach(function (row) {
+//     const editButton = row.querySelector('input[value="Edit"]');
+//     const deleteButton = row.querySelector('input[value="Delete"]');
+
+//     editButton.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       location.href = "#";
+//     });
+
+//     deleteButton.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       location.href = "#";
+//     });
+
+//     row.addEventListener("click", function (event) {
+//       if (event.target !== editButton && event.target !== deleteButton) {
+//         location.href = "#";
+//       }
+//     });
+//   });
+// });
 
 const menuBar = document.querySelector(".content nav .bx.bx-menu");
 const sideBar = document.querySelector(".sidebar");

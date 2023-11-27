@@ -22,6 +22,14 @@
                                     </div>
 
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">
+                                        <?php
+                                        if (!empty($_GET['msg'])) {
+                                            $msg = unserialize(urldecode($_GET['msg']));
+                                            foreach ($msg as $key => $value) {
+                                                echo "<p style='color: green'><br> $value </p>";
+                                            }
+                                        }
+                                        ?>
                                     </h5>
 
                                     <div class="form-outline mb-4">
