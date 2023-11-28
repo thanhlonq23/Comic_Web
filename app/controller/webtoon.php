@@ -20,6 +20,11 @@ class webtoon extends Controller
         $cond = "id = '$id'";
         $webtoonModel = $this->load->model("webtoonModel");
         $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+
+        // Lấy danh sách categories của webtoon
+        $categories = $this->viewCategories($id);
+        $data['categories'] = $categories;
+
         $this->load->view("Admin/Webtoon/webtoon", $data);
     }
 
@@ -271,5 +276,55 @@ class webtoon extends Controller
         $webtoonModel = $this->load->model("webtoonModel");
         $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
         return $data;
+    }
+
+    public function viewCategories($webtoonID)
+    {
+        // Lấy danh sách categories của webtoon dựa trên ID
+        $webtoonModel = $this->load->model("webtoonModel");
+        $categories = $webtoonModel->getCategoriesByWebtoon($webtoonID);
+
+        // Hiển thị view để xem categories của webtoon
+        $data['categories'] = $categories;
+        // $this->load->view("Admin/Webtoon/viewCategories", $data);
+
+        return $categories; // Trả về danh sách categories
+    }
+
+    public function addCategory($webtoonID, $categoryID)
+    {
+        // Thêm category vào webtoon
+        $webtoonModel = $this->load->model("webtoonModel");
+        $result = $webtoonModel->addCategoryToWebtoon($webtoonID, $categoryID);
+
+        // Kiểm tra và xử lý kết quả
+        if ($result != 0) {
+            // Thêm thành công
+            // Redirect hoặc hiển thị thông báo
+            $message['msg'] = "Thêm category thành công!";
+        } else {
+            // Thêm thất bại
+            $message['msg'] = "Thêm category thất bại!";
+            // Redirect hoặc hiển thị thông báo
+        }
+    }
+
+    public function removeCategory($webtoonID, $categoryID)
+    {
+        // Xóa category khỏi webtoon
+        $webtoonModel = $this->load->model("webtoonModel");
+        $result = $webtoonModel->removeCategoryFromWebtoon($webtoonID, $categoryID);
+
+        // Kiểm tra và xử lý kết quả tương tự như addCategory()
+        // Kiểm tra và xử lý kết quả
+        if ($result != 0) {
+            // Thêm thành công
+            // Redirect hoặc hiển thị thông báo
+            $message['msg'] = "Thêm category thành công!";
+        } else {
+            // Thêm thất bại
+            $message['msg'] = "Thêm category thất bại!";
+            // Redirect hoặc hiển thị thông báo
+        }
     }
 }

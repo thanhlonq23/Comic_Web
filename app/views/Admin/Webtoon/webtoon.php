@@ -40,11 +40,16 @@
                         </div>
                         <div>
                             <ul>
-                                <li>Action</li>
-                                <li>Boy Love</li>
-                                <li>Romance</li>
-                                <li>Fantastic</li>
-                                <li>Chinese</li>
+                                <?php
+                                // Hiển thị danh sách categories nếu có, nếu không hiển thị thông báo "Không có thể loại"
+                                if (empty($categories)) {
+                                    echo "Không có thể loại";
+                                } else {
+                                    foreach ($categories as $category) {
+                                        echo "<li>{$category['name']}</li>";
+                                    }
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>
