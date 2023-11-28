@@ -93,7 +93,7 @@ class webtoon extends Controller
         $name = $_POST['name'];
         $description = $_POST['description'];
 
-        // Tên thư mục chứa chapter = id 
+        // Tên thư mục chứa chapter = id
         $newDir = $id;
 
         // Xử lý tạo tên bìa
@@ -141,7 +141,7 @@ class webtoon extends Controller
         // Lấy tên ảnh bìa
         $uploadedFileName = $_FILES["cover"]["name"];
 
-        // Tạo tên duy nhất 
+        // Tạo tên duy nhất
         $fileName = uniqid() . "_" . $uploadedFileName;
 
         $cond = "id = '$id'";
@@ -200,7 +200,7 @@ class webtoon extends Controller
         return 'webtoon' . $randomID;
     }
 
-    // Tạo thư mục chứa ảnh 
+    // Tạo thư mục chứa ảnh
     private function createDir($newDir)
     {
         $dirPath = "public/Uploads/Comic";
