@@ -63,13 +63,15 @@
                     ?>
                             <!-- Hiển thị ảnh -->
                             <div class="page-chaper row">
-                                <img src="<?php echo $filePath ?>">
+                                <center>
+                                    <img src="<?php echo $filePath ?>" style="max-width: 900px;  height: auto;">
+                                </center>
                             </div>
                     <?php
                         }
                     }
                     ?>
-                </div> <br><br>
+                </div>
             </div>
         </div>
     </div>
