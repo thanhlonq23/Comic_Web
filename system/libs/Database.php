@@ -93,16 +93,18 @@ class Database extends PDO
 
     public function delete($table, $condition, $limit = 1)
     {
-        try {
-            $sql = "DELETE FROM $table WHERE $condition LIMIT $limit";
+        $sql = "DELETE FROM $table WHERE $condition LIMIT $limit";
 
-            // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
-            return $this->exec($sql);
-        } catch (\Throwable $th) {
-            // Xử lý nếu có lỗi xảy ra
-            // Thông báo lỗi hoặc ghi log tại đây
-            throw new Exception("Lỗi xóa dữ liệu trong bảng $table" . $th->getMessage());
-        }
+        // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
+        return $this->exec($sql);
+    }
+
+    public function deleteArray($table, $condition)
+    {
+        $sql = "DELETE FROM $table WHERE $condition";
+
+        // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
+        return $this->exec($sql);
     }
 
     public function deleteArray($table, $condition)
