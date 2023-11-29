@@ -135,12 +135,12 @@ class webtoon extends Controller
         $getCover = $webtoonModel->selectByCond($this->table, $cond);
         $cover = $getCover[0]['cover'];
 
-        // Xóa tất cả các liên kết với categories trong bảng webtoons_categories
-        $webtoonModel->removeCategoriesFromWebtoon($id);
 
         // Xóa được thư mục,bìa thành công mới đến xóa trong db
         if ($this->deleteDir($file) && $this->deleteFile($cover)) {
             try {
+                // Xóa tất cả các liên kết với categories trong bảng webtoons_categories
+                $webtoonModel->removeCategoryFromWebtoon($id);
 
                 $webtoonModel->delete($this->table, $cond);
             } catch (Exception  $th) {

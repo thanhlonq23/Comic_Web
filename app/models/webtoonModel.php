@@ -81,25 +81,19 @@ class webtoonModel extends Model
         return $this->db->insert('webtoons_categories', $data);
     }
 
-    // public function removeCategoryFromWebtoon($webtoonID)
-    // {
-    //      // Thực hiện truy vấn xóa các liên kết với categories trong bảng webtoons_categories
-    //      $sql = "DELETE FROM webtoons_categories WHERE webtoon_id = :webtoon_id";
-    //     return $this->db->delete('webtoons_categories', $sql);
-    // }
-
-    public function removeCategoriesFromWebtoon($webtoonID)
+    public function removeCategoryFromWebtoon($webtoonID)
     {
-        // Lấy danh sách các categories của webtoon
-        $categories = $this->getCategoriesByWebtoon($webtoonID);
+        // // Tính tổng các giá trị categories_id
+        // $sql = "SELECT SUM(categories.id) AS total_sum FROM categories
+        //     INNER JOIN webtoons_categories
+        //     ON categories.id = webtoons_categories.categories_id
+        //     WHERE webtoons_categories.webtoons_id = '$webtoonID'";
+        //     $result = $this->db->select($sql);
 
-        if ($categories) {
-            $categoryIds = array_column($categories, 'id');
-            $categoryIdsString = "'" . implode("','", $categoryIds) . "'";
-
-            // Xóa các liên kết trong bảng webtoons_categories
-            $sqlDelete = "DELETE FROM webtoons_categories WHERE webtoons_id = '$webtoonID' AND categories_id IN ($categoryIdsString)";
-            $this->db->delete('webtoons_categories', $sqlDelete);
-        }
+        // Xóa các liên kết với categories trong bảng webtoons_categories dựa trên webtoon_id
+        $condition = "webtoons_id = '$webtoonID'";
+        return $this->db->deleteArray('webtoons_categories', $condition); // Đặt giá trị limit = $sumCategories để không giới hạn số lượng hàng bị xóa là bằng 1 mặc định trong database.php
     }
+
+    // Hàm tính tổng các categories_id theo webtoon_id
 }
