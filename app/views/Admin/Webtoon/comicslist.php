@@ -8,6 +8,14 @@
                     Create Project
                 </button>
             </a>
+            <?php
+            if (!empty($_GET['msg'])) {
+                $msg = unserialize(urldecode($_GET['msg']));
+                foreach ($msg as $key => $value) {
+                    echo "<p style='color: green'><br> $value </p>";
+                }
+            }
+            ?>
         </div>
     </div>
 
@@ -60,7 +68,7 @@
                                 } ?>
                             </td>
                             <td class="date">
-                            <?php
+                                <?php
                                 echo date("d/m/Y", strtotime($value['date']))
                                 ?>
                             </td>

@@ -25,7 +25,7 @@ class login extends Controller
 
 
 
- 
+
 
 
     //=======================================================Các hàm xử lý========================================================//
@@ -64,10 +64,12 @@ class login extends Controller
                 Session::set('role', 'user');
                 header("Location:" . BASE_URL);
             } else {
-                header("Location:" . BASE_URL . "/?url=login");
+                $message['msg'] = "Username hoặc password không đúng";
+                header("Location:" . BASE_URL . "/?url=login/&msg=" . urlencode(serialize($message)));
             }
         } else {
-            header("Location:" . BASE_URL . "/?url=login");
+            $message['msg'] = "Username hoặc password không đúng";
+            header("Location:" . BASE_URL . "/?url=login/&msg=" . urlencode(serialize($message)));
         }
     }
 

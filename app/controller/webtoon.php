@@ -4,7 +4,7 @@ class webtoon extends Controller
     private $table = 'webtoons';
     public function __construct()
     {
-        Session::checkSession();
+        // Session::checkSession();
         parent::__construct();
     }
 
@@ -87,13 +87,13 @@ class webtoon extends Controller
             try {
                 $webtoonModel->delete($this->table, $cond);
             } catch (Exception  $th) {
-                $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại";
+                $message['msg'] = "Xóa không thành công";
                 header("Location:" . BASE_URL . "/?url=admin/comic_List/&msg=" . urlencode(serialize($message)));
                 exit;
             }
             header("Location:" . BASE_URL . "/?url=admin/comic_List");
         } else {
-            $message['msg'] = "Xóa không thành công<br> Vui lòng kiểm tra lại11";
+            $message['msg'] = "Xóa không thành công";
             header("Location:" . BASE_URL . "/?url=admin/comic_List/&msg=" . urlencode(serialize($message)));
         }
     }

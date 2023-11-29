@@ -1,4 +1,3 @@
-
 const sideLinks = document.querySelectorAll(
   ".sidebar .side-menu li a:not(.logout)"
 );
@@ -14,12 +13,12 @@ sideLinks.forEach((item) => {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  var rows = document.querySelectorAll('.comicdb-row');
+  var rows = document.querySelectorAll(".comicdb-row");
   // var baseUrl = "http://localhost:81/f4comics";
 
   rows.forEach(function (row) {
-    row.addEventListener('click', function () {
-      var id = this.getAttribute('datadb-id');
+    row.addEventListener("click", function () {
+      var id = this.getAttribute("datadb-id");
       // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
       window.location.href = id;
     });
@@ -27,12 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  var rows = document.querySelectorAll('.comic-row');
+  var rows = document.querySelectorAll(".comic-row");
   // var baseUrl = "http://localhost:81/f4comics";
 
   rows.forEach(function (row) {
-    row.addEventListener('click', function () {
-      var id = this.getAttribute('data-id');
+    row.addEventListener("click", function () {
+      var id = this.getAttribute("data-id");
       // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
       window.location.href = id;
     });
@@ -64,28 +63,40 @@ document.addEventListener("DOMContentLoaded", function () {
 //   });
 // });
 
+// document.addEventListener("DOMContentLoaded", function () {
+//   const chapterRows = document.querySelectorAll(".chapter-row");
+
+//   chapterRows.forEach(function (row) {
+//     const editButton = row.querySelector('input[value="Edit"]');
+//     const deleteButton = row.querySelector('input[value="Delete"]');
+
+//     editButton.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       location.href = "#";
+//     });
+
+//     deleteButton.addEventListener("click", function (event) {
+//       event.preventDefault();
+//       location.href = "#";
+//     });
+
+//     row.addEventListener("click", function (event) {
+//       if (event.target !== editButton && event.target !== deleteButton) {
+//         location.href = "#";
+//       }
+//     });
+//   });
+// });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const chapterRows = document.querySelectorAll(".chapter-row");
+  var rows = document.querySelectorAll(".chapter-row");
+  // var baseUrl = "http://localhost:81/f4comics";
 
-  chapterRows.forEach(function (row) {
-    const editButton = row.querySelector('input[value="Edit"]');
-    const deleteButton = row.querySelector('input[value="Delete"]');
-
-    editButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      location.href = "#";
-    });
-
-    deleteButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      location.href = "#";
-    });
-
-    row.addEventListener("click", function (event) {
-      if (event.target !== editButton && event.target !== deleteButton) {
-        location.href = "#";
-      }
+  rows.forEach(function (row) {
+    row.addEventListener("click", function () {
+      var id = this.getAttribute("data-chapter-id");
+      // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
+      window.location.href = id;
     });
   });
 });

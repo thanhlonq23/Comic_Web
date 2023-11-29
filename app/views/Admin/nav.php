@@ -53,6 +53,6 @@
              Hello, Admin
          </label>
          <a href="#" class="profile">
-             <img src="./public/Logo/logo.png">
+             <img src="./public/Logo/f4.jpg">
          </a>
      </nav>

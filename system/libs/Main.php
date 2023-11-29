@@ -15,8 +15,6 @@ class Main
         }
     }
 
-    // http://localhost/Comicweb/
-
 
     // Lấy ra url
     public function getURL()
@@ -64,7 +62,7 @@ class Main
     }
 
 
-    // Phân tích url để gọi ra phương thức trong lớp controller 
+    // Phân tích url để gọi ra method trong lớp controller 
     public function callMethod()
     {
         // Nếu tồn tại url[2] => Tồn tại tham số => Tồn tại url[1] => Tồn tại phương thức

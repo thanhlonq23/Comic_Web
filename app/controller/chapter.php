@@ -77,6 +77,47 @@ class chapter extends Controller
 
 
 
+    // Next chapter
+    public function nextChapter($chapter_ID, $WebtoonID)
+    {
+        // Xử lý lấy chapter hiện tại
+        $cond = "webtoon_id = '$WebtoonID' AND id = '$chapter_ID'";
+        $currentChapter = $this->getByCond($cond);
+        $chapterName = $currentChapter['chapters'][0]['name'];
+
+
+        // Tạo điều kiện mới để lấy next chapter
+        $cond = "webtoon_id = '$WebtoonID' AND name >'" . $chapterName
+            . "' ORDER BY name ASC LIMIT 1";
+
+        $result = $this->getByCond($cond);
+
+        return $result;
+    }
+
+
+
+    // Previous chapter
+    public function previousChapter($chapter_ID, $WebtoonID)
+    {
+        // Xử lý lấy chapter hiện tại
+        $cond = "webtoon_id = '$WebtoonID' AND id = '$chapter_ID'";
+        $currentChapter = $this->getByCond($cond);
+        $chapterName = $currentChapter['chapters'][0]['name'];
+
+
+        // Tạo điều kiện mới để lấy previous chapter
+        $cond = "webtoon_id = '$WebtoonID' AND name <'" . $chapterName
+            . "' ORDER BY name DESC LIMIT 1";
+
+        $result = $this->getByCond($cond);
+
+        return $result;
+    }
+
+
+
+
 
     //=======================================================Các hàm xử lý========================================================//
 
@@ -112,6 +153,15 @@ class chapter extends Controller
         }
     }
 
+    // Lấy ra dữ liệu tất cả chapter
+    public function getChapter($WebtoonID)
+    {
+        $cond = "webtoon_id = '$WebtoonID' ORDER BY name ASC";
+        $chapterModel = $this->load->model("chapterModel");
+        $data['chapters'] = $chapterModel->selectByCond($this->table, $cond);
+        return $data;
+    }
+
 
     // Lấy ra dữ liệu chapter dựa trên điều kiện
     public function getByCond($cond)
@@ -142,6 +192,8 @@ class chapter extends Controller
             header("Location:" . BASE_URL . "/?url=chapter/edit_Chapter/" . $id . "/&msg=" . urlencode(serialize($message)));
         }
     }
+
+
 
 
     // Lưu chapter vào thư mục
@@ -203,6 +255,8 @@ class chapter extends Controller
         $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
         rmdir_recursive($dirPath);
     }
+
+
 
 
     private function getid()
