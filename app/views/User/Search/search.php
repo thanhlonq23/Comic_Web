@@ -7,20 +7,23 @@
             </div>
             <ul class="d-flex nav p-2 gap-3 justify-content-around comics-list">
                 <?php
-                foreach ($search as $key => $value) {
+                if (sizeof($search) > 0) {
+                    foreach ($search as $key => $value) {
                 ?>
-                    <div class="comic-item">
-                        <li class="nav-item">
-                            <a href="<?php echo BASE_URL . '/?url=comicPage/homePage/&id=' . $value['id'] ?>" target="_blank">
-                                <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?>" class="cover">
-                                <div class="comic-title">
-                                    <div class="fs-5"><?php echo $value['name'] ?></div>
-                                </div>
-                            </a>
-                        </li>
-                    </div>
+                        <div class="comic-item">
+                            <li class="nav-item">
+                                <a href="<?php echo BASE_URL . '/?url=comicPage/homePage/&id=' . $value['id'] ?>" target="_blank">
+                                    <img src="./public/Uploads/Cover/Webtoon/<?php echo $value['cover'] ?>" class="cover">
+                                    <div class="comic-title">
+                                        <div class="fs-5"><?php echo $value['name'] ?></div>
+                                    </div>
+                                </a>
+                            </li>
+                        </div>
                 <?php
-                }
+                    }
+                } else
+                    echo '<p>Không tìm thấy truyện nào</p>';
                 ?>
             </ul>
         </div>
