@@ -38,8 +38,8 @@
                 ?>
             </div>
         </div>
-        <form class="d-flex pt-2 w-100">
-            <input type="search" class="form-control form-control-dark me-2" placeholder="Tìm kiếm..." aria-label="Search">
+        <form class="d-flex pt-2 w-100" method="post" action="<?php echo BASE_URL ?>/?url=home/search">
+            <input type="search" class="form-control form-control-dark me-2" placeholder="Tìm kiếm..." aria-label="Search" name="tukhoa">
             <button class="btn btn-success" type="submit">Search</button>
         </form>
     </div>

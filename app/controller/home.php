@@ -38,4 +38,16 @@ class home extends Controller
     {
         $this->load->view("404");
     }
+
+    // Tìm kiếm 
+    public function search()
+    {
+        $this->load->view("User/header");
+
+        $webtoon = new webtoon();
+        $tuKhoa = $_POST['tukhoa'];
+        $webtoon->search_Webtoon($tuKhoa);
+
+        $this->load->view("User/footer");
+    }
 }

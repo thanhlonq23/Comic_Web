@@ -58,6 +58,17 @@ class webtoon extends Controller
     }
 
 
+    // Tìm kiếm truyện
+    public function search_Webtoon($tuKhoa)
+    {
+        $data1 = $this->search($tuKhoa);
+        $data2['tuKhoa'] = $tuKhoa;
+
+        $data = array_merge_recursive($data1, $data2);
+        $this->load->view("User/Search/search", $data);
+    }
+
+
 
 
 
@@ -299,6 +310,16 @@ class webtoon extends Controller
         $collum = 'id,name,status,cover,date';
         $webtoonModel = $this->load->model("webtoonModel");
         $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        return $data;
+    }
+
+
+    // Tìm kiếm truyện
+    public function search($tuKhoa)
+    {
+        $cond = "name LIKE '%$tuKhoa%'";
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['search'] = $webtoonModel->selectByCond($this->table, $cond);
         return $data;
     }
 }
