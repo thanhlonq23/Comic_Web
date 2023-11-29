@@ -24,7 +24,7 @@ if (!empty($_GET['msg'])) {
             }
         });
         </script>";
-        } elseif ($value === "Thêm truyện thất bại") {
+        } else {
             // Nếu thêm chapter thất bại, hiển thị Swal với thông báo lỗi (màu đỏ và chữ Check)
             echo "
         <script>
@@ -97,6 +97,39 @@ echo "
 
 ?>
 
+<style>
+    /* CSS cho các selectedCategories */
+    #selectedCategories {
+        display: flex;
+        /* Sử dụng Flexbox để xếp theo hàng ngang */
+        flex-wrap: wrap;
+        /* Cho phép các phần tử wrap sang hàng mới nếu không đủ không gian */
+        gap: 8px;
+        /* Khoảng cách giữa các phần tử */
+    }
+
+    /* CSS cho mỗi phần tử danh mục được chọn */
+    #selectedCategories div {
+        background-color: #3498db;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+    #selectedCategories div:hover {
+        background-color: red;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+</style>
+
 <h1 style="text-align: center;">Thêm truyện:</h1>
 <div class="container mt-5">
     <form name="webtoonForm" onsubmit="return validateWebtoonForm()" action="<?php echo BASE_URL ?>/?url=webtoon/add" method="post" enctype="multipart/form-data">
@@ -108,13 +141,77 @@ echo "
             <label class="form-label">Mô tả:</label><br>
             <textarea class="form-control" name="description" rows="5" placeholder="Nhập mô tả"></textarea>
         </div>
-        <div class="mb-3">
-            <label class="form-label">Ảnh bìa:</label>
-            <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov,.jpeg">
-        </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
-    </form>
+        <?php if (!empty($categories)) : ?> <div class="form-group">
+                <label for="categories">Categories:</label>
+                <div style="display: flex; align-items: center;">
+                    <select class="form-select" id="categoryList">
+                        <?php foreach ($categories as $category) : ?>
+                            <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                    <button onclick="addCategory()" type="button">Add</button>
+                </div>
+            </div>
+            <div class="mb-3">
+                <!-- <label class="form-label">Thể loại đã chọn:</label> -->
+                <ul id="selectedCategories"></ul>
+                <input type="hidden" name="categories[]" id="selectedCategoriesInput" multiple>
+            </div>
+        <?php else : ?>
+            <p>No categories found.</p>
+        <?php endif; ?>
+
+
+        <label class="form-label">Ảnh bìa:</label>
+        <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov,.jpeg">
+</div>
+<button type="submit" class="btn btn-primary">Thêm</button>
+</form>
 
 
 </div>
+<script>
+    function addCategory() {
+        var selectElement = document.getElementById('categoryList');
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        var selectedCategoriesDiv = document.getElementById('selectedCategories');
+        var selectedCategoriesInput = document.getElementsByName('categories[]')[0]; // Thay đổi ở đây
 
+        // Create a new item in the selected categories list
+        var div = document.createElement("div");
+        div.textContent = selectedOption.text;
+        div.classList.add('selected-category'); // Thêm class để xác định các selected categories
+        div.setAttribute('data-category-id', selectedOption.value); // Lưu ID của category
+
+        // Xóa selected category khi click và cập nhật mảng categories[]
+        div.addEventListener('click', function() {
+            selectedCategoriesDiv.removeChild(div);
+            removeCategoryFromArray(selectedOption.value);
+        });
+
+        selectedCategoriesDiv.appendChild(div);
+
+        // Thêm giá trị category
+        var currentValue = selectedCategoriesInput.value;
+        var newValue = (currentValue === '') ? selectedOption.value : currentValue + ',' + selectedOption.value; // Thay đổi ở đây
+        selectedCategoriesInput.value = newValue;
+
+        // In ra Giá trị category gửi đi ở console
+        console.log("Giá trị category gửi đi:", selectedCategoriesInput.value);
+
+        // Xóa category tại dropdown để tránh chọn 2 lần
+        selectElement.remove(selectElement.selectedIndex);
+    }
+
+    // Hàm xóa category khỏi mảng categories[]
+    function removeCategoryFromArray(categoryId) {
+        var selectedCategoriesInput = document.getElementsByName('categories[]')[0]; // Thay đổi ở đây
+        var categoriesArray = selectedCategoriesInput.value.split(',');
+        var index = categoriesArray.indexOf(categoryId);
+        if (index !== -1) {
+            categoriesArray.splice(index, 1);
+            selectedCategoriesInput.value = categoriesArray.join(',');
+        }
+        console.log("Giá trị category gửi đi:", selectedCategoriesInput.value);
+    }
+</script>

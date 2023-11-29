@@ -60,7 +60,7 @@
                                 } ?>
                             </td>
                             <td class="date">
-                            <?php
+                                <?php
                                 echo date("d/m/Y", strtotime($value['date']))
                                 ?>
                             </td>
@@ -76,7 +76,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
     </div>
 
 </main>

@@ -12,13 +12,48 @@ class category extends Controller
         $this->list_Category();
     }
 
+    public function category_Main()
+    {
+        $id = $_GET['id'];
+        $cond = "id = '$id'";
+        $categoryModel = $this->load->model("categoryModel");
+        $data['categories'] = $categoryModel->selectByCond($this->table, $cond);
+
+        $this->load->view("Admin/Category/listCategory", $data);
+    }
+
+    private function getid()
+    {
+        $randomID = '';
+        for ($i = 0; $i < 2; $i++) {
+            $randomID .= rand(0, 9);
+        }
+
+        return 'category' . $randomID;
+    }
+
+    public function add_Category()
+    {
+        $this->load->view("Admin/nav");
+        $this->load->view("Admin/Category/addCategory");
+    }
+
     public function list_Category()
     {
         $categoryModel = $this->load->model("categoryModel");
         $data['categories'] = $categoryModel->selectAll($this->table);
-        $this->load->view("Admin/header");
+        // $this->load->view("Admin/header");
         $this->load->view("Admin/Category/listCategory", $data);
     }
+
+    // public function list_Category_WebtoonSelect()
+    // {
+    //     $categoryModel = $this->load->model("categoryModel");
+    //     $data['categories'] = $categoryModel->selectAll($this->table);
+    //     // $this->load->view("Admin/header");
+    //     $this->load->view("Admin/Webtoon/addWebtoon", $data);
+    // }
+
     public function delete_Category($id)
     {
         $cond = "id = '$id'";
@@ -32,9 +67,34 @@ class category extends Controller
         $categoryModel = $this->load->model("categoryModel");
         $data['categoryByID'] = $categoryModel->selectByCond($this->table, $cond);
 
-        $this->load->view("Admin/header");
-        $this->load->view("Admin/User/editCategory", $data);
+        // $this->load->view("Admin/header");
+        $this->load->view("Admin/category/editCategory", $data);
     }
+
+    // Trong Controller category.php
+    public function add()
+    {
+
+        $id = $this->getid();
+        $name = $_POST['name'];
+
+        $data = [
+            'id' => $id,
+            'name' => $name
+        ];
+
+        $categoryModel = $this->load->model("categoryModel");
+        $result = $categoryModel->insert($this->table, $data);
+
+        if ($result != 0) {
+            $message['msg'] = "Thêm thể loại thành công";
+            header("Location:" . BASE_URL . "/?url=category/add_Category/&msg=" . urlencode(serialize($message)));
+        } else {
+            $message['msg'] = "Thêm thể loại thất bại";
+            header("Location:" . BASE_URL . "/?url=category/add_Category/&msg=" . urlencode(serialize($message)));
+        }
+    }
+
 
     public function edit($id)
     {
