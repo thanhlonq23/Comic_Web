@@ -1,102 +1,3 @@
-<?php
-if (!empty($_GET['msg'])) {
-    $msg = unserialize(urldecode($_GET['msg']));
-    foreach ($msg as $key => $value) {
-        if ($value === "Thêm truyện thành công") {
-            // Nếu thêm chapter thành công, hiển thị Swal với nút "Continue"
-            echo "
-        <script>
-        Swal.fire({
-            title: 'Thêm truyện thành công!',
-            text: 'Chọn Continue để tiếp tục thêm truyện',
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#4CAF50',
-            cancelButtonText: 'Done',
-            confirmButtonText: 'Continue',
-            allowOutsideClick: false, //Không được phép click ra ngoài popup
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '" . BASE_URL . "/?url=webtoon/add_Webtoon';
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
-                window.location.href = '" . BASE_URL . "?url=admin/dashboard';
-            }
-        });
-        </script>";
-        } else {
-            // Nếu thêm chapter thất bại, hiển thị Swal với thông báo lỗi (màu đỏ và chữ Check)
-            echo "
-        <script>
-        Swal.fire({
-            title: 'Thêm Truyện thất bại',
-            text: 'Kiểm tra lại thông tin Truyện',
-            icon: 'error',
-            confirmButtonColor: '#d33',
-            confirmButtonText: 'Check',
-            allowOutsideClick: false, //Không được phép click ra ngoài popup
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = '" . BASE_URL . "/?url=webtoon/add_Webtoon';
-            }
-        });
-        </script>";
-        }
-    }
-}
-
-echo "
-    <script>
-        function validateWebtoonForm() {
-            var webtoonName = document.forms['webtoonForm']['name'].value;
-            var description = document.forms['webtoonForm']['description'].value;
-            var coverInput = document.forms['webtoonForm']['cover'];
-
-            if (webtoonName === '') {
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Vui lòng nhập tên truyện',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false, //Không được phép click ra ngoài popup
-                });
-                return false; // Ngăn chặn việc gửi biểu mẫu
-            }
-
-            if (description === '') {
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Vui lòng nhập mô tả truyện',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false, //Không được phép click ra ngoài popup
-                });
-                return false; // Ngăn chặn việc gửi biểu mẫu
-            }
-
-            // Kiểm tra xem ít nhất một tệp đã được chọn
-            if (!coverInput.value) {
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Vui lòng chọn ảnh bìa',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false, //Không được phép click ra ngoài popup
-                });
-                return false; // Ngăn chặn việc gửi biểu mẫu
-            }
-
-            // Bạn có thể thêm các kiểm tra xác thực khác cho các trường khác nếu cần
-
-            return true; // Cho phép gửi biểu mẫu
-        }
-    </script>";
-
-?>
-
 <style>
     /* CSS cho các selectedCategories */
     #selectedCategories {
@@ -128,6 +29,13 @@ echo "
         margin-top: 5px;
         font-size: 14px;
     }
+
+    .char-count {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #888;
+    }
 </style>
 
 <h1 style="text-align: center;">Thêm truyện:</h1>
@@ -139,9 +47,11 @@ echo "
         </div>
         <div class="mb-3">
             <label class="form-label">Mô tả:</label><br>
-            <textarea class="form-control" name="description" rows="5" placeholder="Nhập mô tả"></textarea>
+            <textarea class="form-control" name="description" rows="5" maxlength="255" placeholder="Nhập mô tả"></textarea>
+            <span id="charCount" class="char-count"> 255 ký tự còn lại.</span>
         </div>
-        <?php if (!empty($categories)) : ?> <div class="form-group">
+        <?php if (!empty($categories)) : ?>
+            <div class="form-group">
                 <label for="categories">Categories:</label>
                 <div style="display: flex; align-items: center;">
                     <select class="form-select" id="categoryList">
@@ -160,17 +70,24 @@ echo "
         <?php else : ?>
             <p>No categories found.</p>
         <?php endif; ?>
-
-
-        <label class="form-label">Ảnh bìa:</label>
-        <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov,.jpeg">
-</div>
-<button type="submit" class="btn btn-primary">Thêm</button>
-</form>
+        <div>
+            <label class="form-label">Ảnh bìa:</label>
+            <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov,.jpeg">
+        </div>
+        <button type="submit" class="btn btn-primary">Thêm</button>
+    </form>
 
 
 </div>
 <script>
+    const textarea = document.querySelector('textarea');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', function() {
+        const remainingChars = 255 - textarea.value.length;
+        charCount.textContent = remainingChars + " ký tự còn lại";
+    });
+
     function addCategory() {
         var selectElement = document.getElementById('categoryList');
         var selectedOption = selectElement.options[selectElement.selectedIndex];
@@ -215,3 +132,100 @@ echo "
         console.log("Giá trị category gửi đi:", selectedCategoriesInput.value);
     }
 </script>
+<?php
+if (!empty($_GET['msg'])) {
+    $msg = unserialize(urldecode($_GET['msg']));
+    foreach ($msg as $key => $value) {
+        if ($value === "Thêm truyện thành công") {
+            // Nếu thêm chapter thành công, hiển thị Swal với nút "Continue"
+            echo "
+            <script>
+            Swal.fire({
+                title: 'Thêm truyện thành công!',
+                text: 'Chọn Continue để tiếp tục thêm truyện',
+                icon: 'success',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#4CAF50',
+                cancelButtonText: 'Done',
+                confirmButtonText: 'Continue',
+                allowOutsideClick: false, //Không được phép click ra ngoài popup
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '" . BASE_URL . "/?url=webtoon/add_Webtoon';
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                    window.location.href = '" . BASE_URL . "?url=admin/dashboard';
+                }
+            });
+        </script>";
+        } else {
+            // Nếu thêm chapter thất bại, hiển thị Swal với thông báo lỗi (màu đỏ và chữ Check)
+            echo "
+        <script>
+            Swal.fire({
+                title: 'Thêm Truyện thất bại',
+                text: 'Kiểm tra lại thông tin Truyện',
+                icon: 'error',
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Check',
+                allowOutsideClick: false, //Không được phép click ra ngoài popup
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '" . BASE_URL . "/?url=webtoon/add_Webtoon';
+                }
+            });
+        </script>";
+        }
+    }
+}
+
+echo "
+        <script>
+            function validateWebtoonForm() {
+                var webtoonName = document.forms['webtoonForm']['name'].value;
+                var description = document.forms['webtoonForm']['description'].value;
+                var coverInput = document.forms['webtoonForm']['cover'];
+
+                if (webtoonName === '') {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Vui lòng nhập tên truyện',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false, //Không được phép click ra ngoài popup
+                    });
+                    return false; // Ngăn chặn việc gửi biểu mẫu
+                }
+
+                if (description === '') {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Vui lòng nhập mô tả truyện',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false, //Không được phép click ra ngoài popup
+                    });
+                    return false; // Ngăn chặn việc gửi biểu mẫu
+                }
+
+                // Kiểm tra xem ít nhất một tệp đã được chọn
+                if (!coverInput.value) {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Vui lòng chọn ảnh bìa',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false, //Không được phép click ra ngoài popup
+                    });
+                    return false; // Ngăn chặn việc gửi biểu mẫu
+                }
+
+                // Bạn có thể thêm các kiểm tra xác thực khác cho các trường khác nếu cần
+
+                return true; // Cho phép gửi biểu mẫu
+            }
+        </script>";
+?>

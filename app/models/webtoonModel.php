@@ -66,6 +66,16 @@ class webtoonModel extends Model
         $sql = "SELECT categories.* FROM categories
             INNER JOIN webtoons_categories
             ON categories.id = webtoons_categories.categories_id
+            WHERE webtoons_categories.webtoons_id = $webtoonID";
+
+        return $this->db->select($sql);
+    }
+
+    public function selectCategoriesByWebtoon($webtoonID)
+    {
+        $sql = "SELECT categories.* FROM categories
+            INNER JOIN webtoons_categories
+            ON categories.id = webtoons_categories.categories_id
             WHERE webtoons_categories.webtoons_id = '$webtoonID'";
 
         return $this->db->select($sql);
