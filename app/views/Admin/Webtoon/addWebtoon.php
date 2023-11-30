@@ -1,4 +1,8 @@
 <style>
+    h1 {
+        margin-top: 50px;
+    }
+
     /* CSS cho các selectedCategories */
     #selectedCategories {
         display: flex;
@@ -30,11 +34,49 @@
         font-size: 14px;
     }
 
+    #AddButton {
+        padding: 5px 40px;
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 8px;
+    }
+
+    #AddButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        /* padding: 5px 40px; */
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    #SubmitButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 50px;
+    }
+
     .char-count {
         display: block;
         margin-top: 5px;
         font-size: 12px;
         color: #888;
+    }
+
+    #divButton {
+        margin-top: 100px;
     }
 </style>
 
@@ -55,11 +97,12 @@
                 <label for="categories">Categories:</label>
                 <div style="display: flex; align-items: center;">
                     <select class="form-select" id="categoryList">
+                    <option value="" disabled selected>---Chọn thể loại---</option>
                         <?php foreach ($categories as $category) : ?>
                             <option value="<?php echo $category['id']; ?>"><?php echo $category['name']; ?></option>
                         <?php endforeach; ?>
                     </select>
-                    <button onclick="addCategory()" type="button">Add</button>
+                    <button onclick="addCategory()" type="button" id="AddButton">Add</button>
                 </div>
             </div>
             <div class="mb-3">
@@ -74,20 +117,24 @@
             <label class="form-label">Ảnh bìa:</label>
             <input type="file" class="form-control" name="cover" accept=".jpg,.png,.mov,.jpeg">
         </div>
-        <button type="submit" class="btn btn-primary">Thêm</button>
+        <div id="divButton">
+            <button type="submit" class="btn btn-primary" id="SubmitButton">Thêm</button>
+        </div>
     </form>
 
 
 </div>
 <script>
+    //Setting độ dài descrpition 255 vì database của mình đang để varchar255 muốn dài hơn thì sang TEXT hoặc LONGTEXT nhưng mà thôi lười sửa database
     const textarea = document.querySelector('textarea');
     const charCount = document.getElementById('charCount');
 
     textarea.addEventListener('input', function() {
         const remainingChars = 255 - textarea.value.length;
-        charCount.textContent = remainingChars + " ký tự còn lại";
+        charCount.textContent = remainingChars;
     });
 
+    //Giải quyết nút Button Add
     function addCategory() {
         var selectElement = document.getElementById('categoryList');
         var selectedOption = selectElement.options[selectElement.selectedIndex];

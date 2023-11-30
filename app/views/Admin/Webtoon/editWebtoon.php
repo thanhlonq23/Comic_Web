@@ -1,7 +1,7 @@
 <?php
 // print_r($categoriesDatabase);
 // var_dump($webtoonByID);
-print_r($selectedCategories);
+// print_r($selectedCategories);
 
 if (!empty($_GET['msg'])) {
     $msg = unserialize(urldecode($_GET['msg']));
@@ -51,10 +51,10 @@ if (!empty($_GET['msg'])) {
 
 echo "
     <script>
-        function UpdateupdateWebtoonForm() {
+        function UpdateWebtoonForm() {
             var webtoonName = document.forms['updateWebtoonForm']['name'].value;
             var description = document.forms['updateWebtoonForm']['description'].value;
-            var coverInput = document.forms['updateWebtoonForm']['cover'];
+            var selectedCategories = document.forms['updateWebtoonForm']['categories[]'];
 
             if (webtoonName === '') {
                 Swal.fire({
@@ -79,22 +79,6 @@ echo "
                 });
                 return false; // Ngăn chặn việc gửi biểu mẫu
             }
-
-            // Kiểm tra xem ít nhất một tệp đã được chọn
-            if (!coverInput.value) {
-                Swal.fire({
-                    title: 'Thông báo',
-                    text: 'Vui lòng chọn ảnh bìa',
-                    icon: 'warning',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'OK',
-                    allowOutsideClick: false, //Không được phép click ra ngoài popup
-                });
-                return false; // Ngăn chặn việc gửi biểu mẫu
-            }
-
-            // Bạn có thể thêm các kiểm tra xác thực khác cho các trường khác nếu cần
-
             return true; // Cho phép gửi biểu mẫu
         }
     </script>";
@@ -102,6 +86,10 @@ echo "
 ?>
 
 <style>
+    h1 {
+        margin-top: 50px;
+    }
+
     /* CSS cho các selectedCategories */
     #selectedCategories {
         display: flex;
@@ -132,11 +120,57 @@ echo "
         margin-top: 5px;
         font-size: 14px;
     }
+
+    #AddButton {
+        padding: 5px 40px;
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 8px;
+    }
+
+    #AddButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        /* padding: 5px 40px; */
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    #SubmitButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 50px;
+    }
+
+    /* Style for the char count */
+    .char-count {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #888;
+    }
+
+    #divButton {
+        margin-top: 100px;
+    }
 </style>
 
 <h1 style="text-align: center;">Sửa truyện:</h1>
 <div class="container mt-5">
-    <form name="updateWebtoonForm" onsubmit="return updateWebtoonForm()" action="<?php echo BASE_URL ?>/?url=webtoon/edit/<?php echo $webtoonByID[0]['id'] ?>" method="post" enctype="multipart/form-data">
+    <form name="updateWebtoonForm" onsubmit="return UpdateWebtoonForm()" action="<?php echo BASE_URL ?>/?url=webtoon/edit/<?php echo $webtoonByID[0]['id'] ?>" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label class="form-label">Tên truyện:</label>
             <input type="text" class="form-control" name="name" placeholder="Nhập tên truyện" value="<?php echo $webtoonByID[0]['name']; ?>">
@@ -144,11 +178,8 @@ echo "
         <div class="mb-3">
             <label class="form-label">Mô tả:</label><br>
             <textarea class="form-control" name="description" rows="5" placeholder="Nhập mô tả"><?php echo $webtoonByID[0]['description']; ?></textarea>
+            <span id="charCount" class="char-count"> 255 ký tự còn lại.</span>
         </div>
-
-
-
-
 
         <!-- Tạo danh sách categories còn lại trong database -->
         <div class="form-group">
@@ -158,7 +189,7 @@ echo "
                 </select>
 
                 <input type="hidden" name="danhsach2[]" multiple>
-                <button onclick="addCategory()" type="button">Add</button>
+                <button onclick="addCategory()" type="button" id="AddButton">Add</button>
             </div>
         </div>
 
@@ -179,11 +210,31 @@ echo "
             <input type="radio" id="status2" name="status" value="0" <?php if ($webtoonByID[0]['status'] == 0) echo 'checked'; ?>>
             <label for="status2">Chưa hoàn thành</label>
         </div>
-        <button type="submit" class="btn btn-primary">Cập nhật</button>
+        <div id="divButton">
+            <button type="submit" class="btn btn-primary" id="SubmitButton">Cập nhật</button>
+        </div>
     </form>
 </div>
 
 <script>
+    //Setting độ dài descrpition 255 vì database của mình đang để varchar255 muốn dài hơn thì sang TEXT hoặc LONGTEXT nhưng mà thôi lười sửa database
+    const textarea = document.querySelector('textarea');
+    const charCount = document.getElementById('charCount');
+
+    textarea.addEventListener('input', function() {
+        const remainingChars = 255 - textarea.value.length;
+        charCount.textContent = remainingChars;
+    });
+
+    // Thêm option mặc định cho select categoryList
+    var defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "---Chọn thể loại---";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    categoryList.appendChild(defaultOption);
+
+    //Giải quyết bài toán 2 mảng danh sách :)) mất 3 ngày oải vl
     document.addEventListener("DOMContentLoaded", function() {
         var selectedCategoriesInputs = document.querySelectorAll("#selectedCategories input[name='categories[]']");
         var categories = [];
