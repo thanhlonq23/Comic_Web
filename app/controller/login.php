@@ -57,11 +57,13 @@ class login extends Controller
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'admin');
+                Session::set('id', $result[0]['id']);
                 header("Location:" . BASE_URL . "/?url=admin");
             } else if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password)) {
                 Session::init();
                 Session::set('login', true);
                 Session::set('role', 'user');
+                Session::set('id', $result[0]['id']);
                 header("Location:" . BASE_URL);
             } else {
                 $message['msg'] = "Username hoặc password không đúng";

@@ -14,6 +14,9 @@
                 <li class="nav-item">
                     <a class="nav-link px-2 menu-text" href="#">Truyện hot</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 menu-text" href="<?php echo BASE_URL ?>/?url=home/profile">Hồ sơ</a>
+                </li>
             </ul>
 
             <!-- Auth -->

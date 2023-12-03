@@ -11,6 +11,7 @@
                     }
                 }
                 ?>
+                <a href="<?php echo BASE_URL ?>/?url=author/add_Author/">Add</a>
             </th>
             <tr>
                 <th class="col-1 text-center">STT</th>

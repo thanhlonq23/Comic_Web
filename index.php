@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="./public/css/user/header.css">
     <link rel="stylesheet" href="./public/css/user/homePage.css">
     <link rel="stylesheet" href="./public/css/user/readPage.css">
+    <link rel="stylesheet" href="./public/css/user/profile.css">
 
 
 

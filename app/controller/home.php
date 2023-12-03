@@ -1,6 +1,8 @@
 <?php
 include_once('./app/controller/webtoon.php');
 include_once('./app/controller/chapter.php');
+include_once('./app/controller/user.php');
+
 
 class home extends Controller
 {
@@ -48,6 +50,19 @@ class home extends Controller
         $tuKhoa = $_POST['tukhoa'];
         $webtoon->search_Webtoon($tuKhoa);
 
+        $this->load->view("User/footer");
+    }
+
+
+    public function profile()
+    {
+        $this->load->view("User/header");
+
+        $user = new user();
+        $id = Session::get("id");
+        $data = $user->get_User($id);
+        
+        $this->load->view("User/Profile/profile", $data);
         $this->load->view("User/footer");
     }
 }

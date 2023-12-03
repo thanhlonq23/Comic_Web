@@ -19,7 +19,7 @@ class comicPage extends Controller
     public function homePage()
     {
         $this->load->view("User/header");
-        Session::checkSession();
+        // Session::checkSession();
 
         // Lấy ra dữ liệu webtoon
         $data = $this->getData();

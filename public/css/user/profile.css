@@ -1,0 +1,82 @@
+/* USER */
+.user-avatar {
+    position: relative;
+    width: 150px;
+    /* Äįŗ·t chiį»u rį»™ng mong muį»‘n cį»§a div */
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.user-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.profile-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+}
+/* USER */
+
+/* CATALOGY */
+@media (min-width: 1200px) {
+    .container.catalogy {
+        max-width: 970px;
+    }
+}
+
+.comic-item {
+    position: relative;
+    width: 200px; /* Äįŗ·t chiį»u rį»™ng mong muį»‘n cį»§a div */
+    height: 300px; /* Äįŗ·t chiį»u cao mong muį»‘n cį»§a div */
+    overflow: hidden;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* Khung viį»n */
+    transition: transform 0.3s ease; /* ThĆŖm hiį»‡u į»©ng transition cho viį»‡c chuyį»n Ä‘į»™ng */
+}
+
+a .cover{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.comic-title{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    color: #fff;
+    padding: 5px;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease; /* ThĆŖm hiį»‡u į»©ng transition cho viį»‡c chuyį»n Ä‘į»™ng */
+}
+
+/* Hiį»‡u į»©ng khi hover */
+.comic-item:hover {
+    transform: scale(1.02); /* PhĆ³ng to khi hover */
+}
+
+a .cover:hover {
+    transform: scale(1.02); /* PhĆ³ng to khi hover */
+}
+
+.comic-title:hover {
+    opacity: 0; /* įŗØn tiĆŖu Ä‘į» khi hover */
+}
+
+/* HĆ¬nh įŗ£nh mįŗ·c Ä‘į»‹nh */
+.comic-item img:empty {
+    background: url('https://fomantic-ui.com/images/wireframe/white-image.png') center center no-repeat;
+    background-size: cover;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Khung viį»n cho trĘ°į»¯ng hį»£p khĆ´ng cĆ³ įŗ£nh */
+}
+/* CATALOGY */

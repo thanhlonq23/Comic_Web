@@ -5,7 +5,7 @@ class chapter extends Controller
 
     public function __construct()
     {
-        Session::checkSession();
+        // Session::checkSession();
         parent::__construct();
     }
     public function index()

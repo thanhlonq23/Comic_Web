@@ -1,6 +1,10 @@
 <?php
 include_once('./app/controller/webtoon.php');
 include_once('./app/controller/chapter.php');
+include_once('./app/controller/user.php');
+include_once('./app/controller/author.php');
+
+
 
 class admin extends Controller
 {
@@ -15,7 +19,7 @@ class admin extends Controller
         $this->dashboard();
     }
 
-    
+
     // Kiểm tra quyền
     public static function checkRole()
     {
@@ -24,8 +28,8 @@ class admin extends Controller
             exit();
         }
     }
-    
-    
+
+
     // Trang chủ admin
     public function dashboard()
     {
@@ -56,5 +60,21 @@ class admin extends Controller
         $this->load->view("Admin/nav");
         $webtoon = new webtoon();
         $webtoon->list_Webtoon();
+    }
+
+    public function users_List()
+    {
+        $this->load->view("Admin/nav");
+        // $this->load->view("Admin/header");
+        $user = new user();
+        $user->list_User();
+    }
+
+    public function authors_List()
+    {
+        $this->load->view("Admin/nav");
+        // $this->load->view("Admin/header");
+        $author = new author();
+        $author->list_Author();
     }
 }

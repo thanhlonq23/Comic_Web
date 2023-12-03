@@ -19,12 +19,12 @@ class user extends Controller
     {
         $userModel = $this->load->model("userModel");
         $data['users'] = $userModel->selectAll($this->table);
-        $this->load->view("Admin/nav");
-        $this->load->view("Admin/header");
+        // $this->load->view("Admin/nav");
+        // $this->load->view("Admin/header");
         $this->load->view("Admin/User/listUser", $data);
     }
 
-    
+
 
     // Trang sửa user
     public function edit_User($id)
@@ -34,12 +34,15 @@ class user extends Controller
         $data['userByID'] = $userModel->selectByCond($this->table, $cond);
 
         $this->load->view("Admin/nav");
-        $this->load->view("Admin/header");
+        // $this->load->view("Admin/header");
         $this->load->view("Admin/User/editUser", $data);
+        $this->load->view("User/footer");
     }
 
 
-    
+
+
+
 
 
 
@@ -48,8 +51,8 @@ class user extends Controller
 
 
 
-    
-    
+
+
     // Xử lý sửa user
     public function edit($id)
     {
@@ -70,23 +73,34 @@ class user extends Controller
 
         $userModel = $this->load->model("userModel");
         $result = $userModel->update($this->table, $data, $cond);
+
         if ($result != 0) {
             $message['msg'] = "Cập nhật người dùng thành công";
-            header("Location:" . BASE_URL . "/?url=User/&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=admin/users_List/&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Cập nhật người dùng thất bại";
-            header("Location:" . BASE_URL . "/?url=User/&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=admin/users_List/&msg=" . urlencode(serialize($message)));
         }
     }
 
 
-    
+
     // Xử lý xóa user
     public function delete_User($id)
     {
         $cond = "id = '$id'";
         $userModel = $this->load->model('userModel');
         $userModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/?url=User/list_User");
+        header("Location:" . BASE_URL . "/?url=admin/users_List");
+    }
+
+
+    // Xử lý lấy thông tin
+    public function get_User($id)
+    {
+        $cond = "id = '$id'";
+        $userModel = $this->load->model("userModel");
+        $data['userInfo'] = $userModel->selectByCond($this->table, $cond);
+        return $data;
     }
 }
