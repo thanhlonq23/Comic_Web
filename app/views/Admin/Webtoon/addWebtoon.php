@@ -131,7 +131,7 @@
 
     textarea.addEventListener('input', function() {
         const remainingChars = 255 - textarea.value.length;
-        charCount.textContent = remainingChars;
+        charCount.textContent = remainingChars + " ký tự còn lại";
     });
 
     //Giải quyết nút Button Add

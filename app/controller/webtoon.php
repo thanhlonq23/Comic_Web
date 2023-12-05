@@ -198,6 +198,43 @@ class webtoon extends Controller
             header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
         }
     }
+
+    public function editCover($id)
+    {
+        // Lấy tên ảnh bìa
+        $uploadedFileName = $_FILES["cover"]["name"];
+
+        // Tạo tên duy nhất
+        $fileName = uniqid() . "_" . $uploadedFileName;
+
+        $cond = "id = '$id'";
+        $data = [
+            'cover' => $fileName,
+        ];
+
+        $webtoonModel = $this->load->model("webtoonModel");
+        $getCover = $webtoonModel->selectByCond($this->table, $cond);
+        $filePath = "public/Uploads/Cover/Webtoon/" . $getCover[0]['cover'];
+
+        if (file_exists($filePath)) {
+            $result = $webtoonModel->update($this->table, $data, $cond);
+
+            if ($result != 0) {
+                unlink($filePath);
+                $this->upload($fileName);
+
+                $message['msg'] = "Cập nhật cover thành công";
+                header("Location:" . BASE_URL . "/?url=admin/info/&id=$id/&msg=" . urlencode(serialize($message)));
+            } else {
+                $message['msg'] = "Cập nhật cover thất bại";
+                header("Location:" . BASE_URL . "/?url=admin/info/&id=$id/&msg=" . urlencode(serialize($message)));
+            }
+        } else {
+            $message['msg'] = "Cập nhật đường link cover thất bại";
+            header("Location:" . BASE_URL . "/?url=admin/info/&id=$id/&msg=" . urlencode(serialize($message)));
+        }
+    }
+
     // public function edit($id)
     // {
     //     // Lấy tên ảnh bìa
