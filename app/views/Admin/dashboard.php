@@ -32,7 +32,7 @@
                 <h3>
                     $6,742
                 </h3>
-                <p>Total Sales</p>
+                <p>Total Coins</p>
             </span>
         </li>
     </ul>
