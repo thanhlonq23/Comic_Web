@@ -48,10 +48,10 @@
                     <?php
                     } else {
                     ?>
-                        <a href="<?php echo BASE_URL ?>//?url=login">
+                        <a href="<?php echo BASE_URL ?>/?url=login">
                             <button type="button" class="btn btn-outline-light me-2">Login</button>
                         </a>
-                        <a href="<?php echo BASE_URL ?>//?url=signup">
+                        <a href="<?php echo BASE_URL ?>/?url=signup">
                             <button type="button" class="btn btn-warning">Sign-up</button>
                         </a>
 
