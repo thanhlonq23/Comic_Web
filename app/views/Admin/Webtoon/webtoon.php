@@ -155,7 +155,7 @@ if (!empty($_GET['msg'])) {
                         <input name="cover" type="file" id="fileInput" style="display: none;" accept="image/*" />
                     </div>
                     <div class="buttons">
-                        <button class="cancelButton">Cancel</button>
+                        <!-- <button class="cancelButton">Cancel</button> -->
                         <button type="submit" class="doneButton">Done</button>
                     </div>
                 </div>
@@ -282,11 +282,11 @@ if (!empty($_GET['msg'])) {
         });
 
 
-        cancelButton.addEventListener('click', function() {
-            previewModal.style.display = 'none'; // Hide the preview modal
-            fileInput.value = ''; // Reset the input field
-            imagePreview.src = '#'; // Reset the preview image source
-        });
+        // cancelButton.addEventListener('click', function() {
+        //     previewModal.style.display = 'none'; // Hide the preview modal
+        //     fileInput.value = ''; // Reset the input field
+        //     imagePreview.src = '#'; // Reset the preview image source
+        // });
 
         doneButton.addEventListener('click', function() {
             // event.preventDefault();
