@@ -33,4 +33,13 @@ class chapterModel extends Model
     {
         return $this->db->delete($table, $cond);
     }
+
+    public function insertChapterForWebtoon($webtoon_id, $data)
+    {
+        // Thêm id của webtoon vào dữ liệu chapter
+        $data['webtoon_id'] = $webtoon_id;
+
+        // Thực hiện insert
+        return $this->db->insert('chapters', $data);
+    }
 }

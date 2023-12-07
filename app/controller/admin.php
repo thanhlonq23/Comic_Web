@@ -1,7 +1,7 @@
 <?php
 include_once('./app/controller/webtoon.php');
 include_once('./app/controller/chapter.php');
-
+include_once('category.php');
 class admin extends Controller
 {
     public function __construct()
@@ -56,5 +56,12 @@ class admin extends Controller
         $this->load->view("Admin/nav");
         $webtoon = new webtoon();
         $webtoon->list_Webtoon();
+    }
+
+    public function category_List()
+    {
+        $this->load->view("Admin/nav");
+        $category = new category();
+        $category->list_Category();
     }
 }

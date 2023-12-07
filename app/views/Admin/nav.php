@@ -10,6 +10,7 @@
         $menuItems = [
             'admin/dashboard' => ['label' => 'Dashboard', 'icon' => 'bx bxs-dashboard'],
             'admin/comic_List' => ['label' => 'Comics List', 'icon' => 'bx bx-store-alt'],
+            'admin/category_List' => ['label' => 'Category List', 'icon' => 'bx bx-category'],
             // Các mục menu khác
         ];
         ?>

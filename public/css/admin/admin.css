@@ -782,7 +782,7 @@ body {
   /* Ẩn bất kỳ phần nào của ảnh vượt ra khỏi phạm vi của khung hình */
   flex: 0 0 240px;
   /* Không cho phần tử mở rộng hoặc co lại, và chiều rộng cố định là 240px */
-  padding: 0 5px;
+  /* padding: 0 5px; */
   display: flex;
   /* Sử dụng display flex để căn giữa ảnh */
   justify-content: center;
@@ -1021,7 +1021,7 @@ ul {
   height: 360px;
   overflow: hidden;
   flex: 0 0 240px;
-  padding: 0 5px;
+  /* padding: 0 5px; */
   display: flex;
   justify-content: center;
   align-items: center;

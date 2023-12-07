@@ -124,7 +124,34 @@ class chapter extends Controller
 
 
 
-    // Xử lý thêm chapter
+    // public function add()
+    // {
+    //     $id = $this->getid();
+    //     $name = $_POST['name'];
+    //     $webtoon_id = $_POST['webtoon_id'];
+
+    //     $data = [
+    //         'id' => $id,
+    //         'webtoon_id' => $webtoon_id,
+    //         'name' => $name
+    //     ];
+
+    //     // Thư mục upload = id
+    //     $dir = $id;
+
+    //     // Xử lý thêm vào db
+    //     $chapterModel = $this->load->model("chapterModel");
+    //     $result = $chapterModel->insert($this->table, $data);
+
+    //     if (($result != 0) && $this->upload($webtoon_id, $dir)) {
+    //         $message['msg'] = "Thêm chapter thành công";
+    //         header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
+    //     } else {
+    //         $message['msg'] = "Thêm chapter thất bại";
+    //         header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
+    //     }
+    // }
+
     public function add()
     {
         $id = $this->getid();
@@ -146,10 +173,10 @@ class chapter extends Controller
 
         if (($result != 0) && $this->upload($webtoon_id, $dir)) {
             $message['msg'] = "Thêm chapter thành công";
-            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter/&id=$webtoon_id/&msg=" . urlencode(serialize($message)));
         } else {
             $message['msg'] = "Thêm chapter thất bại";
-            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=chapter/add_Chapter/&id=$webtoon_id/&msg=" . urlencode(serialize($message)));
         }
     }
 
@@ -253,6 +280,7 @@ class chapter extends Controller
 
         // Sử dụng hàm để xóa thư mục
         $dirPath = "public/Uploads/Comic/" . $webtoonDir . "/" . $dir;
+        // echo $dirPath;
         rmdir_recursive($dirPath);
     }
 
