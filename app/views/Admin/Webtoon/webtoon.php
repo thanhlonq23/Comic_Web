@@ -203,7 +203,7 @@ if (!empty($_GET['msg'])) {
                             </p>
                         </div>
                         <div>
-                            <p><span>View:</span>20030907</p>
+                            <p><span>View:</span><?php echo isset($totalViews) ? $totalViews : 0; ?></p>
                         </div>
                         <div>
                             <ul>
@@ -221,8 +221,8 @@ if (!empty($_GET['msg'])) {
                                         echo "<li>{$category['name']}</li>";
                                     }
                                 }
-                                ?> 
-                            </ul> 
+                                ?>
+                            </ul>
                         </div>
                     </div>
                 <?php
