@@ -5,6 +5,7 @@
                     <li class="nav-item">
                         <a class="nav-link px-2 home-text" href="<?php echo BASE_URL ?>">Trang chủ</a>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link px-2 menu-text" href="#">Theo dõi</a>
                     </li>
@@ -14,18 +15,31 @@
                     <li class="nav-item">
                         <a class="nav-link px-2 menu-text" href="#">Truyện hot</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2 menu-text" href="<?php echo BASE_URL ?>/?url=home/profile">Hồ sơ</a>
-                    </li>
+                    <?php
+                    session_start();
+                    if (Session::get("login") == true) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link px-2 menu-text" href="<?php echo BASE_URL ?>/?url=home/profile">Hồ sơ</a>
+                        </li>
+                    <?php
+                    }
+                    if (Session::get("role") == "admin") {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link px-2 menu-text" href="<?php echo BASE_URL ?>/?url=admin">Admin</a>
+                        </li>
+                    <?php
+                    }
+                    ?>
                 </ul>
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" method="post" action="<?php echo BASE_URL ?>/?url=home/search">
                     <input type="search" class="form-control form-control-dark" placeholder="Tìm kiếm..." name="tukhoa" aria-label="Search">
                 </form>
                 <div class="text-end">
                     <?php
-                    session_start();
-                    // Kiểm tra xem session đã đăng nhập chưa
-                    if (isset($_SESSION['login'])) {
+                    // Kiểm tra session đã đăng nhập chưa
+                    if (Session::get("login") == true) {
                     ?> -->
                         <a href="<?php echo BASE_URL ?>/?url=login/logout">
                             <button type="button" class="btn btn-outline-light me-2">Logout</button>

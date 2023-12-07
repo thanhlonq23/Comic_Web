@@ -221,8 +221,8 @@ if (!empty($_GET['msg'])) {
                                         echo "<li>{$category['name']}</li>";
                                     }
                                 }
-                                ?>
-                            </ul>
+                                ?> 
+                            </ul> 
                         </div>
                     </div>
                 <?php

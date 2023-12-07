@@ -12,9 +12,9 @@
         </li>
         <li><i class='bx bx-show-alt'></i>
             <span class="info">
-                <h3>
-                    3,944
-                </h3>
+                <h5>
+                    Chưa cập nhật
+                </h5>
                 <p>Site Visit</p>
             </span>
         </li>
@@ -22,17 +22,17 @@
             <i class='bx bx-user-circle'></i>
             <span class="info">
                 <h3>
-                    14,721
+                    <?php echo $totalUsers[0]['totalUsers']; ?>
                 </h3>
                 <p>Users</p>
             </span>
         </li>
         <li><i class='bx bx-dollar-circle'></i>
             <span class="info">
-                <h3>
-                    $6,742
-                </h3>
-                <p>Total Sales</p>
+                <h5>
+                    Chưa cập nhật
+                </h5>
+                <p>Total Coins</p>
             </span>
         </li>
     </ul>

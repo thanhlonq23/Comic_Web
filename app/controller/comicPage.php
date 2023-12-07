@@ -23,7 +23,6 @@ class comicPage extends Controller
 
         // Lấy ra dữ liệu webtoon
         $data = $this->getData();
-
         // Hiển thị
         $this->load->view("User/Comic/comicPage", $data);
         $this->load->view("User/footer");
@@ -81,9 +80,10 @@ class comicPage extends Controller
         // Lấy dữ liệu truyện
         $data1 = $webtoon->getByCond($cond1);
         $data2 = $chapter->getByCond($cond2);
+        $data3 = $webtoon->selectCategories($id);
 
         // Gộp dữ liệu
-        $data = array_merge_recursive($data1, $data2);
+        $data = array_merge_recursive(array_merge_recursive($data1, $data2), $data3);
 
         return $data;
     }

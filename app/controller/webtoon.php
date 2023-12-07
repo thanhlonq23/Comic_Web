@@ -20,13 +20,16 @@ class webtoon extends Controller
     public function webtoon_Main()
     {
         $id = $_GET['id'];
+
+        // Lấy ra thông tin webtoon
         $cond = "id = '$id'";
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+        $data1 =  $this->getByCond($cond);
 
         // Lấy danh sách categories của webtoon
-        $categories = $this->selectCategories($id);
-        $data['categories'] = $categories;
+        $data2 = $this->selectCategories($id);
+
+        // Gộp dữ liệu
+        $data = array_merge_recursive($data1, $data2);
 
         $this->load->view("Admin/Webtoon/webtoon", $data);
     }
@@ -60,10 +63,8 @@ class webtoon extends Controller
         $categoryModel = $this->load->model("categoryModel");
         $data['webtoonByID'] = $webtoonModel->selectByCond($this->table, $cond);
         // Lấy danh sách categories của webtoon
-        $categories = $this->selectCategories($id);
-        $data['selectedCategories'] = $categories;
+        $data['selectedCategories'] = $this->selectCategories($id)['categories'];
         $data['categoriesDatabase'] = $categoryModel->selectAll('categories');
-
         $this->load->view("Admin/nav");
         $this->load->view("Admin/Webtoon/editWebtoon", $data);
     }
@@ -379,8 +380,8 @@ class webtoon extends Controller
     {
         // Lấy danh sách categories của webtoon dựa trên ID
         $webtoonModel = $this->load->model("webtoonModel");
-        $categories = $webtoonModel->selectCategoriesByWebtoon($webtoonID);
-        return $categories; // Trả về danh sách categories
+        $data['categories'] = $webtoonModel->selectCategoriesByWebtoon($webtoonID);
+        return $data; // Trả về danh sách categories
     }
 
     public function addCategory($webtoonID, $categoryID)
@@ -401,12 +402,12 @@ class webtoon extends Controller
         }
     }
 
-    
+
     // Hàm lấy tổng truyện
     public function countWebtoons()
     {
         $webtoonModel = $this->load->model("webtoonModel");
-        $result = $webtoonModel->countWebtoons('webtoons');
+        $result = $webtoonModel->countWebtoons($this->table);
 
         $data['totalWebtoons'] = 0; // Mặc định là 0 nếu không có kết quả trả về
         if (!empty($result)) {

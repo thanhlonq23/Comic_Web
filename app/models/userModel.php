@@ -38,4 +38,11 @@ class userModel extends Model
     {
         return $this->db->delete($table, $cond);
     }
+
+    // Hàm tính tổng các categories_id theo webtoon_id
+    public function countUsers($table)
+    {
+        $sql = "SELECT COUNT(*) AS totalUsers FROM $table";
+        return $this->db->select($sql);
+    }
 }
