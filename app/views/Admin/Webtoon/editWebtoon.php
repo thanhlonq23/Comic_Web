@@ -12,18 +12,13 @@ if (!empty($_GET['msg'])) {
         <script>
         Swal.fire({
             title: 'Cập nhật truyện thành công!',
-            text: 'Chọn Continue để tiếp tục thêm truyện',
+            text: 'Chọn Done để về Dashboard',
             icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#4CAF50',
-            cancelButtonText: 'Done',
-            confirmButtonText: 'Continue',
+            confirmButtonColor: '#4CAF50',
+            confirmButtonText: 'Done',
             allowOutsideClick: false, //Không được phép click ra ngoài popup
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = '" . BASE_URL . "/?url=webtoon/add_Webtoon';
-            } else if (result.dismiss === Swal.DismissReason.cancel) {
                 window.location.href = '" . BASE_URL . "?url=admin/dashboard';
             }
         });
@@ -33,7 +28,7 @@ if (!empty($_GET['msg'])) {
             echo "
         <script>
         Swal.fire({
-            title: 'Cập nhật truyện thành công',
+            title: 'Cập nhật truyện thất bại!',
             text: 'Kiểm tra lại thông tin Truyện',
             icon: 'error',
             confirmButtonColor: '#d33',

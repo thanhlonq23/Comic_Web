@@ -46,26 +46,19 @@ class category extends Controller
         $this->load->view("Admin/Category/listCategory", $data);
     }
 
-    // public function list_Category_WebtoonSelect()
-    // {
-    //     $categoryModel = $this->load->model("categoryModel");
-    //     $data['categories'] = $categoryModel->selectAll($this->table);
-    //     // $this->load->view("Admin/header");
-    //     $this->load->view("Admin/Webtoon/addWebtoon", $data);
-    // }
 
     public function delete_Category($id)
     {
         $cond = "id = '$id'";
         $categoryModel = $this->load->model('categoryModel');
         $categoryModel->delete($this->table, $cond);
-        header("Location:" . BASE_URL . "/?url=Category/list_Category");
+        header("Location:" . BASE_URL . "/?url=Category/listCategory");
     }
     public function edit_Category($id)
     {
         $cond = "id = '$id'";
         $categoryModel = $this->load->model("categoryModel");
-        $data['categoryByID'] = $categoryModel->selectByCond($this->table, $cond);
+        $data['categories'] = $categoryModel->selectByCond($this->table, $cond);
 
         // $this->load->view("Admin/header");
         $this->load->view("Admin/category/editCategory", $data);
@@ -110,7 +103,9 @@ class category extends Controller
 
         if ($result != 0) {
             $message['msg'] = "Cập nhật category thành công";
-            header("Location:" . BASE_URL . "/?url=category/&msg=" . urlencode(serialize($message)));
+            // header("Location:" . BASE_URL . "/?url=category/&msg=" . urlencode(serialize($message)));
+            header("Location:" . BASE_URL . "/?url=admin/category_List");
+
         } else {
             $message['msg'] = "Cập nhật category thất bại";
             header("Location:" . BASE_URL . "/?url=category/&msg=" . urlencode(serialize($message)));

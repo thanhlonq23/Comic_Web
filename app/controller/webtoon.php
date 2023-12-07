@@ -235,46 +235,6 @@ class webtoon extends Controller
         }
     }
 
-    // public function edit($id)
-    // {
-    //     // Lấy tên ảnh bìa
-    //     $uploadedFileName = $_FILES["cover"]["name"];
-
-    //     // Tạo tên duy nhất
-    //     $fileName = uniqid() . "_" . $uploadedFileName;
-
-    //     $cond = "id = '$id'";
-    //     $data = [
-    //         'name' => $_POST['name'],
-    //         'cover' => $fileName,
-    //         'status' => $_POST['status'],
-    //         'description' => $_POST['description']
-    //     ];
-
-    //     $webtoonModel = $this->load->model("webtoonModel");
-    //     $getCover = $webtoonModel->selectByCond($this->table, $cond);
-    //     $filePath = "public/Uploads/Cover/Webtoon/" . $getCover[0]['cover'];
-
-    //     if (file_exists($filePath)) {
-    //         $result = $webtoonModel->update($this->table, $data, $cond);
-
-    //         if ($result != 0) {
-    //             unlink($filePath);
-    //             $this->upload($fileName);
-
-    //             $message['msg'] = "Cập nhật truyện thành công";
-    //             header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
-    //         } else {
-    //             $message['msg'] = "Cập nhật truyện thất bại";
-    //             header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
-    //         }
-    //     } else {
-    //         $message['msg'] = "Cập nhật truyện thất bại";
-    //         header("Location:" . BASE_URL . "/?url=webtoon/edit_Webtoon/$id/&msg=" . urlencode(serialize($message)));
-    //     }
-    // }
-
-
     // Lưu ảnh
     private function upload($fileName)
     {
@@ -372,13 +332,6 @@ class webtoon extends Controller
         return $data;
     }
 
-    // public function viewCategories($webtoonID)
-    // {
-    //     // Lấy danh sách categories của webtoon dựa trên ID
-    //     $webtoonModel = $this->load->model("webtoonModel");
-    //     $categories = $webtoonModel->getCategoriesByWebtoon($webtoonID);
-    //     return $categories; // Trả về danh sách categories
-    // }
 
     public function selectCategories($webtoonID)
     {
