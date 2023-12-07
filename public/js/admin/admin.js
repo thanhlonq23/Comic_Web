@@ -89,21 +89,12 @@ document.addEventListener("DOMContentLoaded", function () {
 // });
 
 document.addEventListener("DOMContentLoaded", function () {
-<<<<<<< HEAD
   var rows = document.querySelectorAll(".chapter-row");
   // var baseUrl = "http://localhost:81/f4comics";
 
   rows.forEach(function (row) {
     row.addEventListener("click", function () {
       var id = this.getAttribute("data-chapter-id");
-=======
-  var rows = document.querySelectorAll('.chapter-row');
-  // var baseUrl = "http://localhost:81/f4comics";
-
-  rows.forEach(function (row) {
-    row.addEventListener('click', function () {
-      var id = this.getAttribute('data-chapter-id');
->>>>>>> addchapter
       // window.location.href = baseUrl + "/?url=admin/info/&id=" + id;
       window.location.href = id;
     });
