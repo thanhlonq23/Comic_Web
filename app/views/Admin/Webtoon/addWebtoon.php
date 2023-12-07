@@ -112,11 +112,49 @@
         font-size: 14px;
     }
 
+    #AddButton {
+        padding: 5px 40px;
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        margin-left: 8px;
+    }
+
+    #AddButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        /* padding: 5px 40px; */
+        border: none;
+        background-color: #00c493;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    #SubmitButton:hover {
+        background-color: #45a049;
+    }
+
+    #SubmitButton {
+        display: block;
+        margin: 0 auto;
+        width: 200px;
+        height: 50px;
+    }
+
     .char-count {
         display: block;
         margin-top: 5px;
         font-size: 12px;
         color: #888;
+    }
+
+    #divButton {
+        margin-top: 100px;
     }
 </style>
 
@@ -171,7 +209,7 @@
 
     textarea.addEventListener('input', function() {
         const remainingChars = 255 - textarea.value.length;
-        charCount.textContent = remainingChars + " ký tự còn lại";
+        charCount.textContent = remainingChars;
     });
 
     //Giải quyết nút Button Add
