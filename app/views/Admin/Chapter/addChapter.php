@@ -40,13 +40,16 @@ if (isset($parsed_url['query'])) {
         </div>
 
         <button type="submit" class="btn btn-primary">Thêm</button>
-        <?php
-        if (!empty($_GET['msg'])) {
-            $msg = unserialize(urldecode($_GET['msg']));
-            foreach ($msg as $key => $value) {
-                if ($value === "Thêm chapter thành công") {
-                    // Nếu thêm chapter thành công, hiển thị Swal với nút "Continue"
-                    echo "
+
+    </form>
+
+    <?php
+    if (!empty($_GET['msg'])) {
+        $msg = unserialize(urldecode($_GET['msg']));
+        foreach ($msg as $key => $value) {
+            if ($value === "Thêm chapter thành công") {
+                // Nếu thêm chapter thành công, hiển thị Swal với nút "Continue"
+                echo "
             <script>
             var webtoonId = " . json_encode($webtoonId) . ";
 
@@ -67,9 +70,9 @@ if (isset($parsed_url['query'])) {
                 }
             });
             </script>";
-                } elseif ($value === "Thêm chapter thất bại") {
-                    // Nếu thêm chapter thất bại, hiển thị Swal với thông báo lỗi (màu đỏ và chữ Check)
-                    echo "
+            } elseif ($value === "Thêm chapter thất bại") {
+                // Nếu thêm chapter thất bại, hiển thị Swal với thông báo lỗi (màu đỏ và chữ Check)
+                echo "
             <script>
             var webtoonId = " . json_encode($webtoonId) . ";
 
@@ -85,11 +88,44 @@ if (isset($parsed_url['query'])) {
                 }
             });
             </script>";
-                }
             }
         }
-        ?>
+    }
 
-    </form>
+    echo "
+        <script>
+            function validateForm() {
+                var chapterName = document.forms['chapterForm']['name'].value;
+                var fileInput = document.forms['chapterForm']['images[]'];
+
+                if (chapterName === '') {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Vui lòng nhập tên Chapter',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                    return false; // Ngăn chặn việc gửi biểu mẫu
+                }
+
+                // Kiểm tra xem ít nhất một tệp đã được chọn
+                if (fileInput.files.length === 0) {
+                    Swal.fire({
+                        title: 'Thông báo',
+                        text: 'Vui lòng chọn ít nhất một tệp',
+                        icon: 'warning',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK'
+                    });
+                    return false; // Ngăn chặn việc gửi biểu mẫu
+                }
+
+                // Bạn có thể thêm các kiểm tra xác thực khác cho các trường khác nếu cần
+
+                return true; // Cho phép gửi biểu mẫu
+            }
+        </script>";
+    ?>
 
 </div>
