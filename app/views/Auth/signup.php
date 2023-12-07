@@ -1,3 +1,12 @@
+<style>
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+        display: block;
+    }
+</style>
+
 <section class="vh-200" style="background-color: #eee;">
     <div class="container h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -9,7 +18,7 @@
 
                             <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
                                 <a href="<?php echo BASE_URL ?>">
-                                <img src="./public/Logo/f4.jpg" class="img-fluid">
+                                    <img src="./public/Logo/f4.jpg" class="img-fluid">
                                 </a>
                             </div>
 
@@ -21,7 +30,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="name">Tên người dùng</label>
                                             <input type="text" name="name" id="name" class="form-control" />
-                                            <span id="fullnameError" class="error" style="font-size: 20px;"></span><br>
+                                            <span id="fullnameError" class="error"></span><br>
                                         </div>
                                     </div>
 
@@ -30,7 +39,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="username">Tên đăng nhập</label>
                                             <input type="text" name="username" id="username" class="form-control" />
-                                            <span id="usernameError" class="error" style="font-size: 20px;"></span><br>
+                                            <span id="usernameError" class="error"></span><br>
                                         </div>
                                     </div>
 
@@ -38,8 +47,8 @@
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="password">Mật khẩu</label>
-                                            <input type="password" name="password" id="password" class="form-control" />
-                                            <span id="passwordError" class="error" style="font-size: 20px;"></span><br>
+                                            <input type="password" name="password" id="password" class="form-control" oninput="validatePassword()" />
+                                            <span id="passwordError" class="error"></span>
                                         </div>
                                     </div>
 
@@ -47,8 +56,8 @@
                                         <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="rePassword">Nhập lại mật khẩu</label>
-                                            <input type="password" name="rePassword" id="rePassword" class="form-control" />
-                                            <span id="confirmPasswordError" class="error" style="font-size: 20px;"></span><br>
+                                            <input type="password" name="rePassword" id="rePassword" class="form-control" oninput="validateConfirmPassword()" />
+                                            <span id="confirmPasswordError" class="error"></span>
                                         </div>
                                     </div>
 
@@ -57,8 +66,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="email">Email</label>
                                             <input type="email" name="email" id="email" class="form-control" />
-                                            <span id="emailError" class="error" style="font-size: 20px;"></span><br>
-
+                                            <span id="emailError" class="error"></span><br>
                                         </div>
                                     </div>
 
@@ -67,7 +75,7 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <label class="form-label" for="phoneNumber">Số điện thoại</label>
                                             <input type="text" name="phoneNumber" id="phoneNumber" class="form-control" />
-                                            <span id="phoneError" class="error" style="font-size: 20px;"></span><br>
+                                            <span id="phoneError" class="error"></span><br>
                                         </div>
                                     </div>
 
@@ -94,12 +102,31 @@
         var email = document.getElementById('email').value;
         var phone = document.getElementById('phoneNumber').value;
 
+        // Kiểm tra Tên người dùng có bị bỏ trống không
+        if (fullname.trim() === "") {
+            document.getElementById('fullnameError').innerHTML = "Tên người dùng không được bỏ trống.";
+            return false;
+        } else {
+            document.getElementById('fullnameError').innerHTML = "";
+        }
+
         // Kiểm tra tên đăng nhập có ít nhất 6 kí tự
         if (username.length < 6) {
             document.getElementById('usernameError').innerHTML = "Tên đăng nhập phải có ít nhất 6 kí tự.";
             return false;
         } else {
             document.getElementById('usernameError').innerHTML = "";
+        }
+
+        validatePassword();
+        validateConfirmPassword();
+
+        // Kiểm tra Email có bị bỏ trống và đúng định dạng không
+        if (email.trim() === "" || !validateEmail(email)) {
+            document.getElementById('emailError').innerHTML = "Email không được bỏ trống và phải đúng định dạng.";
+            return false;
+        } else {
+            document.getElementById('emailError').innerHTML = "";
         }
 
         // Kiểm tra số điện thoại chỉ chứa số và có đúng 10 kí tự
@@ -110,14 +137,38 @@
             document.getElementById('phoneError').innerHTML = "";
         }
 
-        // Kiểm tra mật khẩu và xác nhận mật khẩu
-        if (password !== confirm_password) {
-            document.getElementById('confirmPasswordError').innerHTML = "Mật khẩu không khớp.";
-            return false;
-        } else {
-            document.getElementById('confirmPasswordError').innerHTML = "";
-        }
-
         return true;
+    }
+
+
+    function validatePassword() {
+        var password = document.getElementById('password').value;
+        var passwordError = document.getElementById('passwordError');
+        if (password.trim() === "") {
+            passwordError.innerHTML = "Mật khẩu không được bỏ trống.";
+        } else {
+            passwordError.innerHTML = "";
+        }
+    }
+
+// Function để kiểm tra Nhập lại mật khẩu
+function validateConfirmPassword() {
+    var password = document.getElementById('password').value;
+    var confirm_password = document.getElementById('rePassword').value;
+    var confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    if (confirm_password.trim() === "") {
+        confirmPasswordError.innerHTML = "Vui lòng nhập lại mật khẩu.";
+    } else if (password !== confirm_password) {
+        confirmPasswordError.innerHTML = "Mật khẩu không khớp.";
+    } else {
+        confirmPasswordError.innerHTML = "";
+    }
+}
+
+    function validateEmail(email) {
+        //Check định dạng emil
+        var re = /\S+@\S+\.\S+/;
+        return re.test(email);
     }
 </script>
