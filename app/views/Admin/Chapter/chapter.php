@@ -58,6 +58,19 @@ if (isset($parsed_url['query'])) {
                     ?>
 
                     <?php
+                    $webtoonId = ''; // Khai báo biến webtoonId
+
+                    // Lấy giá trị của tham số 'id' từ URL nếu có
+                    $url = $_SERVER['REQUEST_URI'];
+                    $parsed_url = parse_url($url);
+                    if (isset($parsed_url['query'])) {
+                        parse_str($parsed_url['query'], $query_params);
+                        if (isset($query_params['id'])) {
+                            $webtoonId = $query_params['id'];
+                        }
+                    }
+                    ?>
+                    <?php
                     foreach ($chapters as $key => $value) {
                     ?>
                         <tr class="chapter-row" data-chapter-id="<?php echo BASE_URL ?>/?url=comicPage/readPage/<?php echo $webtoonId ?>&chapter=<?php echo $value['id'] ?>" style="cursor: pointer;">

@@ -64,11 +64,19 @@ class login extends Controller
                 Session::set('role', 'user');
                 header("Location:" . BASE_URL);
             } else {
+<<<<<<< HEAD
                 $message['msg'] = "Username hoặc password không đúng";
                 header("Location:" . BASE_URL . "/?url=login/&msg=" . urlencode(serialize($message)));
             }
         } else {
             $message['msg'] = "Username hoặc password không đúng";
+=======
+                $message['msg'] = "Đăng nhập thất bại";
+                header("Location:" . BASE_URL . "/?url=login/&msg=" . urlencode(serialize($message)));
+            }
+        } else {
+            $message['msg'] = "Đăng nhập thất bại";
+>>>>>>> 2185b5c (login, addchapter.php thêm jpeg, chapter thêm phần click đến reading,)
             header("Location:" . BASE_URL . "/?url=login/&msg=" . urlencode(serialize($message)));
         }
     }
