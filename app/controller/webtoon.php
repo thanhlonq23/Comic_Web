@@ -282,7 +282,11 @@ class webtoon extends Controller
         return 'webtoon' . $randomID;
     }
 
+<<<<<<< HEAD
     // Xử lý Tạo thư mục chứa ảnh
+=======
+    // Tạo thư mục chứa ảnh
+>>>>>>> f05afb2 (thêm thông báo add webtoon)
     private function createDir($newDir)
     {
         $dirPath = "public/Uploads/Comic";
