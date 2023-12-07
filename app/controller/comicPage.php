@@ -72,7 +72,11 @@ class comicPage extends Controller
         // Lấy webtoon_id và tạo điều kiện
         $id = $_GET['id'];
         $cond1 = "id = '$id'";
+<<<<<<< HEAD
         $cond2 = "webtoon_id = '$id' ORDER BY name";
+=======
+        $cond2 = "webtoon_id = '$id' ORDER BY name"; //gọi và sx theo tên
+>>>>>>> 099efc6 (new)
 
         // Khởi tạo controller
         $webtoon = new webtoon();
