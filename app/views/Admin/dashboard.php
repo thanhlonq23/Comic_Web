@@ -5,7 +5,7 @@
             <i class='bx bxs-book-open'></i>
             <span class="info">
                 <h3>
-                    <?php echo $totalWebtoons; ?>
+                    <?php echo $totalWebtoons[0]['totalWebtoons']; ?>
                 </h3>
                 <p>Total Comics</p>
             </span>

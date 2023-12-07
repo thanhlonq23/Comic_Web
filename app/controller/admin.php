@@ -35,7 +35,9 @@ class admin extends Controller
     public function dashboard()
     {
         $webtoon = new webtoon();
-        $data = $webtoon->recommended_Webtoon(4);
+        $data1 = $webtoon->recommended_Webtoon(4);
+        $data2 = $webtoon->countWebtoons();
+        $data = array_merge_recursive($data1, $data2);
 
         $this->load->view("Admin/nav");
         $this->load->view("Admin/dashboard", $data);

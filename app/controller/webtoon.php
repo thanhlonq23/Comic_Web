@@ -401,16 +401,17 @@ class webtoon extends Controller
         }
     }
 
-    //Hàm tính tổng
-    // Trong webtoon.php controller
+    
+    // Hàm lấy tổng truyện
     public function countWebtoons()
     {
         $webtoonModel = $this->load->model("webtoonModel");
         $result = $webtoonModel->countWebtoons('webtoons');
 
-        $totalWebtoons = 0; // Mặc định là 0 nếu không có kết quả trả về
+        $data['totalWebtoons'] = 0; // Mặc định là 0 nếu không có kết quả trả về
         if (!empty($result)) {
-            $totalWebtoons = $result[0]['totalWebtoons'];
+            $data['totalWebtoons'] = $result;
         }
+        return $data;
     }
 }
