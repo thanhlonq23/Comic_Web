@@ -46,6 +46,13 @@ class category extends Controller
         $this->load->view("Admin/Category/listCategory", $data);
     }
 
+    // public function list_Category_WebtoonSelect()
+    // {
+    //     $categoryModel = $this->load->model("categoryModel");
+    //     $data['categories'] = $categoryModel->selectAll($this->table);
+    //     // $this->load->view("Admin/header");
+    //     $this->load->view("Admin/Webtoon/addWebtoon", $data);
+    // }
 
     public function delete_Category($id)
     {

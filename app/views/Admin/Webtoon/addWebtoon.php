@@ -80,6 +80,39 @@
     }
 </style>
 
+<style>
+    /* CSS cho các selectedCategories */
+    #selectedCategories {
+        display: flex;
+        /* Sử dụng Flexbox để xếp theo hàng ngang */
+        flex-wrap: wrap;
+        /* Cho phép các phần tử wrap sang hàng mới nếu không đủ không gian */
+        gap: 8px;
+        /* Khoảng cách giữa các phần tử */
+    }
+
+    /* CSS cho mỗi phần tử danh mục được chọn */
+    #selectedCategories div {
+        background-color: #3498db;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+
+    #selectedCategories div:hover {
+        background-color: red;
+        color: #fff;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-top: 5px;
+        font-size: 14px;
+    }
+</style>
+
 <h1 style="text-align: center;">Thêm truyện:</h1>
 <div class="container mt-5">
     <form name="webtoonForm" onsubmit="return validateWebtoonForm()" action="<?php echo BASE_URL ?>/?url=webtoon/add" method="post" enctype="multipart/form-data">
