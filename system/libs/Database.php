@@ -107,13 +107,13 @@ class Database extends PDO
         return $this->exec($sql);
     }
 
-    public function deleteArray($table, $condition)
-    {
-        $sql = "DELETE FROM $table WHERE $condition";
+    // public function deleteArray($table, $condition)
+    // {
+    //     $sql = "DELETE FROM $table WHERE $condition";
 
-        // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
-        return $this->exec($sql);
-    }
+    //     // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
+    //     return $this->exec($sql);
+    // }
 
 
     // Auth => Kiểm tra có tồn tại dữ liệu trùng hay không
