@@ -6,6 +6,7 @@ include_once('./app/controller/author.php');
 
 
 
+include_once('category.php');
 class admin extends Controller
 {
     public function __construct()
@@ -74,5 +75,11 @@ class admin extends Controller
         $this->load->view("Admin/nav");
         $author = new author();
         $author->list_Author();
+    }
+    public function category_List()
+    {
+        $this->load->view("Admin/nav");
+        $category = new category();
+        $category->list_Category();
     }
 }

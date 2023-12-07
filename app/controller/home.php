@@ -41,7 +41,7 @@ class home extends Controller
         $this->load->view("404");
     }
 
-    // Tìm kiếm 
+    // Tìm kiếm
     public function search()
     {
         $this->load->view("User/header");
@@ -61,7 +61,7 @@ class home extends Controller
         $user = new user();
         $id = Session::get("id");
         $data = $user->get_User($id);
-        
+
         $this->load->view("User/Profile/profile", $data);
         $this->load->view("User/footer");
     }

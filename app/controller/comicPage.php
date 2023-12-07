@@ -72,7 +72,7 @@ class comicPage extends Controller
         // Lấy webtoon_id và tạo điều kiện
         $id = $_GET['id'];
         $cond1 = "id = '$id'";
-        $cond2 = "webtoon_id = '$id' ORDER BY name";
+        $cond2 = "webtoon_id = '$id' ORDER BY name"; //gọi và sx theo tên
 
         // Khởi tạo controller
         $webtoon = new webtoon();
@@ -133,7 +133,7 @@ class comicPage extends Controller
             $data = array_merge_recursive($data2, $data3);
         }
 
-        // Gộp dữ liệu 
+        // Gộp dữ liệu
         if ($data != null) {
             $data = array_merge_recursive($data, $data1);
         } else {
