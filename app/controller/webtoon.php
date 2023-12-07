@@ -25,7 +25,11 @@ class webtoon extends Controller
         $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
 
         // Lấy danh sách categories của webtoon
+<<<<<<< HEAD
         $categories = $this->selectCategories($id);
+=======
+        $categories = $this->viewCategories($id);
+>>>>>>> 689341c (xong controller)
         $data['categories'] = $categories;
 
         $this->load->view("Admin/Webtoon/webtoon", $data);
@@ -370,6 +374,7 @@ class webtoon extends Controller
         return $data;
     }
 
+<<<<<<< HEAD
 
     // Tìm kiếm truyện
     public function search($tuKhoa)
@@ -384,6 +389,18 @@ class webtoon extends Controller
         // Lấy danh sách categories của webtoon dựa trên ID
         $webtoonModel = $this->load->model("webtoonModel");
         $categories = $webtoonModel->selectCategoriesByWebtoon($webtoonID);
+=======
+    public function viewCategories($webtoonID)
+    {
+        // Lấy danh sách categories của webtoon dựa trên ID
+        $webtoonModel = $this->load->model("webtoonModel");
+        $categories = $webtoonModel->getCategoriesByWebtoon($webtoonID);
+
+        // Hiển thị view để xem categories của webtoon
+        $data['categories'] = $categories;
+        // $this->load->view("Admin/Webtoon/viewCategories", $data);
+
+>>>>>>> 689341c (xong controller)
         return $categories; // Trả về danh sách categories
     }
 
@@ -404,4 +421,26 @@ class webtoon extends Controller
             // Redirect hoặc hiển thị thông báo
         }
     }
+<<<<<<< HEAD
+=======
+
+    public function removeCategory($webtoonID, $categoryID)
+    {
+        // Xóa category khỏi webtoon
+        $webtoonModel = $this->load->model("webtoonModel");
+        $result = $webtoonModel->removeCategoryFromWebtoon($webtoonID, $categoryID);
+
+        // Kiểm tra và xử lý kết quả tương tự như addCategory()
+        // Kiểm tra và xử lý kết quả
+        if ($result != 0) {
+            // Thêm thành công
+            // Redirect hoặc hiển thị thông báo
+            $message['msg'] = "Thêm category thành công!";
+        } else {
+            // Thêm thất bại
+            $message['msg'] = "Thêm category thất bại!";
+            // Redirect hoặc hiển thị thông báo
+        }
+    }
+>>>>>>> 689341c (xong controller)
 }

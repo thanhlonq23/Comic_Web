@@ -66,6 +66,7 @@ class webtoonModel extends Model
         $sql = "SELECT categories.* FROM categories
             INNER JOIN webtoons_categories
             ON categories.id = webtoons_categories.categories_id
+<<<<<<< HEAD
             WHERE webtoons_categories.webtoons_id = $webtoonID";
 
         return $this->db->select($sql);
@@ -76,6 +77,8 @@ class webtoonModel extends Model
         $sql = "SELECT categories.* FROM categories
             INNER JOIN webtoons_categories
             ON categories.id = webtoons_categories.categories_id
+=======
+>>>>>>> 689341c (xong controller)
             WHERE webtoons_categories.webtoons_id = '$webtoonID'";
 
         return $this->db->select($sql);
@@ -91,6 +94,7 @@ class webtoonModel extends Model
         return $this->db->insert('webtoons_categories', $data);
     }
 
+<<<<<<< HEAD
     public function removeCategoryFromWebtoon($webtoonID)
     {
         // // Tính tổng các giá trị categories_id
@@ -106,4 +110,12 @@ class webtoonModel extends Model
     }
 
     // Hàm tính tổng các categories_id theo webtoon_id
+=======
+    public function removeCategoryFromWebtoon($webtoonID, $categoryID)
+    {
+        //sử dụng phương thức delete để xóa cặp dữ liệu  webtoons_id = $webtoonID và categories_id = $categoryID.
+        $cond = "webtoons_id = '$webtoonID' AND categories_id = '$categoryID'";
+        return $this->db->delete('webtoons_categories', $cond);
+    }
+>>>>>>> 689341c (xong controller)
 }

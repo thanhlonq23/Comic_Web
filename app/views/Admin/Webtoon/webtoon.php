@@ -212,11 +212,6 @@ if (!empty($_GET['msg'])) {
                                 if (empty($categories)) {
                                     echo "Không có thể loại";
                                 } else {
-                                    // Sắp xếp mảng categories theo trường 'name'
-                                    usort($categories, function ($a, $b) {
-                                        return strcmp($a['name'], $b['name']);
-                                    });
-
                                     foreach ($categories as $category) {
                                         echo "<li>{$category['name']}</li>";
                                     }
