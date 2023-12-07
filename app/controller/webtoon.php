@@ -309,6 +309,9 @@ class webtoon extends Controller
 
 
     // Xử lý Lưu ảnh
+
+    // Lưu ảnh
+
     private function upload($fileName)
     {
         $path_uploads = "public/Uploads/Cover/Webtoon/";
@@ -416,7 +419,6 @@ class webtoon extends Controller
         return $data;
     }
 
-
     // Tìm kiếm truyện
     public function search($tuKhoa)
     {
@@ -433,6 +435,7 @@ class webtoon extends Controller
     //     $categories = $webtoonModel->getCategoriesByWebtoon($webtoonID);
     //     return $categories; // Trả về danh sách categories
     // }
+
 
     public function selectCategories($webtoonID)
     {
