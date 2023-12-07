@@ -1,3 +1,11 @@
+<style>
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+</style>
+
 <br><br>
 <section class="vh-100">
     <div class="container py-5 h-100">
@@ -26,24 +34,26 @@
                                         if (!empty($_GET['msg'])) {
                                             $msg = unserialize(urldecode($_GET['msg']));
                                             foreach ($msg as $key => $value) {
-                                                echo "<p style='color: green'><br> $value </p>";
+                                                echo "<p style='color: red'><br> $value </p>";
                                             }
                                         }
                                         ?>
                                     </h5>
 
                                     <div class="form-outline mb-4">
-                                        <input type="text" name="username" id="form2Example17" class="form-control form-control-lg" />
                                         <label class="form-label" for="form2Example17">Username</label>
+                                        <input type="text" name="username" id="form2Example17" class="form-control form-control-lg" />
+                                        <span id="usernameError" class="error"></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" />
                                         <label class="form-label" for="form2Example27">Password</label>
+                                        <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" />
+                                        <span id="passwordError" class="error"></span>
                                     </div>
 
                                     <div class="pt-1 mb-4">
-                                        <button class="btn btn-dark btn-lg btn-block" type="submit">Login</button>
+                                        <button class="btn btn-dark btn-lg btn-block" type="submit" onclick="return validateLoginForm()">Login</button>
                                     </div>
 
                                     <p class="mb-5 pb-lg-2" style="color: #393f81;">
@@ -60,3 +70,28 @@
         </div>
     </div>
 </section>
+
+<script>
+    function validateLoginForm() {
+        var username = document.getElementById('form2Example17').value;
+        var password = document.getElementById('form2Example27').value;
+        var usernameError = document.getElementById('usernameError');
+        var passwordError = document.getElementById('passwordError');
+
+        if (username.trim() === '') {
+            usernameError.innerHTML = 'Vui lòng nhập tên đăng nhập.';
+            return false;
+        } else {
+            usernameError.innerHTML = '';
+        }
+
+        if (password.trim() === '') {
+            passwordError.innerHTML = 'Vui lòng nhập mật khẩu.';
+            return false;
+        } else {
+            passwordError.innerHTML = '';
+        }
+
+        return true;
+    }
+</script>
