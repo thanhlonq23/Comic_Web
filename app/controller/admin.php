@@ -6,6 +6,7 @@ include_once('./app/controller/author.php');
 
 
 
+include_once('category.php');
 class admin extends Controller
 {
     public function __construct()
@@ -34,7 +35,11 @@ class admin extends Controller
     public function dashboard()
     {
         $webtoon = new webtoon();
-        $data = $webtoon->recommended_Webtoon(4);
+        $user = new user();
+        $data1 = $webtoon->recommended_Webtoon(4);
+        $data2 = $webtoon->countWebtoons();
+        $data3 = $user->countUsers();
+        $data = array_merge_recursive(array_merge_recursive($data1, $data2), $data3);
 
         $this->load->view("Admin/nav");
         $this->load->view("Admin/dashboard", $data);
@@ -74,5 +79,11 @@ class admin extends Controller
         $this->load->view("Admin/nav");
         $author = new author();
         $author->list_Author();
+    }
+    public function category_List()
+    {
+        $this->load->view("Admin/nav");
+        $category = new category();
+        $category->list_Category();
     }
 }

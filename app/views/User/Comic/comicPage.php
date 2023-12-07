@@ -34,6 +34,21 @@
                             <p class="col-xs-4">
                                 <i class="fa-solid fa-tags"></i>
                                 Thể Loại:
+                                <?php
+                                // Hiển thị danh sách categories nếu có, nếu không hiển thị thông báo "Không có thể loại"
+                                if (empty($categories)) {
+                                    echo "Không có thể loại";
+                                } else {
+                                    // Sắp xếp mảng categories theo trường 'name'
+                                    usort($categories, function ($a, $b) {
+                                        return strcmp($a['name'], $b['name']);
+                                    });
+
+                                    foreach ($categories as $category) {
+                                        echo "{$category['name']} ";
+                                    }
+                                }
+                                ?>
                             </p>
                         </li>
                         <li class="row">
@@ -85,7 +100,7 @@
                                     <?php echo $value['date'] ?>
                                 </div>
                                 <div class="col-3 text-nowrap text-center small">
-                                    12411
+                                    Đang cập nhật
                                 </div>
                             </li>
                         </a>

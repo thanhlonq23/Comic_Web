@@ -100,4 +100,18 @@ class user extends Controller
         $data['userInfo'] = $userModel->selectByCond($this->table, $cond);
         return $data;
     }
+
+
+    // Hàm lấy tổng người dùng
+    public function countUsers()
+    {
+        $userModel = $this->load->model("userModel");
+        $result = $userModel->countUsers($this->table);
+
+        $data['totalUsers'] = 0; // Mặc định là 0 nếu không có kết quả trả về
+        if (!empty($result)) {
+            $data['totalUsers'] = $result;
+        }
+        return $data;
+    }
 }

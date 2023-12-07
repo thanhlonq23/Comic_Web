@@ -26,6 +26,21 @@ class Database extends PDO
 
     public function insert($table, $data)
     {
+
+        // sql = 'INSERT INTO chapters(id,name,date) VALUES(1,AAA,2003) '
+        // $table = 'chapters';
+        /**
+         * data=[
+         *  'id'=>'1'
+         *  'name'=>'aaa'
+         *  'date'>'2003'
+         * ]
+         *
+         * id,name,date
+         *
+         *
+         */
+
         try {
             // Xử lý lấy key : (id,name,date)
             $keys = implode(',', array_keys($data));
@@ -79,6 +94,14 @@ class Database extends PDO
     public function delete($table, $condition, $limit = 1)
     {
         $sql = "DELETE FROM $table WHERE $condition LIMIT $limit";
+
+        // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
+        return $this->exec($sql);
+    }
+
+    public function deleteArray($table, $condition)
+    {
+        $sql = "DELETE FROM $table WHERE $condition";
 
         // exec() không trả về dữ liệu mà trả về số dòng ảnh hưởng
         return $this->exec($sql);

@@ -15,6 +15,19 @@ class Main
         }
     }
 
+    /*
+        http://localhost/Comic_Web/?url=author/edit_Author/12
+
+        Cắt chuỗi ra $url = [
+            '0'=> author,
+            '1'=> edit_Author,
+            '2'=> 12
+        ]
+
+    */
+
+
+
 
     // Lấy ra url
     public function getURL()
@@ -62,7 +75,8 @@ class Main
     }
 
 
-    // Phân tích url để gọi ra method trong lớp controller 
+    // Phân tích url để gọi ra method trong lớp controller
+    // Phân tích url để gọi ra phương thức trong lớp controller
     public function callMethod()
     {
         // Nếu tồn tại url[2] => Tồn tại tham số => Tồn tại url[1] => Tồn tại phương thức
