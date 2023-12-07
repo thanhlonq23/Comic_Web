@@ -65,7 +65,6 @@ class admin extends Controller
     public function users_List()
     {
         $this->load->view("Admin/nav");
-        // $this->load->view("Admin/header");
         $user = new user();
         $user->list_User();
     }
@@ -73,7 +72,6 @@ class admin extends Controller
     public function authors_List()
     {
         $this->load->view("Admin/nav");
-        // $this->load->view("Admin/header");
         $author = new author();
         $author->list_Author();
     }

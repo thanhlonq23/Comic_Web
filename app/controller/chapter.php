@@ -53,7 +53,6 @@ class chapter extends Controller
         $data['chapterByID'] = $chapterModel->selectByCond($this->table, $cond);
 
         $this->load->view("Admin/nav");
-        // $this->load->view("Admin/header");
         $this->load->view("Admin/Chapter/editChapter", $data);
     }
 

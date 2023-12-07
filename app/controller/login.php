@@ -51,7 +51,6 @@ class login extends Controller
         if ($row != 0) {
             $result = $loginModel->getLogin($table_Admin, $username, $password);
 
-            // Db so sánh k pb chữ hoa chữ thường
             // strcasecmp so sanh chuoi khong phan biet chu hoa chu thuong
             if ((strcasecmp($result[0]['username'], $username) == 0) && ($result[0]['password'] == $password) && ($result[0]['role'] == 'admin')) {
                 Session::init();

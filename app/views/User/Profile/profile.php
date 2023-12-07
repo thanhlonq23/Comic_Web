@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="container bg-white">
+        <div class="container bg-white">
             <div class="m-3">
                 <ul class="d-flex nav p-2 gap-3 justify-content-around">
                     <li class="nav-item">
@@ -33,6 +33,6 @@
                     </li>
                 </ul>
             </div>
-        </div> -->
+        </div>
     </div>
 </body>
