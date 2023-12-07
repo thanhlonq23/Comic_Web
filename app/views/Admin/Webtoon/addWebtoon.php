@@ -111,6 +111,13 @@
         margin-top: 5px;
         font-size: 14px;
     }
+
+    .char-count {
+        display: block;
+        margin-top: 5px;
+        font-size: 12px;
+        color: #888;
+    }
 </style>
 
 <h1 style="text-align: center;">Thêm truyện:</h1>
