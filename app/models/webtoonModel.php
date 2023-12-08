@@ -106,4 +106,9 @@ class webtoonModel extends Model
     }
 
     // Hàm tính tổng các categories_id theo webtoon_id
+    public function countWebtoons($table)
+    {
+        $sql = "SELECT COUNT(*) AS totalWebtoons FROM $table";
+        return $this->db->select($sql);
+    }
 }
