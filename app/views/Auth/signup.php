@@ -102,10 +102,11 @@
         var email = document.getElementById('email').value;
         var phone = document.getElementById('phoneNumber').value;
 
+        var valid = true;
         // Kiểm tra Tên người dùng có bị bỏ trống không
         if (fullname.trim() === "") {
             document.getElementById('fullnameError').innerHTML = "Tên người dùng không được bỏ trống.";
-            return false;
+            valid = false;
         } else {
             document.getElementById('fullnameError').innerHTML = "";
         }
@@ -113,7 +114,7 @@
         // Kiểm tra tên đăng nhập có ít nhất 6 kí tự
         if (username.length < 6) {
             document.getElementById('usernameError').innerHTML = "Tên đăng nhập phải có ít nhất 6 kí tự.";
-            return false;
+            valid = false;
         } else {
             document.getElementById('usernameError').innerHTML = "";
         }
@@ -124,7 +125,7 @@
         // Kiểm tra Email có bị bỏ trống và đúng định dạng không
         if (email.trim() === "" || !validateEmail(email)) {
             document.getElementById('emailError').innerHTML = "Email không được bỏ trống và phải đúng định dạng.";
-            return false;
+            valid = false;
         } else {
             document.getElementById('emailError').innerHTML = "";
         }
@@ -132,12 +133,12 @@
         // Kiểm tra số điện thoại chỉ chứa số và có đúng 10 kí tự
         if (!/^\d{10}$/.test(phone)) {
             document.getElementById('phoneError').innerHTML = "Số điện thoại không hợp lệ.";
-            return false;
+            valid = false;
         } else {
             document.getElementById('phoneError').innerHTML = "";
         }
 
-        return true;
+        return valid;
     }
 
 
@@ -146,6 +147,7 @@
         var passwordError = document.getElementById('passwordError');
         if (password.trim() === "") {
             passwordError.innerHTML = "Mật khẩu không được bỏ trống.";
+            valid = false;
         } else {
             passwordError.innerHTML = "";
         }
@@ -159,6 +161,7 @@ function validateConfirmPassword() {
 
     if (confirm_password.trim() === "") {
         confirmPasswordError.innerHTML = "Vui lòng nhập lại mật khẩu.";
+        valid = false;
     } else if (password !== confirm_password) {
         confirmPasswordError.innerHTML = "Mật khẩu không khớp.";
     } else {
