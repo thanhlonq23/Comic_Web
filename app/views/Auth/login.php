@@ -4,6 +4,59 @@
         font-size: 14px;
         margin-top: 5px;
     }
+
+    /* Card và nội dung */
+    .card {
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form */
+    form {
+        padding: 30px;
+    }
+
+    /* Tiêu đề */
+    .card-body h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    /* Các input và label */
+    .form-outline {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* Nút Login */
+    .btn-login {
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Liên kết đăng ký */
+    .register-link {
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+    }
+
+    .register-link a {
+        color: #007bff;
+        text-decoration: none;
+    }
 </style>
 
 <br><br>
@@ -13,9 +66,9 @@
             <div class="col col-xl-10">
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
-                        <div class="col-md-6 col-lg-5 d-none d-md-block">
-                            <a href="<?php echo BASE_URL ?>">
-                                <img src="./public/Logo/f4.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;" />
+                        <div class="col-md-6 col-lg-5 d-none d-md-flex d-flex align-items-center justify-content-center">
+                            <a href="http://localhost:81/f4comics">
+                                <img src="./public/Logo/f4.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;">
                             </a>
                         </div>
 
