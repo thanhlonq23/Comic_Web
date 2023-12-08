@@ -31,8 +31,8 @@
                 <h3>List Comics</h3>
                 <form action="#">
                     <div class="form-input">
-                        <input type="search" placeholder="Search...">
-                        <button class="search-btn" type="submit"><i class='bx bx-search'></i></button>
+                        <input id="searchInput" type="search" placeholder="Search...">
+                        <i class='bx bx-sort-a-z' style="display: block; margin-left: 20px; margin-right: 10px;"></i>
                     </div>
                 </form>
             </div>
@@ -48,6 +48,9 @@
                 </thead>
                 <tbody>
                     <?php
+                    usort($webtoons, function ($a, $b) {
+                        return strcmp($a['name'], $b['name']);
+                    });
                     foreach ($webtoons as $key => $value) {
                     ?>
                         <tr class="comic-row" data-id="<?php echo BASE_URL ?>/?url=admin/info/&id=<?php echo $value['id'] ?>" style="cursor: pointer;">
@@ -87,3 +90,51 @@
     </div>
 
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var sorted = false; // Biến để xác định trạng thái sắp xếp
+
+        $('#searchInput').on('input', function() {
+            var value = $(this).val().toLowerCase().trim();
+            if (value === '') {
+                // Nếu input trống, trả về danh sách ban đầu
+                resetWebtoonList();
+            } else {
+                // Nếu có nội dung trong input, thực hiện tìm kiếm
+                $('tbody tr').filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            }
+        });
+
+        $('.bx-sort-a-z').click(function() {
+            sorted = !sorted; // Đảo ngược trạng thái sắp xếp
+            var rows = $('tbody tr').get();
+            rows.sort(function(a, b) {
+                var A = $(a).children('td').eq(0).text().toUpperCase();
+                var B = $(b).children('td').eq(0).text().toUpperCase();
+                if (sorted) {
+                    return A > B ? -1 : A < B ? 1 : 0;
+                } else {
+                    return A < B ? -1 : A > B ? 1 : 0;
+                }
+            });
+            $.each(rows, function(index, row) {
+                $('tbody').append(row);
+            });
+
+            // Thay đổi biểu tượng và class tùy thuộc vào trạng thái sắp xếp
+            if (sorted) {
+                $(this).removeClass('bx-sort-a-z').addClass('bx-sort-z-a');
+            } else {
+                $(this).removeClass('bx-sort-z-a').addClass('bx-sort-a-z');
+            }
+        });
+
+        // Hàm để reset danh sách webtoon ban đầu
+        function resetWebtoonList() {
+            $('tbody tr').show(); // Hiển thị lại toàn bộ danh sách webtoon ban đầu
+        }
+    });
+</script>

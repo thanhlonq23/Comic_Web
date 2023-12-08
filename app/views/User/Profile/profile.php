@@ -1,10 +1,15 @@
+<?php
+$mediaValue = ($userInfo[0]["media"] === 'defaut') ? 'user' : $userInfo[0]["media"];
+$mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
+?>
+
 <body class="d-flex flex-column min-vh-100 bg-dark-subtle">
     <div>
         <div class="profile-container container">
             <div class="row">
                 <div class="col-4">
                     <div class="user-avatar">
-                        <img src="./public/Uploads/User/<?php echo $userInfo[0]["media"] ?>.jpg" alt="Profile Picture" class="card-img-top user-image">
+                    <img src="<?php echo $mediaPath ?>" alt="Profile Picture" class="card-img-top user-image">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $userInfo[0]["name"] ?></h5>
