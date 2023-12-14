@@ -14,7 +14,7 @@
                         <li class="row">
                             <p class="col-xs-4">
                                 <i class="fa-solid fa-user"></i>
-                                Tác Giả:
+                                Tác Giả: Đang cập nhật
                             </p>
                         </li>
                         <li class="row">
@@ -54,7 +54,7 @@
                         <li class="row">
                             <p class="col-xs-4">
                                 <i class="fa-solid fa-eye"></i>
-                                Lượt Xem:
+                                Lượt Xem: Đang cập nhật
                             </p>
                         </li>
                     </ul>

@@ -43,42 +43,44 @@ class signup extends Controller
 
             if ($result == true) {
                 // echo "Đăng kí thành công";
-                echo "
-    <script>
-    Swal.fire({
-        title: 'Đăng ký tài khoản thành công!',
-        text: 'Chọn Done để Đăng nhập',
-        icon: 'success',
-        confirmButtonColor: '#4CAF50',
-        confirmButtonText: 'Done',
-        allowOutsideClick: false, //Không được phép click ra ngoài popup
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = '" . BASE_URL . "?url=login';
-        }
-    });
-    </script>";
+?>
+                <script>
+                    Swal.fire({
+                        title: 'Đăng ký tài khoản thành công!',
+                        text: 'Chọn Done để Đăng nhập',
+                        icon: 'success',
+                        confirmButtonColor: '#4CAF50',
+                        confirmButtonText: 'Done',
+                        allowOutsideClick: false, //Không được phép click ra ngoài popup
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '<?php echo BASE_URL ?>?url=login';
+                        }
+                    });
+                </script>
+            <?php
             } else {
-                // Email được để duy nhất không db
+                // Email được để duy nhất trong db
                 echo "Email không hợp lệ";
             }
         } else {
             // echo "Tên đăng nhập hoặc mật khẩu không hợp lệ";
-            echo "
+            ?>
             <script>
-            Swal.fire({
-                title: 'Đăng ký tài khoản thất bại!',
-                text: 'Kiểm tra lại thông tin đăng ký',
-                icon: 'error',
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'Check',
-                allowOutsideClick: false, //Không được phép click ra ngoài popup
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '" . BASE_URL . "?url=signup';
-                }
-            });
-            </script>";
+                Swal.fire({
+                    title: 'Đăng ký tài khoản thất bại!',
+                    text: 'Kiểm tra lại thông tin đăng ký',
+                    icon: 'error',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'Check',
+                    allowOutsideClick: false, //Không được phép click ra ngoài popup
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '<?php echo BASE_URL ?>?url=signup';
+                    }
+                });
+            </script>
+<?php
         }
     }
 

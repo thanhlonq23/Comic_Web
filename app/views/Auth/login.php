@@ -67,7 +67,7 @@
                 <div class="card" style="border-radius: 1rem;">
                     <div class="row g-0">
                         <div class="col-md-6 col-lg-5 d-none d-md-flex d-flex align-items-center justify-content-center">
-                            <a href="http://localhost:81/f4comics">
+                            <a href="<?php echo BASE_URL ?>">
                                 <img src="./public/Logo/f4.jpg" alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem;">
                             </a>
                         </div>
@@ -94,14 +94,14 @@
                                     </h5>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example17">Username</label>
-                                        <input type="text" name="username" id="form2Example17" class="form-control form-control-lg" />
+                                        <label class="form-label" for="Username">Username</label>
+                                        <input type="text" name="username" id="Username" class="form-control form-control-lg" />
                                         <span id="usernameError" class="error"></span>
                                     </div>
 
                                     <div class="form-outline mb-4">
-                                        <label class="form-label" for="form2Example27">Password</label>
-                                        <input type="password" name="password" id="form2Example27" class="form-control form-control-lg" />
+                                        <label class="form-label" for="Password">Password</label>
+                                        <input type="password" name="password" id="Password" class="form-control form-control-lg" />
                                         <span id="passwordError" class="error"></span>
                                     </div>
 

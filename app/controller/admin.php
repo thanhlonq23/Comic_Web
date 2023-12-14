@@ -3,10 +3,10 @@ include_once('./app/controller/webtoon.php');
 include_once('./app/controller/chapter.php');
 include_once('./app/controller/user.php');
 include_once('./app/controller/author.php');
+include_once('./app/controller/category.php');
 
 
 
-include_once('category.php');
 class admin extends Controller
 {
     public function __construct()
