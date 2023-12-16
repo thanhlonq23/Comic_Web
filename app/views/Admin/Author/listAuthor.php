@@ -1,8 +1,23 @@
-<div class="container-fluid">
-    <table class="table table-striped" style="width: 100%; border: 1px ;">
-        <thead>
-            <th colspan="5">
-                <h1 style="text-align: center; font-size: 80px;">Authors</h1>
+<main class="main">
+    <div style="background-color: #f6f6f9; padding: 15px; width: 100% ;border-radius: 20px; position: sticky; top: 50px;">
+        <div class="upload-category">
+            <a href="<?php echo BASE_URL ?>/?url=author/add_Author/">
+                <button style="display: block; background-color: #00c493; color: #ffffff; font-size: 16px; cursor: pointer; padding: 12px 24px;
+                    border-radius: 8px;border: none; outline: none;">
+                    Add Author
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <!-- ... -->
+    <!-- Phần dữ liệu phía dưới -->
+    <div class="bottom-data">
+        <!-- Bảng Categories -->
+        <div class="comics">
+            <div class="header">
+                <i class='bx bx-category'></i>
+                <h3>List of Authors</h3>
                 <?php
                 if (!empty($_GET['msg'])) {
                     $msg = unserialize(urldecode($_GET['msg']));
@@ -11,40 +26,41 @@
                     }
                 }
                 ?>
-                <a href="<?php echo BASE_URL ?>/?url=author/add_Author/">Add</a>
-            </th>
-            <tr>
-                <th class="col-1 text-center">STT</th>
-                <th class="col-3 text-center">ID</th>
-                <th class="col-4 text-center">Author Name</th>
-                <th class="col-2 text-center" colspan="2">Action</th>
-            </tr>
-        </thead>
+                <!-- Thêm form tìm kiếm nếu cần -->
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="padding-left: 7px; font-size: 17px;">ID</th>
+                        <th style="padding-left: 7px; font-size: 17px;">Author Name</th>
+                        <th style="padding-left: 7px; font-size: 17px; text-align: right; padding-right: 60px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
 
+                    <?php
+                    foreach ($authors as $key => $value) {
+                    ?>
+                        <tr>
+                            <td><?php echo $value['id'] ?></td>
+                            <td><?php echo $value['name'] ?></td>
+                            <td style="text-align: right; padding-right: 20px;">
+                                <a href="<?php echo BASE_URL ?>/?url=author/edit_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                    <input type="button" value="Edit">
+                                </a>
+                                <a href="<?php echo BASE_URL ?>/?url=author/delete_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                    <input type="button" value="Delete">
+                                </a>
+                            </td>
 
-
-        <tbody>
-
-            <?php
-            $stt = 0;
-            foreach ($authors as $key => $value) {
-                $stt++;
-            ?>
-                <tr>
-                    <td class="col-1 text-center"><?php echo $stt ?></td>
-                    <td class="col-3 text-center"><?php echo $value['id'] ?></td>
-                    <td class="col-4 text-center"><?php echo $value['name'] ?></td>
-                    <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/?url=author/edit_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
-                    </td>
-
-                    <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/?url=author/delete_Author/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
-                    </td>
-                </tr>
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                            <td class="col-1 text-center">
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

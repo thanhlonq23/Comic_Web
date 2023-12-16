@@ -1,9 +1,10 @@
-<div class="container-fluid">
-
-    <table class="table table-striped" style="width: 100%; border: 1px;">
-        <thead>
-            <th colspan="10">
-                <h1 style="text-align: center; font-size: 80px;">Users</h1>
+<main class="main">
+    <div class="bottom-data">
+        <!-- Bảng Categories -->
+        <div class="comics">
+            <div class="header">
+                <i class='bx bx-category'></i>
+                <h3>List of Users</h3>
                 <?php
                 if (!empty($_GET['msg'])) {
                     $msg = unserialize(urldecode($_GET['msg']));
@@ -12,45 +13,46 @@
                     }
                 }
                 ?>
-            </th>
-            <tr>
-                <th class="text-center">STT</th>
-                <th class="text-center">ID</th>
-                <th class="text-center">Username</th>
-                <th class="text-center">Name</th>
-                <th class="text-center">PhoneNumber</th>
-                <th class="text-center">Email</th>
-                <th class="text-center">Role</th>
-                <!-- <th class="text-center">Password</th> -->
-                <th class="text-center" colspan="2">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            $stt = 0;
-            foreach ($users as $key => $value) {
-                $stt++;
-            ?>
-                <tr>
-                    <th class="text-center"><?php echo $stt ?></th>
-                    <td class="text-center"><?php echo $value['id'] ?></td>
-                    <td class="text-center"><?php echo $value['username'] ?></td>
-                    <td class="text-center"><?php echo $value['name'] ?></td>
-                    <td class="text-center"><?php echo $value['phoneNumber'] ?></td>
-                    <td class="text-center"><?php echo $value['email'] ?></td>
-                    <td class="text-center"><?php echo $value['role'] ?></td>
-                    <!-- <td class="text-center"><?php //echo $value['password'] ?></td> -->
-                    <td class="text-center">
-                        <a href="<?php echo BASE_URL ?>/?url=user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Edit</a>
-                    </td>
-                    <td class="col-1 text-center">
-                        <a href="<?php echo BASE_URL ?>/?url=user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none;">Delete</a>
-                    </td>
-                </tr>
+                <!-- Thêm form tìm kiếm nếu cần -->
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style=" padding-left: 7px; font-size: 17px;">ID</th>
+                        <th style="padding-left: 7px; font-size: 17px;">Username</th>
+                        <th style=" padding-left: 7px; font-size: 17px;">Name</th>
+                        <th style="padding-left: 7px; font-size: 17px;"> PhoneNumber</th>
+                        <th style=" padding-left: 7px; font-size: 17px;">Email</th>
+                        <th style="padding-left: 7px; font-size: 17px;">Role</th>
+                        <th style="padding-left: 7px; font-size: 17px; text-align: right; padding-right: 60px;">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <?php
-            }
-            ?>
-        </tbody>
-    </table>
-</div>
+                    <?php
+                    foreach ($users as $key => $value) {
+                    ?>
+                        <tr>
+                            <td><?php echo $value['id'] ?></td>
+                            <td><?php echo $value['username'] ?></td>
+                            <td><?php echo $value['name'] ?></td>
+                            <td><?php echo $value['phoneNumber'] ?></td>
+                            <td><?php echo $value['email'] ?></td>
+                            <td><?php echo $value['role'] ?></td>
+                            <td style="text-align: right; padding-right: 20px;">
+                                <a href="<?php echo BASE_URL ?>/?url=user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                    <input type="button" value="Edit">
+                                </a>
+                                <a href="<?php echo BASE_URL ?>/?url=user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                    <input type="button" value="Delete">
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

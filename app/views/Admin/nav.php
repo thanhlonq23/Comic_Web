@@ -12,8 +12,8 @@
             'admin/comic_List' => ['label' => 'Comics List', 'icon' => 'bx bx-store-alt'],
             'admin/category_List' => ['label' => 'Category List', 'icon' => 'bx bx-category'],
             // Các mục menu khác
-            'admin/users_List' => ['label' => 'Users list', 'icon' => 'bx bx-user'],
-            'admin/authors_List' => ['label' => 'Authors list', 'icon' => 'bx bx-book'],
+            'admin/users_List' => ['label' => 'Users List', 'icon' => 'bx bx-user'],
+            'admin/authors_List' => ['label' => 'Authors List', 'icon' => 'bx bx-book'],
         ];
         ?>
 

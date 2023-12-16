@@ -42,4 +42,11 @@ class chapterModel extends Model
         // Thực hiện insert
         return $this->db->insert('chapters', $data);
     }
+
+    // Tổng SL chương truyện
+    public function countChapter($table, $cond)
+    {
+        $sql = "SELECT COUNT(*) AS totalChapters FROM $table WHERE $cond";
+        return $this->db->select($sql);
+    }
 }

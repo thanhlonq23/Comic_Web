@@ -10,7 +10,7 @@
             </a>
         </div>
     </div>
-    <!-- ... -->
+    <!-- ... --> 
     <!-- Phần dữ liệu phía dưới -->
     <div class="bottom-data">
         <!-- Bảng Categories -->

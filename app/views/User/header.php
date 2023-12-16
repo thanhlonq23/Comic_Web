@@ -5,16 +5,6 @@
                     <li class="nav-item">
                         <a class="nav-link px-2 home-text" href="<?php echo BASE_URL ?>">Trang chủ</a>
                     </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link px-2 menu-text" href="#">Theo dõi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2 menu-text" href="#">Thể loại</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link px-2 menu-text" href="#">Truyện hot</a>
-                    </li>
                     <?php
                     session_start();
                     if (Session::get("login") == true) {
