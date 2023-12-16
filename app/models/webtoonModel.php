@@ -80,6 +80,8 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+
+    // <Đã chuyển sang category>
     // public function selectCategoriesByWebtoon($webtoonID)
     // {
     //     $sql = "SELECT categories.* FROM categories
