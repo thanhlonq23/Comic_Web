@@ -26,21 +26,6 @@ class Database extends PDO
 
     public function insert($table, $data)
     {
-
-        // sql = 'INSERT INTO chapters(id,name,date) VALUES(1,AAA,2003) '
-        // $table = 'chapters';
-        /**
-         * data=[
-         *  'id'=>'1'
-         *  'name'=>'aaa'
-         *  'date'>'2003'
-         * ]
-         *
-         * id,name,date
-         *
-         *
-         */
-
         try {
             // Xử lý lấy key : (id,name,date)
             $keys = implode(',', array_keys($data));
