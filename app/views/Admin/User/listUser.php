@@ -40,10 +40,10 @@
                             <td><?php echo $value['email'] ?></td>
                             <td><?php echo $value['role'] ?></td>
                             <td style="text-align: right; padding-right: 20px;">
-                                <a href="<?php echo BASE_URL ?>/?url=user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                <a href="<?php echo BASE_URL ?>/?url=user/edit_User/<?php echo $value['id'] ?>" style="text-decoration: none; font-size: 12px;">
                                     <input type="button" value="Edit">
                                 </a>
-                                <a href="<?php echo BASE_URL ?>/?url=user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none;">
+                                <a href="<?php echo BASE_URL ?>/?url=user/delete_User/<?php echo $value['id'] ?>" style="text-decoration: none; font-size: 12px;">
                                     <input type="button" value="Delete">
                                 </a>
                             </td>
