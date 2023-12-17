@@ -53,7 +53,6 @@
                         <th style="padding-left: 7px; font-size: 17px;">Comics</th>
                         <th style="padding-left: 7px;font-size: 17px;">Status</th>
                         <th style="padding-left: 7px;font-size: 17px;">Publish Date</th>
-                        <th style="padding-left: 7px;font-size: 17px;">Chapter</th>
                     </tr>
                 </thead>
 
@@ -83,7 +82,6 @@
                                 echo date("d/m/Y", strtotime($value['date']))
                                 ?>
                             </td>
-                            <td>30 chapters</td>
                         </tr>
                     <?php
                     }

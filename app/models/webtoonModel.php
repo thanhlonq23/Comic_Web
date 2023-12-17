@@ -30,6 +30,17 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+    // Lấy ra truyện kèm số chapter
+    public function selectWebtoonWithChapter($table)
+    {
+        $sql = "SELECT $table.*, COUNT(Chapters.id) AS countChapter
+            FROM $table
+            LEFT JOIN chapters ON $table.id = chapters.webtoon_id
+            GROUP BY $table.id
+            ";
+        return $this->db->select($sql);
+    }
+
     // public function insert($table, $data)
     // {
     //     return $this->db->insert($table, $data);
@@ -68,6 +79,8 @@ class webtoonModel extends Model
         $sql = "SELECT COUNT(*) AS totalWebtoons FROM $table";
         return $this->db->select($sql);
     }
+
+
 
 
     public function getCategoriesByWebtoon($webtoonID)

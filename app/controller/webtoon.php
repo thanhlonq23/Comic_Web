@@ -151,7 +151,7 @@ class webtoon extends Controller
     public function list()
     {
         $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectAll($this->table);
+        $data['webtoons'] = $webtoonModel->selectWebtoonWithChapter($this->table);
         return $data;
     }
 

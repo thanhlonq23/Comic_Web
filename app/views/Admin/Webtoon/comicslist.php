@@ -75,7 +75,7 @@
                                 echo date("d/m/Y", strtotime($value['date']))
                                 ?>
                             </td>
-                            <td>30 chapters</td>
+                            <td><?php echo $value['countChapter'] ?> chapters</td>
                             <td>
                                 <a href="<?php echo BASE_URL ?>/?url=webtoon/edit_Webtoon/<?php echo $value['id'] ?>" style="text-decoration: none; font-size: 12px;"><input type="button" value="Edit"></a>
                                 <a href="<?php echo BASE_URL ?>/?url=webtoon/delete_Webtoon/<?php echo $value['id'] ?>" style="text-decoration: none; font-size: 12px;"><input type="button" value="Delete"></a>
