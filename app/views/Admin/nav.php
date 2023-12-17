@@ -56,6 +56,6 @@
              Hello, Admin
          </label>
          <a href="#" class="profile">
-             <img src="./public/Logo/f4.jpg">
+             <img src="./public/Uploads/User/user.jpg">
          </a>
      </nav>
