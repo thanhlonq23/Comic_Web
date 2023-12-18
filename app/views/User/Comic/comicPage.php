@@ -51,12 +51,27 @@
                                 ?>
                             </p>
                         </li>
+                        <?php
+                        $totalViews = 0; // Khởi tạo biến tổng lượt xem
+
+                        // Lặp qua mảng $chapters để tính tổng lượt xem của từng chapter
+                        foreach ($chapters as $chapter) {
+                            $totalViews += $chapter['views']; // Cộng lượt xem của từng chapter vào tổng lượt xem
+                        }
+                        ?>
+
                         <li class="row">
                             <p class="col-xs-4">
                                 <i class="fa-solid fa-eye"></i>
-                                Lượt Xem: Đang cập nhật
+                                Lượt Xem: <?php echo $totalViews; ?>
                             </p>
                         </li>
+                        <!-- <li class="row">
+                            <p class="col-xs-4">
+                                <i class="fa-solid fa-eye"></i>
+                                Lượt Xem: <?php print_r($chapters) ?>
+                            </p>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -70,9 +85,9 @@
             <p>
                 <?php echo $webtoons[0]['description'] ?>
             </p>
-            <a href="#" class="link-info">
+            <!-- <a href="#" class="link-info">
                 Xem thêm
-            </a>
+            </a> -->
         </div>
         <div class="list-chapter mt-3">
             <h2 class="list-title clearfix">
@@ -100,7 +115,7 @@
                                     <?php echo $value['date'] ?>
                                 </div>
                                 <div class="col-3 text-nowrap text-center small">
-                                    Đang cập nhật
+                                    <?php echo $value['views'] ?>
                                 </div>
                             </li>
                         </a>

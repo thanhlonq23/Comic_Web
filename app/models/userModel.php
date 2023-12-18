@@ -32,7 +32,7 @@ class userModel extends Model
     {
         return $this->db->update($table, $data, $cond);
     }
-    
+
 
     public function delete($table, $cond)
     {

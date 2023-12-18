@@ -37,56 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-// document.addEventListener("DOMContentLoaded", function () {
-//   var rows = document.querySelectorAll('.comic-row');
 
-//   rows.forEach(function (row) {
-//     var id = row.getAttribute('data-id');
-
-//     const editButton = row.querySelector('input[value="Edit"]');
-//     const deleteButton = row.querySelector('input[value="Delete"]');
-
-//     editButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       location.href = 'webtoon/edit_Webtoon/' + id;
-//     });
-
-//     deleteButton.addEventListener("click", function (event) {
-//       location.href = 'webtoon/delete_Webtoon/' + id;
-//     });
-
-//     row.addEventListener("click", function (event) {
-//       if (event.target !== editButton && event.target !== deleteButton) {
-//         window.location.href = id;
-//       }
-//     });
-//   });
-// });
-
-// document.addEventListener("DOMContentLoaded", function () {
-//   const chapterRows = document.querySelectorAll(".chapter-row");
-
-//   chapterRows.forEach(function (row) {
-//     const editButton = row.querySelector('input[value="Edit"]');
-//     const deleteButton = row.querySelector('input[value="Delete"]');
-
-//     editButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       location.href = "#";
-//     });
-
-//     deleteButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       location.href = "#";
-//     });
-
-//     row.addEventListener("click", function (event) {
-//       if (event.target !== editButton && event.target !== deleteButton) {
-//         location.href = "#";
-//       }
-//     });
-//   });
-// });
 
 document.addEventListener("DOMContentLoaded", function () {
   var rows = document.querySelectorAll('.chapter-row');
@@ -101,30 +52,6 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// document.addEventListener("DOMContentLoaded", function () {
-//   const chapterRows = document.querySelectorAll(".chapter-row");
-//   // /public/Uploads/Comic/$webtoonId/$chapterID
-//   chapterRows.forEach(function (row) {
-//     const editButton = row.querySelector('input[value="Edit"]');
-//     const deleteButton = row.querySelector('input[value="Delete"]');
-
-//     editButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       location.href = "#";
-//     });
-
-//     deleteButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       location.href = "#";
-//     });
-
-//     row.addEventListener("click", function (event) {
-//       if (event.target !== editButton && event.target !== deleteButton) {
-//         location.href = "#";
-//       }
-//     });
-//   });
-// });
 
 const menuBar = document.querySelector(".content nav .bx.bx-menu");
 const sideBar = document.querySelector(".sidebar");
@@ -165,15 +92,6 @@ window.addEventListener("resize", () => {
   }
 });
 
-// const toggler = document.getElementById('theme-toggle');
-
-// toggler.addEventListener('change', function () {
-//     if (this.checked) {
-//         document.body.classList.add('dark');
-//     } else {
-//         document.body.classList.remove('dark');
-//     }
-// });
 
 //Khi có nội dung list chpaters trong tbody thì vẫn hiển thị default, khi không có chapter nào sẽ hiển thị phần thêm chapter mới, ẩn thead
 document.addEventListener("DOMContentLoaded", function () {
@@ -228,28 +146,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// document.addEventListener("DOMContentLoaded", function() {
-//     const comicRows = document.querySelectorAll(".comic-row");
-
-//     comicRows.forEach(function(row) {
-//         const deleteButton = row.querySelector('input[value="Delete"]');
-
-//         deleteButton.addEventListener("click", function(event) {
-//             event.preventDefault();
-//             // Thực hiện xóa hoặc xử lý logic xóa ở đây
-//             location.href = 'deletecomic.php';
-//         });
-
-//         row.addEventListener("click", function(event) {
-//             // Kiểm tra xem sự kiện được kích hoạt có phải từ nút "Delete" hay không
-//             if (event.target === deleteButton) {
-//                 event.stopPropagation(); // Ngăn chặn sự kiện lan rộng
-//             } else {
-//                 location.href = 'comic.php';
-//             }
-//         });
-//     });
-// });
 
 function goBackComicslist() {
   window.location.href = "#";

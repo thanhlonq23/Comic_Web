@@ -49,4 +49,11 @@ class chapterModel extends Model
         $sql = "SELECT COUNT(*) AS totalChapters FROM $table WHERE $cond";
         return $this->db->select($sql);
     }
+
+    // public function countViews($table)
+    // {
+    //     $sql = "SELECT COUNT(views) AS totalViews FROM $table";
+    //     return $this->db->select($sql);
+    // }
+
 }
