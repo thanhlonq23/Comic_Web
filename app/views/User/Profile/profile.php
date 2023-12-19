@@ -205,6 +205,12 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
             </div>
         </div> -->
 
+        <?php
+        // Đảo ngược các mảng trước khi sử dụng chúng để hiển thị
+        $reversed_webtoon_info = array_reverse($webtoon_info);
+        $reversed_chapter_info = array_reverse($chapter_info);
+        ?>
+
         <div class="divReading">
             <div class="Header">
                 <h3>Reading List</h3>
@@ -214,16 +220,16 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
                 </div>
             </div>
 
-            <?php if (empty($webtoon_info)) : ?>
+            <?php if (empty($reversed_webtoon_info)) : ?>
                 <div class="no-reading-list">
                     <p>Bạn chưa thêm truyện vào danh sách đọc.</p>
                 </div>
             <?php else : ?>
                 <div class="readinglist">
-                    <?php foreach ($webtoon_info as $key => $webtoon) : ?>
+                    <?php foreach ($reversed_webtoon_info as $key => $webtoon) : ?>
                         <?php
                         $webtoon_name = $webtoon[0]['name'];
-                        $chapter_name = $chapter_info[$key][0]['name'];
+                        $chapter_name = $reversed_chapter_info[$key][0]['name'];
                         $cover_image = $webtoon[0]['cover'];
                         ?>
 
