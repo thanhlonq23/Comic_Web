@@ -34,12 +34,16 @@ class admin extends Controller
     // Trang chủ admin
     public function dashboard()
     {
-        $webtoon = new webtoon();
         $user = new user();
+        $webtoon = new webtoon();
+        $chapter = new chapter();
+
         $data1 = $webtoon->recentComics(4);
         $data2 = $webtoon->countWebtoons();
         $data3 = $user->countUsers();
-        $data = array_merge_recursive(array_merge_recursive($data1, $data2), $data3);
+        $data4 = $chapter->sumViewsChapter();
+
+        $data = array_merge_recursive(array_merge_recursive($data1, $data2), array_merge_recursive($data3, $data4));
 
         $this->load->view("Admin/nav");
         $this->load->view("Admin/dashboard", $data);

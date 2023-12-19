@@ -13,7 +13,7 @@
         <li><i class='bx bx-show-alt'></i>
             <span class="info">
                 <h5>
-                    Chưa cập nhật
+                <?php echo $totalViews[0]['totalViews']; ?>
                 </h5>
                 <p>Site Visit</p>
             </span>

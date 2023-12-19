@@ -51,10 +51,10 @@ class chapterModel extends Model
     }
     
 
-    // public function countViews($table)
-    // {
-    //     $sql = "SELECT COUNT(views) AS totalViews FROM $table";
-    //     return $this->db->select($sql);
-    // }
+    public function sumViews($table)
+    {
+        $sql = "SELECT SUM(views) AS totalViews FROM $table";
+        return $this->db->select($sql);
+    }
 
 }

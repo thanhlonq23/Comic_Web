@@ -288,4 +288,17 @@ class chapter extends Controller
 
         return false; // Trả về false nếu không tìm thấy chương
     }
+
+    // Lấy tổng số lượt xem All chapter
+    public function sumViewsChapter()
+    {
+        $chapterModel = $this->load->model("chapterModel");
+        $result = $chapterModel->sumViews($this->table);
+
+        $data['totalViews'] = 0; // Mặc định là 0 nếu không có kết quả trả về
+        if (!empty($result)) {
+            $data['totalViews'] = $result;
+        }
+        return $data;
+    }
 }

@@ -1,7 +1,3 @@
-<?php
-$mediaValue = ($userInfo[0]["media"] === 'defaut') ? 'user' : $userInfo[0]["media"];
-$mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
-?>
 <style>
     .Header {
         display: flex;
@@ -167,6 +163,11 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
     }
 </style>
 
+<?php
+$mediaValue = ($userInfo[0]["media"] === 'defaut') ? 'user' : $userInfo[0]["media"];
+$mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
+?>
+
 <body class="d-flex flex-column min-vh-100 bg-dark-subtle">
     <div>
         <div class="profile-container container">
@@ -188,22 +189,6 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
                 </div>
             </div>
         </div>
-
-        <!-- <div class="container bg-white">
-            <div class="m-3">
-                <ul class="d-flex nav p-2 gap-3 justify-content-around">
-                    <li class="nav-item">
-                        <a class="btn btn-outline-dark m-1" href="#" title="Đã thích" role="button" target="_blank"><i class="fa-regular fa-heart"></i> Đang theo dõi</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-dark m-1" href="#" title="Đã mở khóa" role="button" target="_blank"><i class="fa-solid fa-lock"></i> Đã mở khóa</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-outline-dark m-1" href="#" title="Lịch sử" role="button" target="_blank"><i class="fa-solid fa-clock-rotate-left"></i> Lịch sử dọc</a>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
 
         <?php
         // Đảo ngược các mảng trước khi sử dụng chúng để hiển thị
