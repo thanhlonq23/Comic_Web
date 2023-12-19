@@ -51,7 +51,7 @@
 
                     <div class="reading-control text-center" style="font-size: 30px;">
                         <div class="">
-                            <a href="<?php echo BASE_URL ?>" class="p-2">
+                            <a href="<?php echo BASE_URL ?>?url=comicPage/homePage/&id=<?php echo $webtoons ?>" class="p-2">
                                 <i class="fa fa-home"></i>
                             </a>
                             <a href="<?php echo BASE_URL ?>/?url=comicPage/readPage/<?php echo $previousChapter['webtoon_id'] . '&chapter=' . $previousChapter['id'] ?>" class="p-2">

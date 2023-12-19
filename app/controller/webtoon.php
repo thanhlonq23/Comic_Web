@@ -351,7 +351,7 @@ class webtoon extends Controller
         return $data;
     }
 
-    
+
     public function recentComics($number)
     {
         $cond = "1=1 ORDER BY date DESC LIMIT $number";

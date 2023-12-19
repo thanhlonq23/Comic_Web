@@ -45,6 +45,9 @@ class comicPage extends Controller
         $data1 = $this->getImg($webtoon_ID, $chapter_ID);
         $data2 = $this->switchChapter($chapter_ID, $webtoon_ID);
         $data3 = $this->checkPinChapter($webtoon_ID, $chapter_ID);
+        $data4['webtoons'] = $webtoon_ID;
+        $data3 = array_merge_recursive($data3, $data4);
+
 
         // Gôp dữ liệu
         if ($data2 != null) {
