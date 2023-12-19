@@ -234,7 +234,7 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
                         ?>
 
                         <div class="webtoon-item">
-                            <a href="<?php echo BASE_URL ?>?url=comicPage/readPage/<?php echo $chapter_info[$key][0]['webtoon_id'] ?>&chapter=<?php echo $chapter_info[$key][0]['id']; ?>" class="webtoon-link">
+                            <a href="<?php echo BASE_URL ?>?url=comicPage/readPage/<?php echo $reversed_chapter_info[$key][0]['webtoon_id'] ?>&chapter=<?php echo $reversed_chapter_info[$key][0]['id']; ?>" class="webtoon-link">
                                 <div class="image-container">
                                     <img src='./public/Uploads/Cover/Webtoon/<?php echo $cover_image; ?>' alt='Cover Image'>
                                 </div>
