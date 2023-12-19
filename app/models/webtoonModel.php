@@ -30,6 +30,12 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+    public function selectJoin($table, $collum, $command)
+    {
+        $sql = "SELECT $collum FROM $table $command";
+        return $this->db->select($sql);
+    }
+
     // Lấy ra truyện kèm số chapter
     public function selectWebtoonWithChapter($table)
     {

@@ -374,10 +374,10 @@ class webtoon extends Controller
     // Lấy ra truyện được đề xuất
     public function recommended_Webtoon($number)
     {
-        $cond = "1=1 ORDER BY date DESC LIMIT $number";
-        $collum = 'id,name,status,cover,date';
+        $collum = 'webtoons.id, webtoons.name, webtoons.cover, SUM(chapters.views) AS TongLuotXem';
+        $cmd = "JOIN chapters ON webtoons.id = chapters.webtoon_id GROUP BY webtoons.id ORDER BY TongLuotXem DESC LIMIT $number";
         $webtoonModel = $this->load->model("webtoonModel");
-        $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        $data['recommended_Webtoon'] = $webtoonModel->selectJoin($this->table, $collum, $cmd);
         return $data;
     }
 
