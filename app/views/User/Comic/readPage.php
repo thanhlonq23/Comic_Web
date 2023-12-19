@@ -43,14 +43,12 @@
                                 <i class="btn btn-outline-dark m-1 fa fa-arrow-right"></i>
                             </a>
 
-                            <form id="myForm">
-                                <input type="hidden" name="webtoon_id" value="<?php echo $value['webtoon_id']; ?>">
-                                <input type="hidden" name="chapter_id" value="<?php echo $value['id']; ?>">
-                                <button type="button" onclick="submitForm()" class="bookmark-btn">
-                                    <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
-                                </button>
-                            </form>
-                            <!-- <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i> -->
+                            <button type="button" onclick="submitForm()" class="bookmark-btn">
+                                <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
+                            </button>
+                            <button type="button" onclick="submitForm()" class="bookmark-btn">
+                                <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -91,39 +89,6 @@
             var selectedValue = this.value;
             window.location.href = selectedValue;
         });
-
-
-        function submitForm() {
-            var webtoonId = document.getElementsByName('webtoon_id')[0].value;
-            var chapterId = document.getElementsByName('chapter_id')[0].value;
-
-            console.log("webtoon_id: " + webtoonId);
-            console.log("chapter_id: " + chapterId);
-
-            // Tạo đối tượng FormData và thêm dữ liệu vào
-            var formData = new FormData();
-            formData.append('webtoon_id', webtoonId);
-            formData.append('chapter_id', chapterId);
-
-            // Gửi dữ liệu bằng Fetch API hoặc XMLHttpRequest
-            fetch("<?php echo BASE_URL ?>/?url=comicPage/add_to_reading_list", {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Xử lý khi gửi thành công
-                        console.log("Dữ liệu đã được gửi thành công!");
-                        // Thực hiện các hành động sau khi gửi thành công ở đây
-                    } else {
-                        // Xử lý khi gửi không thành công
-                        console.error("Có lỗi xảy ra khi gửi dữ liệu.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Lỗi: ", error);
-                });
-        }
     </script>
 
 
