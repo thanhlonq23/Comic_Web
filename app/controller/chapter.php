@@ -268,7 +268,7 @@ class chapter extends Controller
     public function increaseViews($webtoon_ID, $chapter_ID)
     {
 
-        $cond = "webtoon_id = $webtoon_ID AND id = $chapter_ID";
+        $cond = "webtoon_id = '$webtoon_ID' AND id = '$chapter_ID'";
         $chapterModel = $this->load->model("chapterModel");
         // Tìm chương có webtoon_id và id tương ứng
         $chapter = $chapterModel->selectByCond($this->table, $cond);
@@ -282,7 +282,7 @@ class chapter extends Controller
 
             // Cập nhật số lượt views mới
             $data = array('views' => $newViews);
-            $condition = "id = $chapter_ID";
+            $condition = "id = '$chapter_ID'";
             return $chapterModel->update($this->table, $data, $condition);
         }
 
