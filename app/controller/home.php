@@ -26,7 +26,7 @@ class home extends Controller
         // Lấy ra truyện
         $webtoon = new webtoon();
         $data1 = $webtoon->recent_Webtoon();
-        $data2 = $webtoon->recommended_Webtoon(8);
+        $data2 = $webtoon->recommended_Webtoon(4);
         $data = array_merge_recursive($data1, $data2);
 
         // Hiển thị
