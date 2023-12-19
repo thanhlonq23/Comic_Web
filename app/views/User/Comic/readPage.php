@@ -43,12 +43,24 @@
                                 <i class="btn btn-outline-dark m-1 fa fa-arrow-right"></i>
                             </a>
 
-                            <button type="button" onclick="submitForm()" class="bookmark-btn">
-                                <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
-                            </button>
-                            <button type="button" onclick="submitForm()" class="bookmark-btn">
-                                <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i>
-                            </button>
+
+                            <?php
+                            if ($pinChapterStatus == false) {
+                            ?>
+                                <a href="<?php echo BASE_URL . '?url=comicPage/pinChapter/' . $chapters[0]['webtoon_id'] . '&chapter=' . $_GET['chapter'] ?>">
+                                    <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
+                                </a>
+                            <?php
+                            } else {
+                            ?>
+                                <a href="<?php echo BASE_URL . '?url=comicPage/unPinChapter/' . $chapters[0]['webtoon_id'] . '&chapter=' . $_GET['chapter'] ?>">
+                                    <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i>
+                                </a>
+                            <?php
+                            }
+                            ?>
+
+
                         </div>
                     </div>
                 </div>

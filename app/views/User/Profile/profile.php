@@ -248,15 +248,15 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
 
     <?php
     // ...
-    echo '<br>';
-    echo '<br>';
-    print_r($reading_list);
-    echo '<br>';
-    echo '<br>';
-    print_r($webtoon_info);
-    echo '<br>';
-    echo '<br>';
-    print_r($chapter_info);
+    // echo '<br>';
+    // echo '<br>';
+    // print_r($reading_list);
+    // echo '<br>';
+    // echo '<br>';
+    // print_r($webtoon_info);
+    // echo '<br>';
+    // echo '<br>';
+    // print_r($chapter_info);
     ?>
 
     </div>

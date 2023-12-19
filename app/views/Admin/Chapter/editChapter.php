@@ -12,9 +12,9 @@
             <div class="mb-3">
                 Tình trạng <br>
                 <input type="radio" id="status1" name="status" value="1">
-                <label for="status1">Mở khóa</label>
+                <label for="status1">Hoàn thành</label>
                 <input type="radio" id="status2" name="status" value="0">
-                <label for="status2">Khóa</label>
+                <label for="status2">Chưa hoàn thành</label>
             </div>
 
             <button type="submit" class="btn btn-primary">Cập nhật</button>

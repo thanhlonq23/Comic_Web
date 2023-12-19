@@ -43,12 +43,13 @@ class comicPage extends Controller
         // Lấy ra mảng gồm đường dẫn và các img
         $data1 = $this->getImg($webtoon_ID, $chapter_ID);
         $data2 = $this->switchChapter($chapter_ID, $webtoon_ID);
+        $data3 = $this->checkPinChapter($webtoon_ID, $chapter_ID);
 
         // Gôp dữ liệu
         if ($data2 != null) {
-            $data = array_merge_recursive($data1, $data2);
+            $data = array_merge_recursive($data1, array_merge_recursive($data2, $data3));
         } else {
-            $data = $data1;
+            $data = array_merge_recursive($data1, $data3);
         }
 
 
@@ -118,7 +119,7 @@ class comicPage extends Controller
         $data2 = null;
         $data3 = null;
 
-        // Xử lý lấy tất cả chapter
+        // Xử lý lấy tất cả chapter (Chức năng chọn chapter)
         $data1 = $chapter->getChapter($Webtoon_ID);
 
         // Xử lý lấy chapter trước/sau
@@ -145,5 +146,50 @@ class comicPage extends Controller
         }
 
         return $data;
+    }
+
+    // Chức năng truyện yêu thích
+    public function pinChapter($webtoon_ID)
+    {
+        Session::checkSession();
+        $chapter = $this->load->model('chapterModel');
+
+        // Lấy dữ liệu
+        $user_ID = Session::get('id');
+        $chapter_ID = $_GET['chapter'];
+
+        $data = [
+            'user_id' => $user_ID,
+            'webtoon_id' => $webtoon_ID,
+            'chapter_id' => $chapter_ID
+        ];
+
+        $chapter->insert('reading_list', $data);
+        header("Location:" . BASE_URL . "?url=comicPage/readPage/$webtoon_ID&chapter=$chapter_ID");
+    }
+
+    public function unPinChapter($webtoon_ID)
+    {
+        Session::checkSession();
+        $chapter = $this->load->model('chapterModel');
+
+        // Lấy dữ liệu
+        $user_ID = Session::get('id');
+        $chapter_ID = $_GET['chapter'];
+        $cond = "user_id='$user_ID' && webtoon_id='$webtoon_ID' && chapter_id='$chapter_ID'";
+
+        $chapter->delete('reading_list', $cond);
+        header("Location:" . BASE_URL . "?url=comicPage/readPage/$webtoon_ID&chapter=$chapter_ID");
+    }
+
+    public function checkPinChapter($webtoon_ID, $chapter_ID)
+    {
+        Session::checkSession();
+        $user_ID = Session::get('id');
+        $cond = "user_id='$user_ID' && webtoon_id='$webtoon_ID' && chapter_id='$chapter_ID'";
+
+        $chapter = $this->load->model('chapterModel');
+        $status['pinChapterStatus'] = ($chapter->selectByCond('reading_list', $cond) != null) ? true : false;
+        return $status;
     }
 }
