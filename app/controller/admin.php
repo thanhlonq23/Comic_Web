@@ -36,7 +36,7 @@ class admin extends Controller
     {
         $webtoon = new webtoon();
         $user = new user();
-        $data1 = $webtoon->recent_WebtoonAdmin(4);
+        $data1 = $webtoon->recentComics(4);
         $data2 = $webtoon->countWebtoons();
         $data3 = $user->countUsers();
         $data = array_merge_recursive(array_merge_recursive($data1, $data2), $data3);

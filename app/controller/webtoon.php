@@ -340,14 +340,6 @@ class webtoon extends Controller
         return $data;
     }
 
-    public function WebtoonById($id)
-    {
-        $cond = "id = '$id'";
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
-        return $data;
-    }
-
 
     // Lấy ra truyện
     public function recent_Webtoon()
@@ -359,6 +351,15 @@ class webtoon extends Controller
         return $data;
     }
 
+    
+    public function recentComics($number)
+    {
+        $cond = "1=1 ORDER BY date DESC LIMIT $number";
+        $collum = 'id,name,status,cover,date';
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        return $data;
+    }
 
 
     // Lấy ra truyện có điều kiện
@@ -378,15 +379,6 @@ class webtoon extends Controller
         $cmd = "JOIN chapters ON webtoons.id = chapters.webtoon_id GROUP BY webtoons.id ORDER BY TongLuotXem DESC LIMIT $number";
         $webtoonModel = $this->load->model("webtoonModel");
         $data['recommended_Webtoon'] = $webtoonModel->selectJoin($this->table, $collum, $cmd);
-        return $data;
-    }
-
-    public function recent_WebtoonAdmin($number)
-    {
-        $cond = "1=1 ORDER BY date DESC LIMIT $number";
-        $collum = 'id,name,status,cover,date';
-        $webtoonModel = $this->load->model("webtoonModel");
-        $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
         return $data;
     }
 
