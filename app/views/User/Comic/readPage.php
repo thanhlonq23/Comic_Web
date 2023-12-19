@@ -1,3 +1,33 @@
+<style>
+    /* Loại bỏ viền và định dạng lại các nút */
+    .bookmark-btn {
+        border: none;
+        /* Loại bỏ viền */
+        background: none;
+        /* Loại bỏ nền */
+        padding: 0;
+        /* Loại bỏ padding */
+        cursor: pointer;
+    }
+
+    /* Định dạng icon bên trong nút */
+    .bookmark-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Tùy chỉnh màu sắc và kích thước của icon */
+    .bookmark-icon i {
+        color: #0d6efd;
+        /* Màu sắc icon */
+        font-size: 24px;
+        /* Kích thước icon */
+    }
+</style>
+
 <body class="bg-dark-subtle d-flex flex-column min-vh-100">
     <div class="container">
         <div class="row">
@@ -43,10 +73,16 @@
                                 <i class="btn btn-outline-dark m-1 fa fa-arrow-right"></i>
                             </a>
 
-                            <button type="button" onclick="submitForm()" class="bookmark-btn">
+                            <!-- <button type="button" onclick="addForm()" class="bookmark-btn bookmark-icon">
                                 <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
                             </button>
-                            <button type="button" onclick="submitForm()" class="bookmark-btn">
+                            <button type="button" onclick="removeForm()" class="bookmark-btn bookmark-icon">
+                                <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i>
+                            </button> -->
+                            <button type="button" onclick="toggleForms('add')" class="bookmark-btn bookmark-icon" id="addBtn">
+                                <i class='bx bx-bookmark' style='color:#0d6efd; font-size:40px;'></i>
+                            </button>
+                            <button type="button" onclick="toggleForms('remove')" class="bookmark-btn bookmark-icon" id="removeBtn" style="display: none;">
                                 <i class='bx bxs-bookmark' style='color:#FCFD0D; font-size:40px;'></i>
                             </button>
                         </div>
@@ -81,6 +117,7 @@
 
 
 
+
     <!-- Chuyển chương -->
     <script type="text/javascript">
         // Sự kiện khi chương được chọn thay đổi
@@ -89,6 +126,19 @@
             var selectedValue = this.value;
             window.location.href = selectedValue;
         });
+
+        function toggleForms(action) {
+            const addBtn = document.getElementById('addBtn');
+            const removeBtn = document.getElementById('removeBtn');
+
+            if (action === 'add') {
+                addBtn.style.display = 'none';
+                removeBtn.style.display = 'inline-flex';
+            } else if (action === 'remove') {
+                addBtn.style.display = 'inline-flex';
+                removeBtn.style.display = 'none';
+            }
+        }
     </script>
 
 

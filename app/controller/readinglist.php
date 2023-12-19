@@ -25,6 +25,7 @@ class readinglist extends Controller
             foreach ($reading_list as $item) {
                 $webtoon_id = $item['webtoon_id'];
                 $chapter_id = $item['chapter_id'];
+                $date = $item['timestamp'];
 
                 $cond1 = "id = '$webtoon_id'";
                 $cond2 = "id = '$chapter_id'";
@@ -39,7 +40,8 @@ class readinglist extends Controller
                 // Tạo một array mới chứa thông tin của webtoon và chapter
                 $result[] = [
                     'webtoon_id' => $webtoon_id,
-                    'chapter_id' => $chapter_id
+                    'chapter_id' => $chapter_id,
+                    'Moc_thoigian'=> $date
                 ];
             }
 
