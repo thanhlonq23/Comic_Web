@@ -59,3 +59,17 @@
              <img src="./public/Uploads/User/user.jpg">
          </a>
      </nav>
+
+     <script>
+         // Chọn phần tử biểu tượng menu
+         const menuIcon = document.querySelector('.content nav .bx-menu');
+
+         // Chọn phần tử thanh bên (sidebar)
+         const sideBar = document.querySelector('.sidebar');
+
+         // Thêm sự kiện click vào biểu tượng menu
+         menuIcon.addEventListener('click', function() {
+             // Khi biểu tượng menu được click, thực hiện toggle class 'close' trên thanh bên
+             sideBar.classList.toggle('close');
+         });
+     </script>
