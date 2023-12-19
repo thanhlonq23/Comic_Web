@@ -381,6 +381,15 @@ class webtoon extends Controller
         return $data;
     }
 
+    public function recentWebtoonAdmin($number)
+    {
+        $cond = "1=1 ORDER BY date DESC LIMIT $number";
+        $collum = 'id,name,status,cover,date';
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['recommended_Webtoon'] = $webtoonModel->selectCollum($this->table, $collum, $cond);
+        return $data;
+    }
+
 
     // Tìm kiếm truyện
     public function search($tuKhoa)
