@@ -202,9 +202,9 @@ if (!empty($_GET['msg'])) {
                                 ?>
                             </p>
                         </div>
-                        <div>
+                        <!-- <div>
                             <p><span>View:</span><?php echo isset($totalViews) ? $totalViews : 0; ?></p>
-                        </div>
+                        </div> -->
                         <div>
                             <ul>
                                 <?php

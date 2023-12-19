@@ -15,7 +15,7 @@
                 <h5>
                 <?php echo $totalViews[0]['totalViews']; ?>
                 </h5>
-                <p>Site Visit</p>
+                <p>Views</p>
             </span>
         </li>
         <li>

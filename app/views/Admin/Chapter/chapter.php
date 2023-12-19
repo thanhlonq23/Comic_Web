@@ -37,6 +37,7 @@ if (isset($parsed_url['query'])) {
                     <tr>
                         <th style="padding-left: 7px; font-size: 17px;">Chapter</th>
                         <th style="padding-left: 7px;font-size: 17px;">Status</th>
+                        <th style="font-size: 17px;">Views</th>
                         <th style="font-size: 17px;">Publish Date</th>
                         <th style="padding-left: 7px;font-size: 17px;" colspan="2">Action</th>
                     </tr>
@@ -58,13 +59,15 @@ if (isset($parsed_url['query'])) {
                     ?>
 
                     <?php
+                    $views = 0;
                     foreach ($chapters as $key => $value) {
+                        $views += $value['views'];
                     ?>
                         <tr class="chapter-row" data-chapter-id="<?php echo BASE_URL ?>/?url=comicPage/readPage/<?php echo $webtoonId ?>&chapter=<?php echo $value['id'] ?>" style="cursor: pointer;">
                             <td class="col-8">
                                 <p><?php echo $value['name'] ?></p>
                             </td>
-                            <td>
+                            <td class="col-3">
                                 <?php
                                 if ($value['status'] == false) {
                                     echo '<span class="status process">';
@@ -75,6 +78,9 @@ if (isset($parsed_url['query'])) {
                                     echo 'Completed';
                                     echo '</span>';
                                 } ?>
+                            </td>
+                            <td class="col-3">
+                                <p><?php echo $value['views'] ?></p>
                             </td>
                             <td class="date">
                                 <?php
