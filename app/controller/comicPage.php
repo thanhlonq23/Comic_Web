@@ -23,6 +23,7 @@ class comicPage extends Controller
 
         // Lấy ra dữ liệu webtoon
         $data = $this->getData();
+
         // Hiển thị
         $this->load->view("User/Comic/comicPage", $data);
         $this->load->view("User/footer");
@@ -37,8 +38,8 @@ class comicPage extends Controller
         $chapter_ID = $_GET['chapter'];
 
         // Tăng views của chapter
-        // $chapterModel = new chapterModel();
-        // $chapterModel->increaseViews($webtoon_ID, $chapter_ID);
+        $chapter = new chapter();
+        $chapter->increaseViews($webtoon_ID, $chapter_ID);
 
         // Lấy ra mảng gồm đường dẫn và các img
         $data1 = $this->getImg($webtoon_ID, $chapter_ID);
@@ -164,6 +165,8 @@ class comicPage extends Controller
             'chapter_id' => $chapter_ID
         ];
 
+        $cond = "user_id='$user_ID' && webtoon_id='$webtoon_ID'";
+        $chapter->delete('reading_list', $cond);
         $chapter->insert('reading_list', $data);
         header("Location:" . BASE_URL . "?url=comicPage/readPage/$webtoon_ID&chapter=$chapter_ID");
     }
