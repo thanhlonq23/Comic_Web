@@ -60,7 +60,7 @@ class categoryModel extends Model
         return $this->db->select($sql);
     }
 
-    
+
     public function addCategoryToWebtoon($webtoonID, $categoryID)
     {
         $data = [
@@ -71,7 +71,7 @@ class categoryModel extends Model
         return $this->db->insert('webtoons_categories', $data);
     }
 
-    
+
     // Xóa các liên kết với categories trong bảng webtoons_categories dựa trên webtoon_id
     public function removeCategoryFromWebtoon($webtoonID)
     {
@@ -84,7 +84,7 @@ class categoryModel extends Model
 
 
 
-    
+
     // <=========================Phần chưa sử dụng=========================>
 
     // public function addWebtoonToCategory($categoryID, $webtoonID)

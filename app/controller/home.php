@@ -2,7 +2,7 @@
 include_once('./app/controller/webtoon.php');
 include_once('./app/controller/chapter.php');
 include_once('./app/controller/user.php');
-
+include_once('./app/controller/readinglist.php');
 
 class home extends Controller
 {
@@ -60,7 +60,11 @@ class home extends Controller
 
         $user = new user();
         $id = Session::get("id");
-        $data = $user->get_User($id);
+        $readinglist = new readinglist();
+
+        $data1 = $user->get_User($id);
+        $data2 = $readinglist->get_user_reading_list($id);
+        $data = array_merge_recursive($data1, $data2);
 
         $this->load->view("User/Profile/profile", $data);
         $this->load->view("User/footer");

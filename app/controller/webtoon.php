@@ -340,6 +340,13 @@ class webtoon extends Controller
         return $data;
     }
 
+    public function WebtoonById($id)
+    {
+        $cond = "id = '$id'";
+        $webtoonModel = $this->load->model("webtoonModel");
+        $data['webtoons'] = $webtoonModel->selectByCond($this->table, $cond);
+        return $data;
+    }
 
 
     // Lấy ra truyện
