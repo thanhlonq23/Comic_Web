@@ -381,7 +381,7 @@ class webtoon extends Controller
         return $data;
     }
 
-    public function recentWebtoonAdmin($number)
+    public function recent_WebtoonAdmin($number)
     {
         $cond = "1=1 ORDER BY date DESC LIMIT $number";
         $collum = 'id,name,status,cover,date';
