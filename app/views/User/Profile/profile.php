@@ -225,6 +225,22 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
                         $webtoon_name = $webtoon[0]['name'];
                         $chapter_name = $chapter_info[$key][0]['name'];
                         $cover_image = $webtoon[0]['cover'];
+
+                        // Lấy ngày hiện tại và Moc_thoigian
+                        $currentDate = new DateTime();
+                        $mocThoigian = new DateTime($reading_list[$key]['Moc_thoigian']);
+
+                        // Tính toán khoảng cách thời gian
+                        $interval = $currentDate->diff($mocThoigian);
+
+                        // Hiển thị kết quả dựa trên khoảng cách thời gian
+                        if ($interval->days == 0) {
+                            $timeInfo = "Hôm nay";
+                        } elseif ($interval->days == 1) {
+                            $timeInfo = "1 ngày trước";
+                        } else {
+                            $timeInfo = $interval->days . " ngày trước";
+                        }
                         ?>
 
                         <div class="webtoon-item">
@@ -235,7 +251,9 @@ $mediaPath = "./public/Uploads/User/{$mediaValue}.jpg";
                                 <div class="info-container">
                                     <div class="webtoon-name"><?php echo $webtoon_name; ?></div>
                                     <div class="chapter-name"><?php echo $chapter_name; ?></div>
-                                    <div class="date-info">Date Info Here</div>
+                                    <!-- <div class="date-info">Date Info Here</div> -->
+                                    <!-- <div class="date-info"><?php echo $chapter_info[$key][0]['date']; ?></div> -->
+                                    <div class="date-info"><?php echo $timeInfo; ?></div>
                                 </div>
                             </a>
                         </div>

@@ -12,11 +12,18 @@ class readingModel extends Model
         return $this->db->select($sql);
     }
 
+    // public function selectByCond($table, $cond)
+    // {
+    //     $sql = "SELECT * FROM $table WHERE $cond";
+    //     return $this->db->select($sql);
+    // }
+
     public function selectByCond($table, $cond)
     {
         $sql = "SELECT * FROM $table WHERE $cond";
         return $this->db->select($sql);
     }
+
 
     public function insert($table, $data)
     {
