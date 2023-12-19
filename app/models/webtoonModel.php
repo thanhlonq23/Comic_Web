@@ -93,5 +93,11 @@ class webtoonModel extends Model
         return $this->db->select($sql);
     }
 
+    // public function getWebtoonInfo($table, $cond)
+    // {
+    //     $sql = "SELECT * FROM $table WHERE $cond";
+    //     return $this->db->select($sql);
+    // }
+
 
 }

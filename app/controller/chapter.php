@@ -265,33 +265,27 @@ class chapter extends Controller
     }
 
 
-    // Tăng số lượng views của chapter
-    public function increaseChapterViews($chapter_id, $webtoon_id)
+    public function increaseViews($webtoon_ID, $chapter_ID)
     {
+
+        $cond = "webtoon_id = $webtoon_ID AND id = $chapter_ID";
         $chapterModel = $this->load->model("chapterModel");
+        // Tìm chương có webtoon_id và id tương ứng
+        $chapter = $chapterModel->selectByCond($this->table, $cond);
 
-        // Lấy thông tin chapter dựa trên id và webtoon_id
-        $cond = "id = '$chapter_id' AND webtoon_id = '$webtoon_id'";
-        $chapterInfo = $chapterModel->selectByCond($this->table, $cond);
+        if ($chapter) {
+            // Lấy số lượt views hiện tại
+            $currentViews = $chapter[0]['views'];
 
-        if (!empty($chapterInfo)) {
-            // Lấy số lượng views hiện tại
-            $currentViews = $chapterInfo[0]['views'];
-
-            // Tăng số lượng views lên 1
+            // Tăng số lượt views
             $newViews = $currentViews + 1;
 
-            // Cập nhật số lượng views mới vào cơ sở dữ liệu
-            $data = ['views' => $newViews];
-            $updateCond = "id = '$chapter_id' AND webtoon_id = '$webtoon_id'";
-            $chapterModel->update($this->table, $data, $updateCond);
-
-            // Trả về số lượng views mới sau khi tăng
-            return $newViews;
+            // Cập nhật số lượt views mới
+            $data = array('views' => $newViews);
+            $condition = "id = $chapter_ID";
+            return $chapterModel->update($this->table, $data, $condition);
         }
 
-        // Trả về -1 nếu không tìm thấy thông tin chapter
-        return -1;
+        return false; // Trả về false nếu không tìm thấy chương
     }
-
 }

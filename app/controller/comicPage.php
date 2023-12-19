@@ -37,14 +37,14 @@ class comicPage extends Controller
         $chapter_ID = $_GET['chapter'];
 
         // Tăng views của chapter
-        $chapterModel = new chapter();
-        $chapterModel->increaseChapterViews($chapter_ID, $webtoon_ID);
+        // $chapterModel = new chapterModel();
+        // $chapterModel->increaseViews($webtoon_ID, $chapter_ID);
 
         // Lấy ra mảng gồm đường dẫn và các img
         $data1 = $this->getImg($webtoon_ID, $chapter_ID);
         $data2 = $this->switchChapter($chapter_ID, $webtoon_ID);
 
-        //Gôp dữ liệu
+        // Gôp dữ liệu
         if ($data2 != null) {
             $data = array_merge_recursive($data1, $data2);
         } else {
