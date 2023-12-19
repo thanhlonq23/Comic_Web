@@ -48,9 +48,11 @@ class category extends Controller
 
     public function delete_Category($id)
     {
-        $cond = "id = '$id'";
+        $cond1 = "categories_id = '$id'";
+        $cond2 = "id = '$id'";
         $categoryModel = $this->load->model('categoryModel');
-        $categoryModel->delete($this->table, $cond);
+        $categoryModel->delete('webtoons_categories', $cond1);
+        $categoryModel->delete($this->table, $cond2);
         header("Location:" . BASE_URL . "/?url=admin/category_List");
     }
     public function edit_Category($id)
@@ -58,14 +60,14 @@ class category extends Controller
         $cond = "id = '$id'";
         $categoryModel = $this->load->model("categoryModel");
         $data['categories'] = $categoryModel->selectByCond($this->table, $cond);
-        
+
         $this->load->view("Admin/nav");
         $this->load->view("Admin/category/editCategory", $data);
     }
 
 
-    
-    
+
+
 
 
     //=======================================================Các hàm xử lý========================================================//
@@ -74,7 +76,7 @@ class category extends Controller
 
 
 
-    
+
     // Trong Controller category.php
     public function add()
     {
