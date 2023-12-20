@@ -15,17 +15,6 @@ class Main
         }
     }
 
-    /*
-        http://localhost/Comic_Web/?url=author/edit_Author/12
-
-        Cắt chuỗi ra $url = [
-            '0'=> author,
-            '1'=> edit_Author,
-            '2'=> 12
-        ]
-
-    */
-
 
 
 

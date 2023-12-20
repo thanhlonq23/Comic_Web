@@ -51,8 +51,9 @@ class category extends Controller
         $cond1 = "categories_id = '$id'";
         $cond2 = "id = '$id'";
         $categoryModel = $this->load->model('categoryModel');
-        $categoryModel->delete('webtoons_categories', $cond1);
-        $categoryModel->delete($this->table, $cond2);
+        if ($categoryModel->delete('webtoons_categories', $cond1)) {
+            $categoryModel->delete($this->table, $cond2);
+        }
         header("Location:" . BASE_URL . "/?url=admin/category_List");
     }
     public function edit_Category($id)

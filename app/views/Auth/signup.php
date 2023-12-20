@@ -103,6 +103,7 @@
         var phone = document.getElementById('phoneNumber').value;
 
         var valid = true;
+
         // Kiểm tra Tên người dùng có bị bỏ trống không
         if (fullname.trim() === "") {
             document.getElementById('fullnameError').innerHTML = "Tên người dùng không được bỏ trống.";
@@ -119,59 +120,81 @@
             document.getElementById('usernameError').innerHTML = "";
         }
 
-        validatePassword();
-        validateConfirmPassword();
-
-        // Kiểm tra Email có bị bỏ trống và đúng định dạng không
-        if (email.trim() === "" || !validateEmail(email)) {
-            document.getElementById('emailError').innerHTML = "Email không được bỏ trống và phải đúng định dạng.";
+        // Kiểm tra Mật khẩu
+        if (!validatePassword(password)) {
             valid = false;
-        } else {
-            document.getElementById('emailError').innerHTML = "";
         }
 
-        // Kiểm tra số điện thoại chỉ chứa số và có đúng 10 kí tự
-        if (!/^\d{10}$/.test(phone)) {
-            document.getElementById('phoneError').innerHTML = "Số điện thoại không hợp lệ.";
+        // Kiểm tra Nhập lại mật khẩu
+        if (!validateConfirmPassword(password, confirm_password)) {
             valid = false;
-        } else {
-            document.getElementById('phoneError').innerHTML = "";
+        }
+
+        // Kiểm tra Email
+        if (!validateEmail(email)) {
+            valid = false;
+        }
+
+        // Kiểm tra Số điện thoại
+        if (!validatePhoneNumber(phone)) {
+            valid = false;
         }
 
         return valid;
     }
 
-
-    function validatePassword() {
-        var password = document.getElementById('password').value;
+    function validatePassword(password) {
         var passwordError = document.getElementById('passwordError');
         if (password.trim() === "") {
             passwordError.innerHTML = "Mật khẩu không được bỏ trống.";
-            valid = false;
+            return false;
+        } else if (password.length < 6) {
+            passwordError.innerHTML = "Mật khẩu phải có ít nhất 6 kí tự.";
+            return false;
         } else {
             passwordError.innerHTML = "";
+            return true;
         }
     }
 
-// Function để kiểm tra Nhập lại mật khẩu
-function validateConfirmPassword() {
-    var password = document.getElementById('password').value;
-    var confirm_password = document.getElementById('rePassword').value;
-    var confirmPasswordError = document.getElementById('confirmPasswordError');
 
-    if (confirm_password.trim() === "") {
-        confirmPasswordError.innerHTML = "Vui lòng nhập lại mật khẩu.";
-        valid = false;
-    } else if (password !== confirm_password) {
-        confirmPasswordError.innerHTML = "Mật khẩu không khớp.";
-    } else {
-        confirmPasswordError.innerHTML = "";
+    function validateConfirmPassword(password, confirm_password) {
+        var confirmPasswordError = document.getElementById('confirmPasswordError');
+
+        if (confirm_password.trim() === "") {
+            confirmPasswordError.innerHTML = "Vui lòng nhập lại mật khẩu.";
+            return false;
+        } else if (password !== confirm_password) {
+            confirmPasswordError.innerHTML = "Mật khẩu không khớp.";
+            return false;
+        } else {
+            confirmPasswordError.innerHTML = "";
+            return true;
+        }
     }
-}
 
     function validateEmail(email) {
-        //Check định dạng emil
+        var emailError = document.getElementById('emailError');
         var re = /\S+@\S+\.\S+/;
-        return re.test(email);
+
+        if (email.trim() === "" || !re.test(email)) {
+            emailError.innerHTML = "Email không được bỏ trống và phải đúng định dạng.";
+            return false;
+        } else {
+            emailError.innerHTML = "";
+            return true;
+        }
+    }
+
+    function validatePhoneNumber(phone) {
+        var phoneError = document.getElementById('phoneError');
+
+        if (!/^\d{10}$/.test(phone)) {
+            phoneError.innerHTML = "Số điện thoại không hợp lệ.";
+            return false;
+        } else {
+            phoneError.innerHTML = "";
+            return true;
+        }
     }
 </script>
